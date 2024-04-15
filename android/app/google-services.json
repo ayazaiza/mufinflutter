@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "547020247713",
+    "project_id": "mufin-academy",
+    "storage_bucket": "mufin-academy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547020247713:android:c031b7c182b541243bd6e0",
+        "android_client_info": {
+          "package_name": "com.mufin.academy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "547020247713-2hlghiqmqfegignqd1dc96f4uduj0e8n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mufin.academy",
+            "certificate_hash": "4f8d92992d3c705ab57ea694eda7f5d95fec8172"
+          }
+        },
+        {
+          "client_id": "547020247713-lkgtpvdaq10cvc8tc3usp0ld9k1sochk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mufin.academy",
+            "certificate_hash": "0204a6b8c14891496263437c6108df907bfa3712"
+          }
+        },
+        {
+          "client_id": "547020247713-l4bnmofvv4ack9vdnq9b0u1klr9iid61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaxX4fbXYZuSAAIVfb-DInFpN7qSe5PfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "547020247713-l4bnmofvv4ack9vdnq9b0u1klr9iid61.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
