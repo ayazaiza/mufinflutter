@@ -23,7 +23,6 @@ class _YesOrNoWidgetState extends State<YesOrNoWidget> {
   @override
   void initState() {
     _yesRNo = widget.initialValue;
-
     super.initState();
   }
 

@@ -3,6 +3,7 @@ import 'package:academy/core/common/widgets/action_bar_loader.dart';
 import 'package:academy/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,24 +11,12 @@ import '../../../../core/constants/app_strings.dart';
 import '../../../../core/utils/custom_widgets.dart';
 import '../../../../core/utils/router_const.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
+class ForgotPasswordScreen extends HookWidget {
   const ForgotPasswordScreen({super.key});
 
   @override
-  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
-}
-
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
-  final TextEditingController emailController = TextEditingController();
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final emailController = useTextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text(AppStrings.forgotPwd),
@@ -81,12 +70,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     context: context,
                     onPressed: !state.isLoading
                         ? () {
-                            context
-                                .read<AuthBloc>()
-                                .add(AuthEvent.submitEmail(
-                                  email: emailController.text,
-                                ));
-                          }
+                      context
+                          .read<AuthBloc>()
+                          .add(AuthEvent.submitEmail(
+                        email: emailController.text,
+                      ));
+                    }
                         : null),
                 CustomWidgets.spacerHeight(defaultHeight: 30),
                 Text(
@@ -103,3 +92,5 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     );
   }
 }
+
+

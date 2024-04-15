@@ -1,15 +1,23 @@
 import 'dart:developer';
 
+import 'package:academy/core/constants/app_strings.dart';
+import 'package:academy/features/academy/domain/usescases/student/add_student.dart';
 import 'package:academy/features/academy/domain/usescases/student/delete_student.dart';
+import 'package:academy/features/academy/domain/usescases/student/get_student.dart';
 import 'package:academy/features/academy/domain/usescases/student/get_students_stream.dart';
+import 'package:academy/features/academy/domain/usescases/student/update_student.dart';
 import 'package:academy/features/academy/domain/usescases/user/get_activities_stream.dart';
 import 'package:academy/features/academy/domain/usescases/user/insert_user.dart';
 import 'package:academy/features/academy/domain/usescases/user/update_user.dart';
+import 'package:academy/features/academy/presentation/blocs/add_student/add_student_bloc.dart';
 import 'package:academy/features/academy/presentation/blocs/all_students/all_students_bloc.dart';
 import 'package:academy/features/academy/presentation/cubits/bottom_nav/bottom_nav_cubit.dart';
 import 'package:academy/features/academy/presentation/cubits/dashboard/dashboard_cubit.dart';
+import 'package:academy/features/academy/presentation/cubits/student_details/student_details_cubit.dart';
+import 'package:academy/features/academy/presentation/pages/add_student_page.dart';
 import 'package:academy/features/academy/presentation/pages/all_students.dart';
 import 'package:academy/features/academy/presentation/pages/user_home_tabs.dart';
+import 'package:academy/features/academy/presentation/pages/view_student.dart';
 import 'package:academy/features/auth/presentation/cubit/root_cubit.dart';
 import 'package:academy/features/auth/presentation/pages/root_page.dart';
 import 'package:academy/features/academy/domain/repository/mufin_events_repo.dart';
@@ -30,6 +38,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/utils/router_const.dart';
+import '../../features/academy/domain/usescases/student/get_student_stream.dart';
 import '../../features/academy/presentation/blocs/profile_update_bloc/profile_update_bloc.dart';
 import '../../features/academy/domain/usescases/user/user_exist.dart';
 import '../../features/academy/presentation/cubits/event_details/event_details_cubit.dart';
@@ -84,10 +93,48 @@ class RouterModule {
               final String uuid = state.uri.queryParameters['uuid'].toString();
               return BlocProvider(
                 create: (context) => AllStudentsBloc(
-                    studentsStream: _getIt<GetStudentsStream>(),
-                    deleteStudent: _getIt<DeleteStudent>(),
-                    uuid: uuid)..add(AllStudentsEvent.startEvent(uuid: uuid)),
+                    studentsStream: _getIt<GetStudentsStream>(), uuid: uuid)
+                  ..add(AllStudentsEvent.startEvent(uuid: uuid)),
                 child: const AllStudents(),
+              );
+            }),
+        GoRoute(
+            path: RoutePaths.addStudent.path,
+            name: RoutePaths.addStudent.routeName(),
+            builder: (context, state) {
+              final String uuid = state.uri.queryParameters['uuid'].toString();
+              final String? studentId = state.uri.queryParameters['studentId'];
+              return BlocProvider(
+                create: (context) => AddStudentBloc(
+                    studentId: studentId,
+                    getStudent: _getIt<GetStudent>(),
+                    userExists: _getIt<UserExists>(),
+                    addStudent: _getIt<AddStudent>(),
+                    updateStudent: _getIt<UpdateStudent>(),
+                )
+                  ..add(AddStudentEvent.loadUser(uuid: uuid))
+                ..add(AddStudentEvent.loadStudent(studentId: studentId)),
+                child: AddStudentPage(
+                  title: studentId != null
+                      ? AppStrings.edit
+                      : AppStrings.addStudent,
+                ),
+              );
+            }),
+        GoRoute(
+            path: RoutePaths.studentDetails.path,
+            name: RoutePaths.studentDetails.routeName(),
+            builder: (context, state) {
+              final String uuid = state.uri.queryParameters['uuid'].toString();
+              final String studentId =
+                  state.uri.queryParameters['studentId'].toString();
+              return BlocProvider(
+                create: (context) => StudentDetailsCubit(
+                  studentId: studentId,
+                  getStudentStream: _getIt<GetStudentStream>(),
+                  uuid: uuid,
+                ),
+                child: const ViewStudent(),
               );
             }),
         GoRoute(

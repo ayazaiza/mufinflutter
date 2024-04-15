@@ -1,40 +1,31 @@
 import 'package:academy/core/constants/app_strings.dart';
 import 'package:academy/core/extensions/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class CustomDropDownList extends StatefulWidget {
-  final String? selectedCountry;
+class CustomDropDownList extends HookWidget {
+  final String? initialValue;
   final void Function(String) onChange;
   final List<String> countryList;
   final String? errorMsg;
+  final String label;
 
   const CustomDropDownList(
-      {this.selectedCountry,
+      {this.initialValue,
       required this.onChange,
       required this.countryList,
       this.errorMsg,
+      required this.label,
       super.key});
 
   @override
-  State<CustomDropDownList> createState() => _CustomDropDownListState();
-}
-
-class _CustomDropDownListState extends State<CustomDropDownList> {
-  String? _selectedCountry;
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedCountry = widget.selectedCountry;
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final selectedCountry = useState<String?>(initialValue);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppStrings.country,
+          label,
           style: context.textTheme.titleLarge!
               .copyWith(fontWeight: FontWeight.bold),
         ),
@@ -46,7 +37,7 @@ class _CustomDropDownListState extends State<CustomDropDownList> {
           padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
           decoration: BoxDecoration(
               border: Border.all(
-                  color: widget.errorMsg == null
+                  color: errorMsg == null
                       ? context.colorScheme.onBackground
                       : context.colorScheme.error,
                   width: 1.5),
@@ -57,11 +48,11 @@ class _CustomDropDownListState extends State<CustomDropDownList> {
                   color: context.colorScheme.onBackground,
                   fontWeight: FontWeight.w500,
                   letterSpacing: 1.5),
-              hint: const Text(AppStrings.country),
-              value: _selectedCountry,
+              hint: Text(label),
+              value: selectedCountry.value,
               underline: Container(),
               isExpanded: true,
-              items: widget.countryList.map((e) {
+              items: countryList.map((e) {
                 return DropdownMenuItem<String>(
                   onTap: () {},
                   value: e,
@@ -69,22 +60,20 @@ class _CustomDropDownListState extends State<CustomDropDownList> {
                 );
               }).toList(),
               onChanged: (value) {
-                setState(() {
-                  _selectedCountry = value;
-                  widget.onChange(_selectedCountry!);
-                });
+                selectedCountry.value = value;
+                onChange(selectedCountry.value!);
               }),
         ),
         Visibility(
-            visible: widget.errorMsg != null,
-            child: widget.errorMsg != null
+            visible: errorMsg != null,
+            child: errorMsg != null
                 ? Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 8.0, vertical: 4),
                     child: SizedBox(
                         width: double.infinity,
                         child: Text(
-                          widget.errorMsg!,
+                          errorMsg!,
                           style: context.textTheme.bodySmall!.copyWith(
                               fontWeight: FontWeight.w500,
                               color: context.colorScheme.error),

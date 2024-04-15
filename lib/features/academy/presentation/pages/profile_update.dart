@@ -201,7 +201,8 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                         Padding(
                           padding: EdgeInsets.all(_padding),
                           child: CustomDropDownList(
-                            selectedCountry: state.country,
+                            label: AppStrings.country,
+                            initialValue: state.country,
                             countryList: state.countriesList,
                             errorMsg: state.countryError,
                             onChange: (country) {
@@ -262,7 +263,21 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                                               .submit());
                                         }
                                       : null)
-                              /* child: FilledButton(
+
+                              ),
+                        )
+                      ],
+                    ),
+                  ),
+                );
+        },
+      ),
+    );
+  }
+}
+
+
+/* child: FilledButton(
                             onPressed: () {
                               event.add(ProfileUpdateEvent.submit(
                                   firstName: firstNameController.text,
@@ -282,14 +297,3 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                                     fontWeight: FontWeight.w600),
                               ),
                             ))*/
-                              ),
-                        )
-                      ],
-                    ),
-                  ),
-                );
-        },
-      ),
-    );
-  }
-}

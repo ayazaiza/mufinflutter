@@ -37,6 +37,11 @@ class AppStrings {
 
   static const String lastname = "Last Name";
   static const String enterLastname = "Enter Last Name";
+  static const String dateOfBirth = "Date of birth";
+  static const String age = "Age";
+  static const String gender = "Gender";
+  static const String relation = "Relation";
+  static const String addedDate = "Added date";
 
   static const String address = "Address";
   static const String enterAddress = "Enter Address";
@@ -110,7 +115,8 @@ class AppStrings {
   static const String attendance = "Attendance";
   static const String attendanceDetails = "Attendance details";
   static const String studentDetails = "Student details";
-  static const String addStudent = "Add new student";
+  static const String addStudent = "Add student";
+  static const String addNewStudent = "Add new student";
   static const String dashboard = "Dashboard";
   static const String courses = "Courses";
   static const String courseDetails = "Course details";

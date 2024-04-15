@@ -7,34 +7,28 @@ import 'package:academy/features/academy/presentation/widgets/nav_drawer_custom_
 import 'package:academy/features/academy/presentation/widgets/nav_drawer_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/utils/app_local_assets.dart';
 import '../../../../presentation/navigation/user_session_bloc/user_session_bloc.dart';
 import 'dashboard_page.dart';
 
-class UserHomeTabs extends StatefulWidget {
+class UserHomeTabs extends HookWidget {
   const UserHomeTabs({super.key});
 
   @override
-  State<UserHomeTabs> createState() => _UserHomeTabsState();
-}
-
-class _UserHomeTabsState extends State<UserHomeTabs> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  void _openDrawer() {
-    _scaffoldKey.currentState!.openDrawer();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final scaffoldKey = useMemoized(GlobalKey<ScaffoldState>.new);
     return Scaffold(
-      key: _scaffoldKey,
+      key: scaffoldKey,
       appBar: AppBar(
         title: const Text(AppStrings.appName),
         leading: IconButton(
-            onPressed: _openDrawer, icon: const Icon(Icons.menu_rounded)),
+            onPressed: () {
+              scaffoldKey.currentState!.openDrawer();
+            },
+            icon: const Icon(Icons.menu_rounded)),
         actions: [
           IconButton(
               onPressed: () {
@@ -53,37 +47,37 @@ class _UserHomeTabsState extends State<UserHomeTabs> {
                 icon: AppLocalAssets.profileIcon,
                 hasDiv: false,
                 onTap: () {
-                  _scaffoldKey.currentState?.closeDrawer();
+                  scaffoldKey.currentState?.closeDrawer();
                 }),
             NavDrawerCustomItem(
                 text: AppStrings.settings,
                 icon: AppLocalAssets.settingsIcon,
                 onTap: () {
-                  _scaffoldKey.currentState?.closeDrawer();
+                  scaffoldKey.currentState?.closeDrawer();
                 }),
             NavDrawerCustomItem(
                 text: AppStrings.students,
                 icon: AppLocalAssets.students,
                 onTap: () {
-                  _scaffoldKey.currentState?.closeDrawer();
+                  scaffoldKey.currentState?.closeDrawer();
                 }),
             NavDrawerCustomItem(
                 text: AppStrings.enrolls,
                 icon: AppLocalAssets.courseIconActive,
                 onTap: () {
-                  _scaffoldKey.currentState?.closeDrawer();
+                  scaffoldKey.currentState?.closeDrawer();
                 }),
             NavDrawerCustomItem(
                 text: AppStrings.eventEnrolls,
                 icon: AppLocalAssets.eventsIcon,
                 onTap: () {
-                  _scaffoldKey.currentState?.closeDrawer();
+                  scaffoldKey.currentState?.closeDrawer();
                 }),
             NavDrawerCustomItem(
                 text: AppStrings.songs,
                 icon: AppLocalAssets.songIcon,
                 onTap: () {
-                  _scaffoldKey.currentState?.closeDrawer();
+                  scaffoldKey.currentState?.closeDrawer();
                 }),
           ],
         ),

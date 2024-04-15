@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:academy/features/academy/domain/usescases/student/delete_student.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -16,15 +15,13 @@ part 'all_students_bloc.freezed.dart';
 
 class AllStudentsBloc extends Bloc<AllStudentsEvent, AllStudentsState> {
   final GetStudentsStream _getStudentsStream;
-  final DeleteStudent _deleteStudent;
   final String _uuid;
   StreamSubscription<Resource<List<Student>>>? _students;
 
   AllStudentsBloc(
       {required GetStudentsStream studentsStream,
-      required DeleteStudent deleteStudent,
       required String uuid})
-      : _deleteStudent = deleteStudent,
+      :
         _getStudentsStream = studentsStream,
         _uuid = uuid,
         super(AllStudentsState(uuid: uuid)) {
