@@ -54,6 +54,12 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+/*
+* View Student progress list and ui -> List details and ui
+* View Student regular course list and ui -> View All List and Ui -> list and ui
+* View Student Song -> View All -> details
+* */
+
 
 //  dart run build_runner build --delete-conflicting-outputs
 

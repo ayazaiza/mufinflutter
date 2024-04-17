@@ -77,21 +77,21 @@ class LessonCourseModel extends LessonCourse {
 
   factory LessonCourseModel.fromMap(Map<String, dynamic> map) {
     return LessonCourseModel(
-      title: map['title'] as String,
-      lessonId: map['lessonId'] as String,
-      about: map['about'] as String,
-      imageUrl: map['imageUrl'] as String,
-      courseName: map['courseName'] as String,
-      courseId: map['courseId'] as String,
-      subCourseName: map['subCourseName'] as String,
-      subCourseId: map['subCourseId'] as String,
-      certificationId: map['certificationId'] as String,
-      certificationName: map['certificationName'] as String,
+      title: map['title'] ?? "",
+      lessonId: map['lessonId'] ?? "",
+      about: map['about'] ?? "",
+      imageUrl: map['imageUrl'] ?? "",
+      courseName: map['courseName'] ?? "",
+      courseId: map['courseId'] ?? "",
+      subCourseName: map['subCourseName'] ?? "",
+      subCourseId: map['subCourseId'] ?? "",
+      certificationId: map['certificationId'] ?? "",
+      certificationName: map['certificationName'] ?? "",
       index: map['index'] as int,
       timestamp: map['timestamp'] as Timestamp,
       lastUpdated: map['lastUpdated'] as Timestamp,
-      gradeId: map['gradeId'] as String,
-      gradeName: map['gradeName'] as String,
+      gradeId: map['gradeId'] ?? "",
+      gradeName: map['gradeName'] ?? "",
     );
   }
 }

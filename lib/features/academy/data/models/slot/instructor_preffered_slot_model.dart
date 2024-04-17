@@ -67,18 +67,18 @@ class InstructorPrefSlotModel extends InstructorPrefSlot {
 
   factory InstructorPrefSlotModel.fromMap(Map<String, dynamic> map) {
     return InstructorPrefSlotModel(
-      prefSlotId: map['prefSlotId'] as String,
-      name: map['name'] as String,
-      email: map['email'] as String,
-      phone: map['phone'] as String,
-      userId: map['userId'] as String,
-      mainCourse: map['mainCourse'] as String,
-      courseId: map['courseId'] as String,
-      subCourse: map['subCourse'] as String,
-      subCourseId: map['subCourseId'] as String,
+      prefSlotId: map['prefSlotId'] ?? "",
+      name: map['name'] ?? "",
+      email: map['email'] ?? "",
+      phone: map['phone'] ?? "",
+      userId: map['userId'] ?? "",
+      mainCourse: map['mainCourse'] ?? "",
+      courseId: map['courseId'] ?? "",
+      subCourse: map['subCourse'] ?? "",
+      subCourseId: map['subCourseId'] ?? "",
       timestamp: map['timestamp'] as Timestamp,
       lastUpdated: map['lastUpdated'] as Timestamp,
-      days: map['days'] as List<DayModel>,
+      days: map['days'] ?? [],
     );
   }
 }

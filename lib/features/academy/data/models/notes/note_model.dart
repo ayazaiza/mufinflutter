@@ -42,10 +42,10 @@ class NoteModel extends Note {
 
   factory NoteModel.fromMap(Map<String, dynamic> map) {
     return NoteModel(
-      description: map['description'] as String,
-      noteId: map['noteId'] as String,
-      noteType: map['noteType'] as String,
-      date: map['date'] as String,
+      description: map['description'] ?? "",
+      noteId: map['noteId'] ?? "",
+      noteType: map['noteType'] ?? "",
+      date: map['date'] ?? "",
       timestamp: map['timestamp'] as Timestamp,
       lastUpdated: map['lastUpdated'] as Timestamp,
     );

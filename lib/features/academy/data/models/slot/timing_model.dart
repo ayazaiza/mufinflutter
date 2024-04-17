@@ -29,9 +29,9 @@ class TimingModel extends Timing {
 
   factory TimingModel.fromMap(Map<String, dynamic> map) {
     return TimingModel(
-      name: map['name'] as String,
-      timingId: map['timingId'] as String,
-      studentTimes: map['studentTimes'] as List<StudentTimesModel>,
+      name: map['name'] ?? "",
+      timingId: map['timingId'] ?? "",
+      studentTimes: map['studentTimes'] ?? [],
     );
   }
 }

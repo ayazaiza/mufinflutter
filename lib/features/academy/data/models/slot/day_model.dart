@@ -23,8 +23,8 @@ class DayModel extends Day {
 
   factory DayModel.fromMap(Map<String, dynamic> map) {
     return DayModel(
-      dayName: map['dayName'] as String,
-      timings: map['timings'] as List<TimingModel>,
+      dayName: map['dayName'] ?? "",
+      timings: map['timings'] ?? [],
     );
   }
 }

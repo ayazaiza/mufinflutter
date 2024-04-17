@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/academy/domain/entities/utils/carousel_item.dart';
+import '../error/app_exceptions.dart';
 
 extension MufinUserExt on MufinUser {
   Map<String, dynamic> get toHashMap => {
@@ -42,10 +43,14 @@ extension QuerySnapExt on QuerySnapshot {
 
   List<Map<String, dynamic>> get toMapList =>
       snaps.map((e) => e.data() as Map<String, dynamic>).toList();
+
+  
 }
 
 extension DocumentSnapExt on DocumentSnapshot {
   Map<String, dynamic> get snaps => data() as Map<String, dynamic>;
+
+
 
   MufinEvents get toMufinEvents => MufinEvents(
       mufinEventId: snaps['mufinEventId'],

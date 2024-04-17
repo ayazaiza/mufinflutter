@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:academy/core/constants/app_strings.dart';
+import 'package:academy/features/academy/domain/usescases/enrolls/get_enrolls_stud_uuid.dart';
+import 'package:academy/features/academy/domain/usescases/slot_attandance/get_student_slots_stud_id.dart';
+import 'package:academy/features/academy/domain/usescases/song/get_songs_student_id.dart';
 import 'package:academy/features/academy/domain/usescases/student/add_student.dart';
-import 'package:academy/features/academy/domain/usescases/student/delete_student.dart';
 import 'package:academy/features/academy/domain/usescases/student/get_student.dart';
 import 'package:academy/features/academy/domain/usescases/student/get_students_stream.dart';
 import 'package:academy/features/academy/domain/usescases/student/update_student.dart';
@@ -106,14 +108,14 @@ class RouterModule {
               final String? studentId = state.uri.queryParameters['studentId'];
               return BlocProvider(
                 create: (context) => AddStudentBloc(
-                    studentId: studentId,
-                    getStudent: _getIt<GetStudent>(),
-                    userExists: _getIt<UserExists>(),
-                    addStudent: _getIt<AddStudent>(),
-                    updateStudent: _getIt<UpdateStudent>(),
+                  studentId: studentId,
+                  getStudent: _getIt<GetStudent>(),
+                  userExists: _getIt<UserExists>(),
+                  addStudent: _getIt<AddStudent>(),
+                  updateStudent: _getIt<UpdateStudent>(),
                 )
                   ..add(AddStudentEvent.loadUser(uuid: uuid))
-                ..add(AddStudentEvent.loadStudent(studentId: studentId)),
+                  ..add(AddStudentEvent.loadStudent(studentId: studentId)),
                 child: AddStudentPage(
                   title: studentId != null
                       ? AppStrings.edit
@@ -133,7 +135,12 @@ class RouterModule {
                   studentId: studentId,
                   getStudentStream: _getIt<GetStudentStream>(),
                   uuid: uuid,
-                ),
+                  getEnrollsStudUUId: _getIt<GetEnrollsStudUUId>(),
+                  getStudentSlotsStudId: _getIt<GetStudentSlotsStudId>(),
+                  getSongsStudentId: _getIt<GetSongsStudentId>(),
+                )
+                  ..fetchData()
+                  ..loadData(),
                 child: const ViewStudent(),
               );
             }),

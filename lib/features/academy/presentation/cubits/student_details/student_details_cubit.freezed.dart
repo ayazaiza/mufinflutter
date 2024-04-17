@@ -20,6 +20,9 @@ mixin _$StudentDetailsState {
   String? get studentId => throw _privateConstructorUsedError;
   Student? get student => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+  List<EnrollCourse> get enrollCourses => throw _privateConstructorUsedError;
+  List<StudentTimes> get allClasses => throw _privateConstructorUsedError;
+  List<Song> get songs => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -38,6 +41,9 @@ abstract class $StudentDetailsStateCopyWith<$Res> {
       String? studentId,
       Student? student,
       String? error,
+      List<EnrollCourse> enrollCourses,
+      List<StudentTimes> allClasses,
+      List<Song> songs,
       bool isLoading});
 }
 
@@ -58,6 +64,9 @@ class _$StudentDetailsStateCopyWithImpl<$Res, $Val extends StudentDetailsState>
     Object? studentId = freezed,
     Object? student = freezed,
     Object? error = freezed,
+    Object? enrollCourses = null,
+    Object? allClasses = null,
+    Object? songs = null,
     Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
@@ -77,6 +86,18 @@ class _$StudentDetailsStateCopyWithImpl<$Res, $Val extends StudentDetailsState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      enrollCourses: null == enrollCourses
+          ? _value.enrollCourses
+          : enrollCourses // ignore: cast_nullable_to_non_nullable
+              as List<EnrollCourse>,
+      allClasses: null == allClasses
+          ? _value.allClasses
+          : allClasses // ignore: cast_nullable_to_non_nullable
+              as List<StudentTimes>,
+      songs: null == songs
+          ? _value.songs
+          : songs // ignore: cast_nullable_to_non_nullable
+              as List<Song>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -98,6 +119,9 @@ abstract class _$$InitialImplCopyWith<$Res>
       String? studentId,
       Student? student,
       String? error,
+      List<EnrollCourse> enrollCourses,
+      List<StudentTimes> allClasses,
+      List<Song> songs,
       bool isLoading});
 }
 
@@ -116,6 +140,9 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? studentId = freezed,
     Object? student = freezed,
     Object? error = freezed,
+    Object? enrollCourses = null,
+    Object? allClasses = null,
+    Object? songs = null,
     Object? isLoading = null,
   }) {
     return _then(_$InitialImpl(
@@ -135,6 +162,18 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      enrollCourses: null == enrollCourses
+          ? _value._enrollCourses
+          : enrollCourses // ignore: cast_nullable_to_non_nullable
+              as List<EnrollCourse>,
+      allClasses: null == allClasses
+          ? _value._allClasses
+          : allClasses // ignore: cast_nullable_to_non_nullable
+              as List<StudentTimes>,
+      songs: null == songs
+          ? _value._songs
+          : songs // ignore: cast_nullable_to_non_nullable
+              as List<Song>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -151,7 +190,13 @@ class _$InitialImpl implements _Initial {
       this.studentId,
       this.student,
       this.error,
-      this.isLoading = true});
+      final List<EnrollCourse> enrollCourses = const [],
+      final List<StudentTimes> allClasses = const [],
+      final List<Song> songs = const [],
+      this.isLoading = true})
+      : _enrollCourses = enrollCourses,
+        _allClasses = allClasses,
+        _songs = songs;
 
   @override
   final String? uuid;
@@ -161,13 +206,40 @@ class _$InitialImpl implements _Initial {
   final Student? student;
   @override
   final String? error;
+  final List<EnrollCourse> _enrollCourses;
+  @override
+  @JsonKey()
+  List<EnrollCourse> get enrollCourses {
+    if (_enrollCourses is EqualUnmodifiableListView) return _enrollCourses;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_enrollCourses);
+  }
+
+  final List<StudentTimes> _allClasses;
+  @override
+  @JsonKey()
+  List<StudentTimes> get allClasses {
+    if (_allClasses is EqualUnmodifiableListView) return _allClasses;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_allClasses);
+  }
+
+  final List<Song> _songs;
+  @override
+  @JsonKey()
+  List<Song> get songs {
+    if (_songs is EqualUnmodifiableListView) return _songs;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_songs);
+  }
+
   @override
   @JsonKey()
   final bool isLoading;
 
   @override
   String toString() {
-    return 'StudentDetailsState(uuid: $uuid, studentId: $studentId, student: $student, error: $error, isLoading: $isLoading)';
+    return 'StudentDetailsState(uuid: $uuid, studentId: $studentId, student: $student, error: $error, enrollCourses: $enrollCourses, allClasses: $allClasses, songs: $songs, isLoading: $isLoading)';
   }
 
   @override
@@ -180,13 +252,26 @@ class _$InitialImpl implements _Initial {
                 other.studentId == studentId) &&
             (identical(other.student, student) || other.student == student) &&
             (identical(other.error, error) || other.error == error) &&
+            const DeepCollectionEquality()
+                .equals(other._enrollCourses, _enrollCourses) &&
+            const DeepCollectionEquality()
+                .equals(other._allClasses, _allClasses) &&
+            const DeepCollectionEquality().equals(other._songs, _songs) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, uuid, studentId, student, error, isLoading);
+  int get hashCode => Object.hash(
+      runtimeType,
+      uuid,
+      studentId,
+      student,
+      error,
+      const DeepCollectionEquality().hash(_enrollCourses),
+      const DeepCollectionEquality().hash(_allClasses),
+      const DeepCollectionEquality().hash(_songs),
+      isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -201,6 +286,9 @@ abstract class _Initial implements StudentDetailsState {
       final String? studentId,
       final Student? student,
       final String? error,
+      final List<EnrollCourse> enrollCourses,
+      final List<StudentTimes> allClasses,
+      final List<Song> songs,
       final bool isLoading}) = _$InitialImpl;
 
   @override
@@ -211,6 +299,12 @@ abstract class _Initial implements StudentDetailsState {
   Student? get student;
   @override
   String? get error;
+  @override
+  List<EnrollCourse> get enrollCourses;
+  @override
+  List<StudentTimes> get allClasses;
+  @override
+  List<Song> get songs;
   @override
   bool get isLoading;
   @override

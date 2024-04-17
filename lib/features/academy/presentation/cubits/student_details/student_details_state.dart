@@ -7,6 +7,9 @@ class StudentDetailsState with _$StudentDetailsState {
     String? studentId,
     Student? student,
     String? error,
+    @Default([]) List<EnrollCourse> enrollCourses,
+    @Default([]) List<StudentTimes> allClasses,
+    @Default([]) List<Song> songs,
     @Default(true) bool isLoading
 }) = _Initial;
 }

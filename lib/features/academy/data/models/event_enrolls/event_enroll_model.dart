@@ -86,23 +86,23 @@ class EventEnrollModel extends EventEnroll {
 
   factory EventEnrollModel.fromMap(Map<String, dynamic> map) {
     return EventEnrollModel(
-      eventName: map['eventName'] as String,
-      eventTypeId: map['eventTypeId'] as String,
-      id: map['id'] as String,
-      parentId: map['parentId'] as String,
-      parentName: map['parentName'] as String,
-      parentEmail: map['parentEmail'] as String,
-      parentPhone: map['parentPhone'] as String,
-      studentName: map['studentName'] as String,
-      studentId: map['studentId'] as String,
-      studentAge: map['studentAge'] as String,
-      gender: map['gender'] as String,
-      studentDob: map['studentDob'] as String,
-      studentFirstName: map['studentFirstName'] as String,
-      studentLastName: map['studentLastName'] as String,
+      eventName: map['eventName'] ?? "",
+      eventTypeId: map['eventTypeId'] ?? "",
+      id: map['id'] ?? "",
+      parentId: map['parentId'] ?? "",
+      parentName: map['parentName'] ?? "",
+      parentEmail: map['parentEmail'] ?? "",
+      parentPhone: map['parentPhone'] ?? "",
+      studentName: map['studentName'] ?? "",
+      studentId: map['studentId'] ?? "",
+      studentAge: map['studentAge'] ?? "",
+      gender: map['gender'] ?? "",
+      studentDob: map['studentDob'] ?? "",
+      studentFirstName: map['studentFirstName'] ?? "",
+      studentLastName: map['studentLastName'] ?? "",
       timestamp: map['timestamp'] as Timestamp,
       lastUpdated: map['lastUpdated'] as Timestamp,
-      status: map['status'] as String,
+      status: map['status'] ?? "",
     );
   }
 }

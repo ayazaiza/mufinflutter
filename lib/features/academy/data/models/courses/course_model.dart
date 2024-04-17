@@ -45,10 +45,10 @@ class CourseModel extends Course {
 
   factory CourseModel.fromMap(Map<String, dynamic> map) {
     return CourseModel(
-      name: map['name'] as String,
-      about: map['about'] as String,
-      imageUrl: map['imageUrl'] as String,
-      courseId: map['courseId'] as String,
+      name: map['name'] ?? "",
+      about: map['about'] ?? "",
+      imageUrl: map['imageUrl'] ?? "",
+      courseId: map['courseId'] ?? "",
       index: map['index'] as int,
       timestamp: map['timestamp'] as Timestamp,
       lastUpdated: map['lastUpdated'] as Timestamp,

@@ -50,13 +50,13 @@ class EventEnrollTypeModel extends EventEnrollType {
 
   factory EventEnrollTypeModel.fromMap(Map<String, dynamic> map) {
       return EventEnrollTypeModel(
-          name: map['name'] as String,
-          id: map['id'] as String,
+          name: map['name'] ?? "",
+          id: map['id'] ?? "",
           itemVisible: map['itemVisible'] as bool,
           timestamp: map['timestamp'] as Timestamp,
           lastUpdated: map['lastUpdated'] as Timestamp,
           totalEnrolls: map['totalEnrolls'] as int,
-          description: map['description'] as String,
+          description: map['description'] ?? "",
           availableCount: map['availableCount'] as int,
       );
   }

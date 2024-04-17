@@ -73,9 +73,13 @@ class StudentRepoImpl implements StudentRepo {
 
   @override
   Future<Resource<List<Student>>> getStudents(String uuid) async {
-    var resp = await _studentDatasource.getStudents(uuid);
-    return DataSuccess(
-        resp.toMapList.map((e) => StudentModel.fromMap(e)).toList());
+    try {
+      var resp = await _studentDatasource.getStudents(uuid);
+      return DataSuccess(
+          resp.toMapList.map((e) => StudentModel.fromMap(e)).toList());
+    }on ServerException catch (e) {
+      return DataError(e.message);
+    }
   }
 
   @override

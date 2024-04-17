@@ -12,11 +12,11 @@ class AppConstants {
 
   static const String eventEnrollType = "eventEnrollType";
   static const String eventEnroll = "eventEnroll";
-  static const String enrollCourses = "enrollCourses";
+  static const String enrollCoursesRef = "enrollCourses";
   static const String userNotifications = "userNotifications";
   static const String users = "users";
   static const String students = "students";
-  static const String studentSlotTimes = "studentsSlotTimes";
+  static const String studentSlotTimesRef = "studentsSlotTimes";
   static const String studentAttendanceRef = "studentAttendance";
   static const String songDataRef = "SongData";
 

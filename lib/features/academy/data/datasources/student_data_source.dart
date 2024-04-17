@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:academy/core/error/app_exceptions.dart';
 import 'package:academy/features/academy/data/models/student/student_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -45,12 +43,12 @@ class StudentDatasourceImpl implements StudentDatasource {
   @override
   Stream<QuerySnapshot<Object?>> getStudentsStream(String uuid) {
     try {
+      // var query = Query().where("userId",isEqualTo: uuid);
       return _ref
           .where('userId',isEqualTo: uuid)
           .orderBy("lastUpdated", descending: true)
           .snapshots();
     } catch (e) {
-      log(e.toString());
       throw ServerException(message: e.toString());
     }
   }

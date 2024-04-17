@@ -1,6 +1,46 @@
+import 'package:academy/features/academy/data/datasources/completed_topic_data_source.dart';
+import 'package:academy/features/academy/data/datasources/courses_data_source.dart';
+import 'package:academy/features/academy/data/datasources/enroll_course_data_source.dart';
+import 'package:academy/features/academy/data/datasources/notification_data_source.dart';
 import 'package:academy/features/academy/data/datasources/student_data_source.dart';
+import 'package:academy/features/academy/data/datasources/student_slot_data_source.dart';
+import 'package:academy/features/academy/data/repository/completed_topic_repo_impl.dart';
+import 'package:academy/features/academy/data/repository/course_repo_impl.dart';
+import 'package:academy/features/academy/data/repository/enroll_course_repo_impl.dart';
+import 'package:academy/features/academy/data/repository/notification_repo_impl.dart';
+import 'package:academy/features/academy/data/repository/song_repo_impl.dart';
 import 'package:academy/features/academy/data/repository/student_repo_impl.dart';
+import 'package:academy/features/academy/data/repository/student_slot_repo_impl.dart';
+import 'package:academy/features/academy/domain/repository/completed_topic_repo.dart';
+import 'package:academy/features/academy/domain/repository/notification_repo.dart';
+import 'package:academy/features/academy/domain/repository/song_repo.dart';
 import 'package:academy/features/academy/domain/repository/student_repo.dart';
+import 'package:academy/features/academy/domain/usescases/courses/get_certification_course.dart';
+import 'package:academy/features/academy/domain/usescases/courses/get_course.dart';
+import 'package:academy/features/academy/domain/usescases/courses/get_courses.dart';
+import 'package:academy/features/academy/domain/usescases/courses/get_grade_course.dart';
+import 'package:academy/features/academy/domain/usescases/courses/get_lesson_course.dart';
+import 'package:academy/features/academy/domain/usescases/courses/get_sub_course.dart';
+import 'package:academy/features/academy/domain/usescases/enrolls/enroll_new_course.dart';
+import 'package:academy/features/academy/domain/usescases/enrolls/get_enroll_course.dart';
+import 'package:academy/features/academy/domain/usescases/enrolls/get_enrolls_cou_uuid.dart';
+import 'package:academy/features/academy/domain/usescases/enrolls/get_enrolls_stud_id.dart';
+import 'package:academy/features/academy/domain/usescases/enrolls/get_enrolls_stud_uuid.dart';
+import 'package:academy/features/academy/domain/usescases/enrolls/get_enrolls_user_id.dart';
+import 'package:academy/features/academy/domain/usescases/enrolls/has_enrolled.dart';
+import 'package:academy/features/academy/domain/usescases/enrolls/update_enroll_course.dart';
+import 'package:academy/features/academy/domain/usescases/notification/get_notification.dart';
+import 'package:academy/features/academy/domain/usescases/notification/get_notifications.dart';
+import 'package:academy/features/academy/domain/usescases/notification/update_notification.dart';
+import 'package:academy/features/academy/domain/usescases/slot_attandance/get_all_attendance.dart';
+import 'package:academy/features/academy/domain/usescases/slot_attandance/get_attendance_by_stud_id_slot_time_id.dart';
+import 'package:academy/features/academy/domain/usescases/slot_attandance/get_attendances.dart';
+import 'package:academy/features/academy/domain/usescases/slot_attandance/get_student_slot_time.dart';
+import 'package:academy/features/academy/domain/usescases/slot_attandance/get_student_slots_parent_id.dart';
+import 'package:academy/features/academy/domain/usescases/slot_attandance/get_student_slots_stud_id.dart';
+import 'package:academy/features/academy/domain/usescases/song/get_song.dart';
+import 'package:academy/features/academy/domain/usescases/song/get_songs_student_id.dart';
+import 'package:academy/features/academy/domain/usescases/song/get_songs_user_id.dart';
 import 'package:academy/features/academy/domain/usescases/student/add_student.dart';
 import 'package:academy/features/academy/domain/usescases/student/delete_student.dart';
 import 'package:academy/features/academy/domain/usescases/student/get_student.dart';
@@ -9,6 +49,12 @@ import 'package:academy/features/academy/domain/usescases/student/get_students.d
 import 'package:academy/features/academy/domain/usescases/student/get_students_stream.dart';
 import 'package:academy/features/academy/domain/usescases/student/student_usecase.dart';
 import 'package:academy/features/academy/domain/usescases/student/update_student.dart';
+import 'package:academy/features/academy/domain/usescases/topics/get_grade_topic.dart';
+import 'package:academy/features/academy/domain/usescases/topics/get_lesson_topic.dart';
+import 'package:academy/features/academy/domain/usescases/topics/get_lesson_topics.dart';
+import 'package:academy/features/academy/domain/usescases/topics/get_topic.dart';
+import 'package:academy/features/academy/domain/usescases/topics/get_topics_by_enroll.dart';
+import 'package:academy/features/academy/domain/usescases/topics/get_topics_by_enroll_pref_slot.dart';
 import 'package:academy/features/academy/domain/usescases/user/add_activity.dart';
 import 'package:academy/features/academy/domain/usescases/user/get_activities.dart';
 import 'package:academy/features/academy/domain/usescases/user/get_activities_stream.dart';
@@ -34,7 +80,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/constants/constants.dart';
 import '../features/academy/data/datasources/shared_prefs_data_source.dart';
+import '../features/academy/data/datasources/song_data_source.dart';
+import '../features/academy/domain/repository/courses_repo.dart';
+import '../features/academy/domain/repository/enroll_course_repo.dart';
 import '../features/academy/domain/repository/shared_prefs_repo.dart';
+import '../features/academy/domain/repository/student_slot_repo.dart';
+import '../features/academy/domain/usescases/courses/get_certication_courses.dart';
+import '../features/academy/domain/usescases/courses/get_grade_courses.dart';
+import '../features/academy/domain/usescases/courses/get_lesson_courses.dart';
+import '../features/academy/domain/usescases/courses/get_sub_courses.dart';
+import '../features/academy/domain/usescases/slot_attandance/get_attendance.dart';
+import '../features/academy/domain/usescases/topics/get_grade_topics.dart';
+import '../features/academy/domain/usescases/topics/get_topics.dart';
 import '../features/academy/presentation/blocs/delete_student/delete_student_bloc.dart';
 import '../features/auth/data/datasources/firebase_user_auth_ds.dart';
 import '../features/auth/data/repository/firebase_user_auth_impl.dart';
@@ -80,6 +137,7 @@ Future<void> initDependencies() async {
     ..registerFactory(() => LandingCubit(
         carouselItemRepo: locator<CarouselItemRepo>(),
         mufinEventsRepo: locator<MufinEventsRepo>()))
+
     /* Auth */
     ..registerFactory<FirebaseUserAuthDataSource>(() =>
         FirebaseUserAuthDataSourceImpl(
@@ -151,7 +209,148 @@ Future<void> initDependencies() async {
         getStudentsStream: locator<GetStudentsStream>(),
         updateStudent: locator<UpdateStudent>()))
     ..registerLazySingleton(
-        () => DeleteStudentBloc(deleteStudent: locator<DeleteStudent>()));
+        () => DeleteStudentBloc(deleteStudent: locator<DeleteStudent>()))
+
+    /* Courses */
+    ..registerLazySingleton<CoursesDataSource>(() => CoursesDataSourceImpl(
+        courseRef:
+            locator<FirebaseFirestore>().collection(AppConstants.courses),
+        subCourseRef:
+            locator<FirebaseFirestore>().collection(AppConstants.subCourses),
+        certificationRef: locator<FirebaseFirestore>()
+            .collection(AppConstants.certificationCourse),
+        gradeRef:
+            locator<FirebaseFirestore>().collection(AppConstants.gradeCourse),
+        lessonRef:
+            locator<FirebaseFirestore>().collection(AppConstants.lessonCourse)))
+    ..registerLazySingleton<CoursesRepo>(
+        () => CoursesRepoImpl(coursesDataSource: locator<CoursesDataSource>()))
+    ..registerFactory<GetCourse>(
+        () => GetCourse(coursesRepo: locator<CoursesRepo>()))
+    ..registerFactory<GetCourses>(
+        () => GetCourses(coursesRepo: locator<CoursesRepo>()))
+    ..registerFactory<GetSubCourse>(
+        () => GetSubCourse(coursesRepo: locator<CoursesRepo>()))
+    ..registerFactory<GetSubCourses>(
+        () => GetSubCourses(coursesRepo: locator<CoursesRepo>()))
+    ..registerFactory<GetCertificationCourse>(
+        () => GetCertificationCourse(coursesRepo: locator<CoursesRepo>()))
+    ..registerFactory<GetCertificationCourses>(
+        () => GetCertificationCourses(coursesRepo: locator<CoursesRepo>()))
+    ..registerFactory<GetGradeCourse>(
+        () => GetGradeCourse(coursesRepo: locator<CoursesRepo>()))
+    ..registerFactory<GetGradeCourses>(
+        () => GetGradeCourses(coursesRepo: locator<CoursesRepo>()))
+    ..registerFactory<GetLessonCourse>(
+        () => GetLessonCourse(coursesRepo: locator<CoursesRepo>()))
+    ..registerFactory<GetLessonCourses>(
+        () => GetLessonCourses(coursesRepo: locator<CoursesRepo>()))
+
+    /* Completed Topic */
+    ..registerLazySingleton<CompletedTopicDataSource>(() =>
+        CompletedTopicDataSourceImpl(
+            completedTopicRef: locator<FirebaseFirestore>()
+                .collection(AppConstants.completedTopics),
+            gradeTopicRef: locator<FirebaseFirestore>()
+                .collection(AppConstants.gradeTopic),
+            lessonTopicRef: locator<FirebaseFirestore>()
+                .collection(AppConstants.lessonTopic)))
+    ..registerLazySingleton<CompletedTopicRepo>(() => CompletedTopicRepoImpl(
+        completedTopicDataSource: locator<CompletedTopicDataSource>()))
+    ..registerFactory<GetTopic>(
+        () => GetTopic(completedTopicRepo: locator<CompletedTopicRepo>()))
+    ..registerFactory<GetTopics>(
+        () => GetTopics(completedTopicRepo: locator<CompletedTopicRepo>()))
+    ..registerFactory<GetTopicsByEnroll>(() =>
+        GetTopicsByEnroll(completedTopicRepo: locator<CompletedTopicRepo>()))
+    ..registerFactory<GetTopicsByEnrollPrefSlot>(() =>
+        GetTopicsByEnrollPrefSlot(
+            completedTopicRepo: locator<CompletedTopicRepo>()))
+    ..registerFactory<GetGradeTopic>(
+        () => GetGradeTopic(completedTopicRepo: locator<CompletedTopicRepo>()))
+    ..registerFactory<GetGradeTopics>(
+        () => GetGradeTopics(completedTopicRepo: locator<CompletedTopicRepo>()))
+    ..registerFactory<GetLessonTopic>(
+        () => GetLessonTopic(completedTopicRepo: locator<CompletedTopicRepo>()))
+    ..registerFactory<GetLessonTopics>(() =>
+        GetLessonTopics(completedTopicRepo: locator<CompletedTopicRepo>()))
+
+    /* Student slot */
+    ..registerLazySingleton<StudentSlotDataSource>(() =>
+        StudentSlotDataSourceImpl(
+            studentSlotTimeRef: locator<FirebaseFirestore>()
+                .collection(AppConstants.studentSlotTimesRef),
+            studentAttendanceRef: locator<FirebaseFirestore>()
+                .collection(AppConstants.studentAttendanceRef)))
+    ..registerLazySingleton<StudentSlotRepo>(() => StudentSlotRepoImpl(
+        studentSlotDataSource: locator<StudentSlotDataSource>()))
+    ..registerFactory<GetAllAttendance>(
+        () => GetAllAttendance(studentSlotRepo: locator<StudentSlotRepo>()))
+    ..registerFactory<GetAttendance>(
+        () => GetAttendance(studentSlotRepo: locator<StudentSlotRepo>()))
+    ..registerFactory<GetAttendanceByStudIdSlotTimeId>(() =>
+        GetAttendanceByStudIdSlotTimeId(
+            studentSlotRepo: locator<StudentSlotRepo>()))
+    ..registerFactory<GetAttendances>(
+        () => GetAttendances(studentSlotRepo: locator<StudentSlotRepo>()))
+    ..registerFactory<GetStudentSlotTime>(
+        () => GetStudentSlotTime(studentSlotRepo: locator<StudentSlotRepo>()))
+    ..registerFactory<GetStudentSlotsParentId>(() =>
+        GetStudentSlotsParentId(studentSlotRepo: locator<StudentSlotRepo>()))
+    ..registerFactory<GetStudentSlotsStudId>(() =>
+        GetStudentSlotsStudId(studentSlotRepo: locator<StudentSlotRepo>()))
+
+    /* Enrolls */
+    ..registerLazySingleton<EnrollCourseDataSource>(() =>
+        EnrollCourseDataSourceImpl(
+            enrollCourseRef: locator<FirebaseFirestore>()
+                .collection(AppConstants.enrollCoursesRef)))
+    ..registerLazySingleton<EnrollCourseRepo>(() => EnrollCourseRepoImpl(
+        enrollCourseDataSource: locator<EnrollCourseDataSource>()))
+    ..registerFactory<EnrollNewCourse>(() => EnrollNewCourse(
+        enrollCourseRepo: locator<EnrollCourseRepo>(),
+        addActivity: locator<AddActivity>()))
+    ..registerFactory<GetEnrollCourse>(
+        () => GetEnrollCourse(enrollCourseRepo: locator<EnrollCourseRepo>()))
+    ..registerFactory<GetEnrollsCouUUId>(
+        () => GetEnrollsCouUUId(enrollCourseRepo: locator<EnrollCourseRepo>()))
+    ..registerFactory<GetEnrollsStudId>(
+        () => GetEnrollsStudId(enrollCourseRepo: locator<EnrollCourseRepo>()))
+    ..registerFactory<GetEnrollsStudUUId>(
+        () => GetEnrollsStudUUId(enrollCourseRepo: locator<EnrollCourseRepo>()))
+    ..registerFactory<GetEnrollsUserId>(
+        () => GetEnrollsUserId(enrollCourseRepo: locator<EnrollCourseRepo>()))
+    ..registerFactory<HasEnrolled>(
+        () => HasEnrolled(enrollCourseRepo: locator<EnrollCourseRepo>()))
+    ..registerFactory<UpdateEnrollCourse>(() => UpdateEnrollCourse(
+        enrollCourseRepo: locator<EnrollCourseRepo>(),
+        addActivity: locator<AddActivity>()))
+
+    /*Song data*/
+    ..registerLazySingleton<SongDatasource>(() => SongDatasourceImpl(
+        songRef:
+            locator<FirebaseFirestore>().collection(AppConstants.songDataRef)))
+    ..registerLazySingleton<SongRepo>(
+        () => SongRepoImpl(songDatasource: locator<SongDatasource>()))
+    ..registerFactory<GetSong>(() => GetSong(songRepo: locator<SongRepo>()))
+    ..registerFactory<GetSongsStudentId>(
+        () => GetSongsStudentId(songRepo: locator<SongRepo>()))
+    ..registerFactory<GetSongsUserId>(
+        () => GetSongsUserId(songRepo: locator<SongRepo>()))
+
+    /* Notification */
+    ..registerLazySingleton<NotificationDataSource>(() =>
+        NotificationDataSourceImpl(
+            notificationRef: locator<FirebaseFirestore>()
+                .collection(AppConstants.userNotifications)))
+    ..registerLazySingleton<NotificationRepo>(() => NotificationRepoImpl(
+        notificationDataSource: locator<NotificationDataSource>()))
+    ..registerFactory<GetNotificationStream>(() =>
+        GetNotificationStream(notificationRepo: locator<NotificationRepo>()))
+    ..registerFactory<GetNotificationsStream>(() =>
+        GetNotificationsStream(notificationRepo: locator<NotificationRepo>()))
+    ..registerFactory<UpdateNotification>(() =>
+        UpdateNotification(notificationRepo: locator<NotificationRepo>()));
 }
 
 Future<void> _init() async {
