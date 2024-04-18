@@ -1,4 +1,3 @@
-import 'package:academy/core/extensions/extension_mapper.dart';
 import 'package:academy/core/extensions/extensions.dart';
 import 'package:academy/core/utils/router_const.dart';
 import 'package:academy/features/academy/presentation/widgets/student_card.dart';

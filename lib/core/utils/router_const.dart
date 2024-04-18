@@ -11,6 +11,7 @@ enum RoutePaths {
   students(path: '/students'),
   addStudent(path: '/add_student'),
   studentDetails(path: '/student_details'),
+  studentProgress(path: '/student_progress'),
   attendances(path: '/attendances'),
   attendanceDetails(path: '/attendance_details'),
   enrolls(path: '/enrolls'),
@@ -104,6 +105,8 @@ enum RoutePaths {
         return AppStrings.eventEnrollDetails;
       case RoutePaths.payments:
         return AppStrings.payments;
+      case RoutePaths.studentProgress:
+        return AppStrings.progress;
     }
   }
 }

@@ -21,6 +21,7 @@ mixin _$StudentDetailsState {
   Student? get student => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   List<EnrollCourse> get enrollCourses => throw _privateConstructorUsedError;
+  List<EnrollCourse> get progress => throw _privateConstructorUsedError;
   List<StudentTimes> get allClasses => throw _privateConstructorUsedError;
   List<Song> get songs => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
@@ -42,6 +43,7 @@ abstract class $StudentDetailsStateCopyWith<$Res> {
       Student? student,
       String? error,
       List<EnrollCourse> enrollCourses,
+      List<EnrollCourse> progress,
       List<StudentTimes> allClasses,
       List<Song> songs,
       bool isLoading});
@@ -65,6 +67,7 @@ class _$StudentDetailsStateCopyWithImpl<$Res, $Val extends StudentDetailsState>
     Object? student = freezed,
     Object? error = freezed,
     Object? enrollCourses = null,
+    Object? progress = null,
     Object? allClasses = null,
     Object? songs = null,
     Object? isLoading = null,
@@ -89,6 +92,10 @@ class _$StudentDetailsStateCopyWithImpl<$Res, $Val extends StudentDetailsState>
       enrollCourses: null == enrollCourses
           ? _value.enrollCourses
           : enrollCourses // ignore: cast_nullable_to_non_nullable
+              as List<EnrollCourse>,
+      progress: null == progress
+          ? _value.progress
+          : progress // ignore: cast_nullable_to_non_nullable
               as List<EnrollCourse>,
       allClasses: null == allClasses
           ? _value.allClasses
@@ -120,6 +127,7 @@ abstract class _$$InitialImplCopyWith<$Res>
       Student? student,
       String? error,
       List<EnrollCourse> enrollCourses,
+      List<EnrollCourse> progress,
       List<StudentTimes> allClasses,
       List<Song> songs,
       bool isLoading});
@@ -141,6 +149,7 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? student = freezed,
     Object? error = freezed,
     Object? enrollCourses = null,
+    Object? progress = null,
     Object? allClasses = null,
     Object? songs = null,
     Object? isLoading = null,
@@ -165,6 +174,10 @@ class __$$InitialImplCopyWithImpl<$Res>
       enrollCourses: null == enrollCourses
           ? _value._enrollCourses
           : enrollCourses // ignore: cast_nullable_to_non_nullable
+              as List<EnrollCourse>,
+      progress: null == progress
+          ? _value._progress
+          : progress // ignore: cast_nullable_to_non_nullable
               as List<EnrollCourse>,
       allClasses: null == allClasses
           ? _value._allClasses
@@ -191,10 +204,12 @@ class _$InitialImpl implements _Initial {
       this.student,
       this.error,
       final List<EnrollCourse> enrollCourses = const [],
+      final List<EnrollCourse> progress = const [],
       final List<StudentTimes> allClasses = const [],
       final List<Song> songs = const [],
       this.isLoading = true})
       : _enrollCourses = enrollCourses,
+        _progress = progress,
         _allClasses = allClasses,
         _songs = songs;
 
@@ -213,6 +228,15 @@ class _$InitialImpl implements _Initial {
     if (_enrollCourses is EqualUnmodifiableListView) return _enrollCourses;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_enrollCourses);
+  }
+
+  final List<EnrollCourse> _progress;
+  @override
+  @JsonKey()
+  List<EnrollCourse> get progress {
+    if (_progress is EqualUnmodifiableListView) return _progress;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_progress);
   }
 
   final List<StudentTimes> _allClasses;
@@ -239,7 +263,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'StudentDetailsState(uuid: $uuid, studentId: $studentId, student: $student, error: $error, enrollCourses: $enrollCourses, allClasses: $allClasses, songs: $songs, isLoading: $isLoading)';
+    return 'StudentDetailsState(uuid: $uuid, studentId: $studentId, student: $student, error: $error, enrollCourses: $enrollCourses, progress: $progress, allClasses: $allClasses, songs: $songs, isLoading: $isLoading)';
   }
 
   @override
@@ -254,6 +278,7 @@ class _$InitialImpl implements _Initial {
             (identical(other.error, error) || other.error == error) &&
             const DeepCollectionEquality()
                 .equals(other._enrollCourses, _enrollCourses) &&
+            const DeepCollectionEquality().equals(other._progress, _progress) &&
             const DeepCollectionEquality()
                 .equals(other._allClasses, _allClasses) &&
             const DeepCollectionEquality().equals(other._songs, _songs) &&
@@ -269,6 +294,7 @@ class _$InitialImpl implements _Initial {
       student,
       error,
       const DeepCollectionEquality().hash(_enrollCourses),
+      const DeepCollectionEquality().hash(_progress),
       const DeepCollectionEquality().hash(_allClasses),
       const DeepCollectionEquality().hash(_songs),
       isLoading);
@@ -287,6 +313,7 @@ abstract class _Initial implements StudentDetailsState {
       final Student? student,
       final String? error,
       final List<EnrollCourse> enrollCourses,
+      final List<EnrollCourse> progress,
       final List<StudentTimes> allClasses,
       final List<Song> songs,
       final bool isLoading}) = _$InitialImpl;
@@ -301,6 +328,8 @@ abstract class _Initial implements StudentDetailsState {
   String? get error;
   @override
   List<EnrollCourse> get enrollCourses;
+  @override
+  List<EnrollCourse> get progress;
   @override
   List<StudentTimes> get allClasses;
   @override

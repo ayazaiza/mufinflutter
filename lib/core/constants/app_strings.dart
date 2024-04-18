@@ -112,6 +112,9 @@ class AppStrings {
 
   static const String profile = "Profile";
   static const String students = "Students";
+  static const String progress = "Progress";
+  static const String regularCourses = "Regular Courses";
+  static const String regularCourseEnrolls = "Regular course enrollments";
   static const String attendance = "Attendance";
   static const String attendanceDetails = "Attendance details";
   static const String studentDetails = "Student details";

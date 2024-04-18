@@ -61,7 +61,12 @@ class StudentDetailsCubit extends Cubit<StudentDetailsState> {
 
   Future<void> _loadEnrolls() async {
     var resp = await _getEnrollsStudUUId(Tuple2(_uuid, _studentId));
-    emit(state.copyWith(enrollCourses: resp.data ?? state.enrollCourses));
+    emit(state.copyWith(
+        enrollCourses: resp.data ?? state.enrollCourses,
+        progress: resp.data
+                ?.where((element) => element.status != "Pending")
+                .toList() ??
+            state.progress));
   }
 
   // Future<void> loadClasses() async {

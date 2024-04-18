@@ -1,12 +1,14 @@
 import 'package:academy/core/constants/app_strings.dart';
-import 'package:academy/core/extensions/extension_mapper.dart';
 import 'package:academy/core/extensions/extensions.dart';
-import 'package:academy/core/utils/app_local_assets.dart';
+import 'package:academy/features/academy/domain/entities/courses/enroll_course.dart';
+import 'package:academy/features/academy/domain/entities/utils/song.dart';
 import 'package:academy/features/academy/presentation/blocs/delete_student/delete_student_bloc.dart';
 import 'package:academy/features/academy/presentation/cubits/student_details/student_details_cubit.dart';
+import 'package:academy/features/academy/presentation/widgets/custom_container_box.dart';
 import 'package:academy/features/academy/presentation/widgets/delete_confirm_dialog.dart';
 import 'package:academy/features/academy/presentation/widgets/details_widget.dart';
 import 'package:academy/features/academy/presentation/widgets/error_screen.dart';
+import 'package:academy/features/academy/presentation/widgets/list_item_widget.dart';
 import 'package:academy/features/academy/presentation/widgets/text_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,20 +48,20 @@ class ViewStudent extends HookWidget {
                                 Expanded(
                                   child: SingleChildScrollView(
                                     child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.all(16.0),
                                           child: Row(
                                             children: [
                                               Container(
-                                                height: 56,
-                                                width: 56,
+                                                padding:
+                                                    const EdgeInsets.all(18),
                                                 decoration: BoxDecoration(
                                                     color: context
                                                         .colorScheme.primary,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50)),
+                                                    shape: BoxShape.circle),
                                                 child: Center(
                                                     child: Text(
                                                   state.student!.name[0],
@@ -114,6 +116,111 @@ class ViewStudent extends HookWidget {
                                               .toDate()
                                               .toString(),
                                         ),
+                                        if (state.progress.isNotEmpty) ...[
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                          CustomContainerBox<EnrollCourse>(
+                                              title: AppStrings.progress,
+                                              item: state.progress,
+                                              itemWidget: (index) {
+                                                return GestureDetector(
+                                                  onTap: () {
+                                                    context.push(Uri(
+                                                        path: RoutePaths
+                                                            .studentProgress
+                                                            .path,
+                                                        queryParameters: {
+                                                          "enrollId": state
+                                                              .progress[index]
+                                                              .enrollDocId,
+                                                          "studentId": state
+                                                              .progress[index]
+                                                              .studentDocumentId
+                                                        }).toString());
+                                                  },
+                                                  child: ListItemWidget(
+                                                      title:
+                                                          "${state.progress[index].courseName} (${state.enrollCourses[index].subCourseName})",
+                                                      subtitle: state
+                                                          .progress[index]
+                                                          .parentName,
+                                                      icon: Icon(
+                                                        Icons.home_work_rounded,
+                                                        color: context
+                                                            .colorScheme
+                                                            .onPrimary,
+                                                      )),
+                                                );
+                                              },
+                                              itemCount: state.progress.length),
+                                        ] else ...[
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                        ],
+                                        if (state.enrollCourses.isNotEmpty) ...[
+                                          CustomContainerBox<EnrollCourse>(
+                                              title: AppStrings
+                                                  .regularCourseEnrolls,
+                                              viewAll: () {},
+                                              item: state.enrollCourses,
+                                              itemWidget: (index) {
+                                                return GestureDetector(
+                                                  onTap: () {},
+                                                  child: ListItemWidget(
+                                                    title: state
+                                                        .enrollCourses[index]
+                                                        .courseName,
+                                                    subtitle: state
+                                                        .enrollCourses[index]
+                                                        .subCourseName,
+                                                    icon: Icon(
+                                                      Icons.school_rounded,
+                                                      color: context.colorScheme
+                                                          .onPrimary,
+                                                    ),
+                                                    third: state
+                                                        .enrollCourses[index]
+                                                        .timestamp
+                                                        .toDate()
+                                                        .toString(),
+                                                  ),
+                                                );
+                                              },
+                                              itemCount: state.enrollCourses
+                                                  .take(10)
+                                                  .length)
+                                        ],
+                                        if (state.songs.isNotEmpty) ...[
+                                          CustomContainerBox<Song>(
+                                              title: AppStrings.songs,
+                                              viewAll: () {},
+                                              item: state.songs,
+                                              itemWidget: (index) {
+                                                return GestureDetector(
+                                                  onTap: () {},
+                                                  child: ListItemWidget(
+                                                    title: state
+                                                        .songs[index].songName,
+                                                    subtitle: state.songs[index]
+                                                        .songShortDesc,
+                                                    icon: Icon(
+                                                      Icons.music_note,
+                                                      color: context.colorScheme
+                                                          .onPrimary,
+                                                    ),
+                                                    third: state
+                                                        .enrollCourses[index]
+                                                        .timestamp
+                                                        .toDate()
+                                                        .toString(),
+                                                  ),
+                                                );
+                                              },
+                                              itemCount:
+                                                  state.songs.take(10).length)
+                                        ]
                                       ],
                                     ),
                                   ),

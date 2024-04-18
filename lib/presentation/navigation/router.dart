@@ -8,6 +8,9 @@ import 'package:academy/features/academy/domain/usescases/student/add_student.da
 import 'package:academy/features/academy/domain/usescases/student/get_student.dart';
 import 'package:academy/features/academy/domain/usescases/student/get_students_stream.dart';
 import 'package:academy/features/academy/domain/usescases/student/update_student.dart';
+import 'package:academy/features/academy/domain/usescases/topics/get_grade_topics.dart';
+import 'package:academy/features/academy/domain/usescases/topics/get_lesson_topics.dart';
+import 'package:academy/features/academy/domain/usescases/topics/get_topics_by_enroll.dart';
 import 'package:academy/features/academy/domain/usescases/user/get_activities_stream.dart';
 import 'package:academy/features/academy/domain/usescases/user/insert_user.dart';
 import 'package:academy/features/academy/domain/usescases/user/update_user.dart';
@@ -16,8 +19,10 @@ import 'package:academy/features/academy/presentation/blocs/all_students/all_stu
 import 'package:academy/features/academy/presentation/cubits/bottom_nav/bottom_nav_cubit.dart';
 import 'package:academy/features/academy/presentation/cubits/dashboard/dashboard_cubit.dart';
 import 'package:academy/features/academy/presentation/cubits/student_details/student_details_cubit.dart';
+import 'package:academy/features/academy/presentation/cubits/student_progress/student_progress_cubit.dart';
 import 'package:academy/features/academy/presentation/pages/add_student_page.dart';
 import 'package:academy/features/academy/presentation/pages/all_students.dart';
+import 'package:academy/features/academy/presentation/pages/student_progress.dart';
 import 'package:academy/features/academy/presentation/pages/user_home_tabs.dart';
 import 'package:academy/features/academy/presentation/pages/view_student.dart';
 import 'package:academy/features/auth/presentation/cubit/root_cubit.dart';
@@ -32,7 +37,7 @@ import 'package:academy/presentation/navigation/user_session_bloc/user_session_b
 import 'package:academy/features/academy/presentation/pages/privacy_policy.dart';
 import 'package:academy/features/academy/presentation/pages/profile_update.dart';
 import 'package:academy/features/auth/presentation/pages/register_page.dart';
-import 'package:academy/presentation/splash/splash_page.dart';
+import 'package:academy/features/auth/presentation/pages/splash_page.dart';
 import 'package:academy/presentation/welcome_page/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -145,6 +150,25 @@ class RouterModule {
               );
             }),
         GoRoute(
+            path: RoutePaths.studentProgress.path,
+            name: RoutePaths.studentProgress.routeName(),
+            builder: (context, state) {
+              final String enrollId =
+                  state.uri.queryParameters['enrollId'].toString();
+              final String studentId =
+                  state.uri.queryParameters['studentId'].toString();
+              return BlocProvider(
+                create: (context) => StudentProgressCubit(
+                    getTopicsByEnroll: _getIt<GetTopicsByEnroll>(),
+                    getLessonTopics: _getIt<GetLessonTopics>(),
+                    getGradeTopics: _getIt<GetGradeTopics>(),
+                    studentId: studentId,
+                    enrollId: enrollId)
+                  ..fetchData(),
+                child: const StudentProgressPage(),
+              );
+            }),
+        GoRoute(
             path: RoutePaths.splash.path,
             name: RoutePaths.splash.routeName(),
             builder: (context, state) {
@@ -238,10 +262,9 @@ class RouterModule {
             path: RoutePaths.welcome.path,
             name: RoutePaths.welcome.routeName(),
             builder: (context, GoRouterState state) {
-              final String userId =
-                  state.uri.queryParameters['uuid'].toString();
+              final String uuid = state.uri.queryParameters['uuid'].toString();
               return WelcomePage(
-                id: userId,
+                id: uuid,
               );
             }),
       ],

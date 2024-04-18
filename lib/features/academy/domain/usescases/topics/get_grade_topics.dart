@@ -10,7 +10,7 @@ class GetGradeTopics implements UseCase<Resource<List<GradeTopic>>, String> {
   GetGradeTopics({required CompletedTopicRepo completedTopicRepo}) : _completedTopicRepo = completedTopicRepo;
 
   @override
-  Future<Resource<List<GradeTopic>>> call(String params) async {
-    return await _completedTopicRepo.getGradeTopics(params);
+  Future<Resource<List<GradeTopic>>> call(String topicId) async {
+    return await _completedTopicRepo.getGradeTopics(topicId);
   }
 }
