@@ -20,6 +20,9 @@ abstract interface class StudentSlotRepo {
       String studentId);
 
   Future<Resource<StudentTimes>> getStudentSlotTime(String studentSlotDocId);
+
+  Future<Resource<List<StudentTimes>>> getStudentsSlotTimes(
+      String enrollId, String instructorId);
 }
 
 

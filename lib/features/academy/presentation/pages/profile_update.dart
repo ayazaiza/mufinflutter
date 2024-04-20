@@ -2,7 +2,7 @@ import 'package:academy/core/common/widgets/action_bar_loader.dart';
 import 'package:academy/core/constants/app_strings.dart';
 import 'package:academy/core/extensions/extensions.dart';
 import 'package:academy/core/utils/custom_outlined_text_form_field.dart';
-import 'package:academy/features/academy/presentation/blocs/profile_update_bloc/profile_update_bloc.dart';
+import 'package:academy/features/academy/presentation/blocs/profile_update/profile_update_bloc.dart';
 import 'package:academy/features/academy/presentation/widgets/drop_down_list.dart';
 import 'package:academy/features/academy/presentation/widgets/selection_items.dart';
 import 'package:academy/features/academy/presentation/widgets/yes_or_no_widget.dart';
@@ -13,7 +13,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/custom_widgets.dart';
-import '../../../../presentation/navigation/user_session_bloc/user_session_bloc.dart';
+import '../../../navigation/bloc/user_session_bloc.dart';
 
 class ProfileUpdate extends StatefulWidget {
   final String? title;

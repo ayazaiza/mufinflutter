@@ -3,7 +3,8 @@ part of 'event_details_cubit.dart';
 @freezed
 class EventDetailsState with _$EventDetailsState {
   const factory EventDetailsState({
-    @Default(null) MufinEvents? mufinEvents,
-    @Default(true) bool isLoading
+    MufinEvents? mufinEvents,
+    @Default(true) bool isLoading,
+    String? error
   }) = _Initial;
 }

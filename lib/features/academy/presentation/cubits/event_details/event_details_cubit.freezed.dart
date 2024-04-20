@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$EventDetailsState {
   MufinEvents? get mufinEvents => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  String? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EventDetailsStateCopyWith<EventDetailsState> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $EventDetailsStateCopyWith<$Res> {
           EventDetailsState value, $Res Function(EventDetailsState) then) =
       _$EventDetailsStateCopyWithImpl<$Res, EventDetailsState>;
   @useResult
-  $Res call({MufinEvents? mufinEvents, bool isLoading});
+  $Res call({MufinEvents? mufinEvents, bool isLoading, String? error});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$EventDetailsStateCopyWithImpl<$Res, $Val extends EventDetailsState>
   $Res call({
     Object? mufinEvents = freezed,
     Object? isLoading = null,
+    Object? error = freezed,
   }) {
     return _then(_value.copyWith(
       mufinEvents: freezed == mufinEvents
@@ -58,6 +60,10 @@ class _$EventDetailsStateCopyWithImpl<$Res, $Val extends EventDetailsState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -70,7 +76,7 @@ abstract class _$$InitialImplCopyWith<$Res>
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({MufinEvents? mufinEvents, bool isLoading});
+  $Res call({MufinEvents? mufinEvents, bool isLoading, String? error});
 }
 
 /// @nodoc
@@ -86,6 +92,7 @@ class __$$InitialImplCopyWithImpl<$Res>
   $Res call({
     Object? mufinEvents = freezed,
     Object? isLoading = null,
+    Object? error = freezed,
   }) {
     return _then(_$InitialImpl(
       mufinEvents: freezed == mufinEvents
@@ -96,6 +103,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -103,18 +114,19 @@ class __$$InitialImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$InitialImpl implements _Initial {
-  const _$InitialImpl({this.mufinEvents = null, this.isLoading = true});
+  const _$InitialImpl({this.mufinEvents, this.isLoading = true, this.error});
 
   @override
-  @JsonKey()
   final MufinEvents? mufinEvents;
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  final String? error;
 
   @override
   String toString() {
-    return 'EventDetailsState(mufinEvents: $mufinEvents, isLoading: $isLoading)';
+    return 'EventDetailsState(mufinEvents: $mufinEvents, isLoading: $isLoading, error: $error)';
   }
 
   @override
@@ -125,11 +137,12 @@ class _$InitialImpl implements _Initial {
             (identical(other.mufinEvents, mufinEvents) ||
                 other.mufinEvents == mufinEvents) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, mufinEvents, isLoading);
+  int get hashCode => Object.hash(runtimeType, mufinEvents, isLoading, error);
 
   @JsonKey(ignore: true)
   @override
@@ -140,12 +153,16 @@ class _$InitialImpl implements _Initial {
 
 abstract class _Initial implements EventDetailsState {
   const factory _Initial(
-      {final MufinEvents? mufinEvents, final bool isLoading}) = _$InitialImpl;
+      {final MufinEvents? mufinEvents,
+      final bool isLoading,
+      final String? error}) = _$InitialImpl;
 
   @override
   MufinEvents? get mufinEvents;
   @override
   bool get isLoading;
+  @override
+  String? get error;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

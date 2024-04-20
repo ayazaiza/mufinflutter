@@ -1,3 +1,4 @@
+import 'package:academy/core/constants/app_strings.dart';
 import 'package:academy/features/academy/domain/entities/event_enrolls/mufin_events.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -22,6 +23,11 @@ class EventDetailsCubit extends Cubit<EventDetailsState> {
 
   void fetchData() async {
     var resp = await _mufinEventsRepo.getMufinEvent(_eventId);
+    if (resp.data == null) {
+      emit(state.copyWith(
+          error: resp.error ?? AppStrings.dataNotFound, isLoading: false));
+      return;
+    }
     await Future.delayed(const Duration(seconds: 1));
     emit(state.copyWith(mufinEvents: resp.data, isLoading: false));
   }

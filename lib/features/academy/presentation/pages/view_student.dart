@@ -2,13 +2,14 @@ import 'package:academy/core/constants/app_strings.dart';
 import 'package:academy/core/extensions/extensions.dart';
 import 'package:academy/features/academy/domain/entities/courses/enroll_course.dart';
 import 'package:academy/features/academy/domain/entities/utils/song.dart';
-import 'package:academy/features/academy/presentation/blocs/delete_student/delete_student_bloc.dart';
-import 'package:academy/features/academy/presentation/cubits/student_details/student_details_cubit.dart';
+import 'package:academy/features/academy/presentation/blocs/student/delete_student/delete_student_bloc.dart';
+import 'package:academy/features/academy/presentation/cubits/stundent/student_details/student_details_cubit.dart';
 import 'package:academy/features/academy/presentation/widgets/custom_container_box.dart';
 import 'package:academy/features/academy/presentation/widgets/delete_confirm_dialog.dart';
 import 'package:academy/features/academy/presentation/widgets/details_widget.dart';
-import 'package:academy/features/academy/presentation/widgets/error_screen.dart';
+import 'package:academy/features/academy/presentation/widgets/heading_title_widget.dart';
 import 'package:academy/features/academy/presentation/widgets/list_item_widget.dart';
+import 'package:academy/features/academy/presentation/widgets/loading_error_widget.dart';
 import 'package:academy/features/academy/presentation/widgets/text_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,12 +37,12 @@ class ViewStudent extends HookWidget {
                     return;
                   }
                 },
-                child: state.isLoading
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : state.error != null && state.student == null
-                        ? ErrorScreen(error: state.error)
+                child: LoadingErrorWidget(
+                    isLoading: state.isLoading,
+                    error: state.error,
+                    type: state.student,
+                    child: state.student == null
+                        ? Container()
                         : SafeArea(
                             child: Column(
                               children: [
@@ -51,44 +52,8 @@ class ViewStudent extends HookWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(16.0),
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(18),
-                                                decoration: BoxDecoration(
-                                                    color: context
-                                                        .colorScheme.primary,
-                                                    shape: BoxShape.circle),
-                                                child: Center(
-                                                    child: Text(
-                                                  state.student!.name[0],
-                                                  style: context
-                                                      .textTheme.titleLarge!
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w800,
-                                                          color: context
-                                                              .colorScheme
-                                                              .onPrimary),
-                                                )),
-                                              ),
-                                              const SizedBox(
-                                                width: 20,
-                                              ),
-                                              Text(
-                                                state.student!.name,
-                                                style: context
-                                                    .textTheme.titleLarge!
-                                                    .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w700),
-                                              )
-                                            ],
-                                          ),
-                                        ),
+                                        HeadingTitleWidget(
+                                            title: state.student!.name),
                                         DetailsWidget(
                                           title: AppStrings.firstname,
                                           detail: state.student!.firstname,
@@ -167,7 +132,21 @@ class ViewStudent extends HookWidget {
                                               item: state.enrollCourses,
                                               itemWidget: (index) {
                                                 return GestureDetector(
-                                                  onTap: () {},
+                                                  onTap: () {
+                                                    context.push(Uri(
+                                                        path: RoutePaths
+                                                            .enrollDetails.path,
+                                                        queryParameters: {
+                                                          "enrollId": state
+                                                              .enrollCourses[
+                                                                  index]
+                                                              .enrollDocId,
+                                                          "instructorId": state
+                                                              .enrollCourses[
+                                                                  index]
+                                                              .instructorId
+                                                        }).toString());
+                                                  },
                                                   child: ListItemWidget(
                                                     title: state
                                                         .enrollCourses[index]
@@ -211,8 +190,7 @@ class ViewStudent extends HookWidget {
                                                           .onPrimary,
                                                     ),
                                                     third: state
-                                                        .enrollCourses[index]
-                                                        .timestamp
+                                                        .songs[index].timestamp
                                                         .toDate()
                                                         .toString(),
                                                   ),
@@ -276,7 +254,7 @@ class ViewStudent extends HookWidget {
                                 )
                               ],
                             ),
-                          )));
+                          ))));
       },
     );
   }

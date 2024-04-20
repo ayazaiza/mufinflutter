@@ -66,6 +66,7 @@ import 'package:academy/features/academy/data/repository/carousel_item_repo_impl
 import 'package:academy/features/academy/domain/repository/mufin_user_repo.dart';
 import 'package:academy/features/academy/data/repository/shared_prefs_repo_impl.dart';
 import 'package:academy/features/academy/domain/repository/mufin_events_repo.dart';
+import 'package:academy/features/academy/presentation/cubits/courses/all_courses/courses_cubit.dart';
 import 'package:academy/features/auth/domain/usecases/user_sign_in.dart';
 import 'package:academy/features/auth/domain/usecases/user_sign_up.dart';
 import 'package:academy/features/auth/presentation/bloc/auth_bloc.dart';
@@ -73,7 +74,6 @@ import 'package:academy/features/academy/presentation/cubits/landing/landing_cub
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -90,9 +90,10 @@ import '../features/academy/domain/usescases/courses/get_grade_courses.dart';
 import '../features/academy/domain/usescases/courses/get_lesson_courses.dart';
 import '../features/academy/domain/usescases/courses/get_sub_courses.dart';
 import '../features/academy/domain/usescases/slot_attandance/get_attendance.dart';
+import '../features/academy/domain/usescases/slot_attandance/get_students_slot_times.dart';
 import '../features/academy/domain/usescases/topics/get_grade_topics.dart';
 import '../features/academy/domain/usescases/topics/get_topics.dart';
-import '../features/academy/presentation/blocs/delete_student/delete_student_bloc.dart';
+import '../features/academy/presentation/blocs/student/delete_student/delete_student_bloc.dart';
 import '../features/auth/data/datasources/firebase_user_auth_ds.dart';
 import '../features/auth/data/repository/firebase_user_auth_impl.dart';
 import '../features/academy/data/repository/mufin_user_repo_impl.dart';
@@ -103,7 +104,7 @@ import '../features/academy/domain/usescases/user/user_exist.dart';
 import '../features/auth/domain/usecases/user_sign_in_google.dart';
 import '../features/academy/data/repository/mufin_events_repo_impl.dart';
 import '../features/academy/domain/repository/carousel_items_repo.dart';
-import '../presentation/navigation/user_session_bloc/user_session_bloc.dart';
+import '../features/navigation/bloc/user_session_bloc.dart';
 
 final GetIt locator = GetIt.instance;
 
@@ -299,6 +300,8 @@ Future<void> initDependencies() async {
         GetStudentSlotsParentId(studentSlotRepo: locator<StudentSlotRepo>()))
     ..registerFactory<GetStudentSlotsStudId>(() =>
         GetStudentSlotsStudId(studentSlotRepo: locator<StudentSlotRepo>()))
+    ..registerFactory<GetStudentsSlotTimes>(
+        () => GetStudentsSlotTimes(studentSlotRepo: locator<StudentSlotRepo>()))
 
     /* Enrolls */
     ..registerLazySingleton<EnrollCourseDataSource>(() =>
@@ -349,12 +352,15 @@ Future<void> initDependencies() async {
         GetNotificationStream(notificationRepo: locator<NotificationRepo>()))
     ..registerFactory<GetNotificationsStream>(() =>
         GetNotificationsStream(notificationRepo: locator<NotificationRepo>()))
-    ..registerFactory<UpdateNotification>(() =>
-        UpdateNotification(notificationRepo: locator<NotificationRepo>()));
+    ..registerFactory<UpdateNotification>(
+        () => UpdateNotification(notificationRepo: locator<NotificationRepo>()))
+
+    /* cubits */
+    ..registerLazySingleton<CoursesCubit>(
+        () => CoursesCubit(getCourses: locator<GetCourses>()));
 }
 
 Future<void> _init() async {
-  await Firebase.initializeApp();
   final SharedPreferences sharedPreferences =
       await SharedPreferences.getInstance();
   locator

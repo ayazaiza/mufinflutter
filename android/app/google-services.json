@@ -30,7 +30,7 @@
           }
         },
         {
-          "client_id": "547020247713-l4bnmofvv4ack9vdnq9b0u1klr9iid61.apps.googleusercontent.com",
+          "client_id": "547020247713-ns2v9j4ka5dp1rlkcr9o3nl1g5almlor.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -45,6 +45,57 @@
             {
               "client_id": "547020247713-l4bnmofvv4ack9vdnq9b0u1klr9iid61.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "547020247713-cfeud2251sb5llmjh6vtdehrhnulh6dg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mufin.academy.MufinAcademyMulti"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547020247713:android:73c7227228c73e063bd6e0",
+        "android_client_info": {
+          "package_name": "com.mufin.academy.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "547020247713-19nj5kses20prvn4l3ee1o887e34qom3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mufin.academy.debug",
+            "certificate_hash": "b054c09c68ac9f928a5d4c9714854979103214af"
+          }
+        },
+        {
+          "client_id": "547020247713-ns2v9j4ka5dp1rlkcr9o3nl1g5almlor.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaxX4fbXYZuSAAIVfb-DInFpN7qSe5PfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "547020247713-l4bnmofvv4ack9vdnq9b0u1klr9iid61.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "547020247713-cfeud2251sb5llmjh6vtdehrhnulh6dg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mufin.academy.MufinAcademyMulti"
+              }
             }
           ]
         }

@@ -1,9 +1,7 @@
-import 'package:academy/core/extensions/extension_mapper.dart';
 import 'package:academy/core/extensions/extensions.dart';
 import 'package:academy/core/utils/app_local_assets.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/app_strings.dart';
 
 class NavDrawerHeader extends StatelessWidget {
   const NavDrawerHeader({super.key});
@@ -15,13 +13,14 @@ class NavDrawerHeader extends StatelessWidget {
       decoration: BoxDecoration(
           color: context.colorScheme.primary,
           borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(25),
-              bottomRight: Radius.circular(25))),
+              bottomLeft: Radius.circular(24),
+              bottomRight: Radius.circular(24))),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-           AppLocalAssets.musicIcon.toAssetIcon(size: 48,color: context.colorScheme.onPrimary),
+            Image.asset(AppLocalAssets.appLogo,width: context.width * 0.4,)
+           /*AppLocalAssets.musicIcon.toAssetIcon(size: 48,color: context.colorScheme.onPrimary),
             const SizedBox(
               height: 12,
             ),
@@ -31,7 +30,7 @@ class NavDrawerHeader extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 color: context.colorScheme.onPrimary,
               ),
-            )
+            )*/
           ],
         ),
       ),

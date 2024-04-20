@@ -8,14 +8,17 @@ import 'package:academy/features/academy/presentation/widgets/nav_drawer_header.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/utils/app_local_assets.dart';
-import '../../../../presentation/navigation/user_session_bloc/user_session_bloc.dart';
+import '../../../../core/utils/router_const.dart';
+import '../../../navigation/bloc/user_session_bloc.dart';
 import 'dashboard_page.dart';
 
 class UserHomeTabs extends HookWidget {
-  const UserHomeTabs({super.key});
+  final String uuid;
+   const UserHomeTabs({super.key, required this.uuid});
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +35,9 @@ class UserHomeTabs extends HookWidget {
         actions: [
           IconButton(
               onPressed: () {
-                context.read<UserSessionBloc>().add(UserDoLoggedOutEvent());
+                // context.read<UserSessionBloc>().add(UserDoLoggedOutEvent());
               },
-              icon: const Icon(Icons.logout_rounded)),
+              icon: const Icon(Icons.notifications)),
         ],
       ),
       drawer: SafeArea(
@@ -48,6 +51,10 @@ class UserHomeTabs extends HookWidget {
                 hasDiv: false,
                 onTap: () {
                   scaffoldKey.currentState?.closeDrawer();
+                  context.push(Uri(
+                      path: RoutePaths.profile.path,
+                      queryParameters: {"uuid": uuid})
+                      .toString());
                 }),
             NavDrawerCustomItem(
                 text: AppStrings.settings,
@@ -60,6 +67,10 @@ class UserHomeTabs extends HookWidget {
                 icon: AppLocalAssets.students,
                 onTap: () {
                   scaffoldKey.currentState?.closeDrawer();
+                  context.push(Uri(
+                      path: RoutePaths.students.path,
+                      queryParameters: {"uuid": uuid})
+                      .toString());
                 }),
             NavDrawerCustomItem(
                 text: AppStrings.enrolls,
@@ -79,6 +90,14 @@ class UserHomeTabs extends HookWidget {
                 onTap: () {
                   scaffoldKey.currentState?.closeDrawer();
                 }),
+            NavDrawerCustomItem(
+                text: AppStrings.logout,
+                icon: AppLocalAssets.logoutIcon,
+                onTap: () {
+                  scaffoldKey.currentState?.closeDrawer();
+                  context.read<UserSessionBloc>().add(UserDoLoggedOutEvent());
+                }),
+
           ],
         ),
       ),

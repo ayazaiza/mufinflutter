@@ -1,26 +1,36 @@
+import 'dart:io';
+
 import 'package:academy/core/theme/color_schemes.dart';
 import 'package:academy/core/constants/app_strings.dart';
-import 'package:academy/features/academy/presentation/blocs/delete_student/delete_student_bloc.dart';
+import 'package:academy/features/academy/presentation/blocs/student/delete_student/delete_student_bloc.dart';
 import 'package:academy/features/academy/presentation/cubits/landing/landing_cubit.dart';
-import 'package:academy/presentation/navigation/router.dart';
-import 'package:academy/presentation/navigation/router_listener.dart';
-import 'package:academy/presentation/navigation/user_session_bloc/user_session_bloc.dart';
+import 'package:academy/features/navigation/router.dart';
+import 'package:academy/features/navigation/router_listener.dart';
+import 'package:academy/features/navigation/bloc/user_session_bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:academy/di/app_module.dart' as di;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Platform.isAndroid
+      ? await Firebase.initializeApp(
+          options: const FirebaseOptions(
+              apiKey: "AIzaSyBaxX4fbXYZuSAAIVfb-DInFpN7qSe5PfI",
+              appId: "1:547020247713:android:c031b7c182b541243bd6e0",
+              messagingSenderId: "547020247713",
+              projectId: "mufin-academy"))
+      : await Firebase.initializeApp();
   await di.initDependencies();
   runApp(MultiBlocProvider(providers: [
     BlocProvider(create: (context) => di.locator<LandingCubit>()),
     BlocProvider(create: (context) => di.locator<DeleteStudentBloc>()),
-    // BlocProvider(create: (context) => di.getIt.call<RegisterBloc>()),
     BlocProvider(
         create: (context) =>
             di.locator<UserSessionBloc>()..add(UserSessionInit()))
   ], child: const MyApp()));
-  // runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -55,11 +65,8 @@ class MyApp extends StatelessWidget {
   }
 }
 /*
-* View Student progress list and ui -> List details and ui
-* View Student regular course list and ui -> View All List and Ui -> list and ui
 * View Student Song -> View All -> details
 * */
-
 
 //  dart run build_runner build --delete-conflicting-outputs
 

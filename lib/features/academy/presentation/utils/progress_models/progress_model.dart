@@ -50,7 +50,7 @@ class ProgressGradeTopicModel {
   final String gradeId;
   final int size;
   final bool status;
-  final List<LessonTopic> lessons;
+  final List<ProgressLessonTopicModel> progressLessonTopicModel;
   final bool isExpanded;
 
   ProgressGradeTopicModel({
@@ -59,7 +59,7 @@ class ProgressGradeTopicModel {
     required this.size,
     required this.isExpanded,
     required this.status,
-    required this.lessons,
+    required this.progressLessonTopicModel,
   });
 
   ProgressGradeTopicModel copyWith({
@@ -68,21 +68,52 @@ class ProgressGradeTopicModel {
     int? size,
     bool? isExpanded,
     bool? status,
-    List<LessonTopic>? lessons,
+    List<ProgressLessonTopicModel>? progressLessonTopicModel,
   }) {
     return ProgressGradeTopicModel(
       gradeTopic: gradeTopic ?? this.gradeTopic,
       gradeId: gradeId ?? this.gradeId,
       size: size ?? this.size,
       isExpanded: isExpanded ?? this.isExpanded,
-
       status: status ?? this.status,
-      lessons: lessons ?? this.lessons,
+      progressLessonTopicModel: progressLessonTopicModel ?? this.progressLessonTopicModel,
     );
   }
 
   @override
   String toString() {
-    return 'ProgressGradeTopicModel{gradeTopic: $gradeTopic, gradeId: $gradeId, size: $size, status: $status, lessons: $lessons}';
+    return 'ProgressGradeTopicModel{gradeTopic: $gradeTopic, gradeId: $gradeId, size: $size, status: $status, progressLessonTopicModel: $progressLessonTopicModel}';
+  }
+}
+
+class ProgressLessonTopicModel {
+  final LessonTopic lesson;
+  final bool isExpanded;
+  final String lessonId;
+  final bool status;
+
+  ProgressLessonTopicModel(
+      {required this.lesson,
+      required this.isExpanded,
+      required this.lessonId,
+      required this.status});
+
+  ProgressLessonTopicModel copyWith({
+    LessonTopic? lesson,
+    bool? isExpanded,
+    String? lessonId,
+    bool? status,
+  }) {
+    return ProgressLessonTopicModel(
+      lesson: lesson ?? this.lesson,
+      isExpanded: isExpanded ?? this.isExpanded,
+      lessonId: lessonId ?? this.lessonId,
+      status: status ?? this.status,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'ProgressLessonTopicModel{lesson: $lesson, isExpanded: $isExpanded, lessonId: $lessonId, status: $status}';
   }
 }

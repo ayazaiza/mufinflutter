@@ -11,8 +11,8 @@ class GetAttendance implements UseCase<Resource<StudentAttendance>, String> {
       : _studentSlotRepo = studentSlotRepo;
 
   @override
-  Future<Resource<StudentAttendance>> call(String params) async {
-    return await _studentSlotRepo.getAttendance(params);
+  Future<Resource<StudentAttendance>> call(String attendanceId) async {
+    return await _studentSlotRepo.getAttendance(attendanceId);
   }
 }
 

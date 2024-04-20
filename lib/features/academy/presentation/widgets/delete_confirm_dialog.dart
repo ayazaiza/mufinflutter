@@ -1,11 +1,10 @@
-import 'package:academy/core/extensions/extensions.dart';
 import 'package:academy/features/academy/domain/entities/student/student.dart';
 import 'package:academy/features/academy/presentation/widgets/text_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/constants/app_strings.dart';
-import '../blocs/delete_student/delete_student_bloc.dart';
+import '../blocs/student/delete_student/delete_student_bloc.dart';
 
 class DeleteConfirmDialog extends StatelessWidget {
   final Student student;

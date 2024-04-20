@@ -1,5 +1,5 @@
 import 'package:academy/core/extensions/extensions.dart';
-import 'package:academy/features/academy/presentation/blocs/all_students/all_students_bloc.dart';
+import 'package:academy/features/academy/presentation/blocs/student/all_students/all_students_bloc.dart';
 import 'package:academy/features/academy/presentation/widgets/student_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

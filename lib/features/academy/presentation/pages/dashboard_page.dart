@@ -11,14 +11,14 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
-    return  SingleChildScrollView(
+    return  const SingleChildScrollView(
       child: Column(
         children: [
-          const RecentActivitiesCard(),
-          const SizedBox(
+          RecentActivitiesCard(),
+          SizedBox(
             height: 6,
           ),
-          const StudentDashboardCard()
+          StudentDashboardCard()
         ],
       ),
     );

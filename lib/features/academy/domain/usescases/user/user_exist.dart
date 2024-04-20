@@ -10,7 +10,7 @@ class UserExists implements UseCase<Resource<MufinUser>, String> {
       : _mufinUserRepo = mufinUserRepo;
 
   @override
-  Future<Resource<MufinUser>> call(String params) async {
-    return await _mufinUserRepo.getMufinUser(params);
+  Future<Resource<MufinUser>> call(String userId) async {
+    return await _mufinUserRepo.getMufinUser(userId);
   }
 }

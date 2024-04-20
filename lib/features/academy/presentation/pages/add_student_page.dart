@@ -1,5 +1,5 @@
 import 'package:academy/core/extensions/extensions.dart';
-import 'package:academy/features/academy/presentation/blocs/add_student/add_student_bloc.dart';
+import 'package:academy/features/academy/presentation/blocs/student/add_student/add_student_bloc.dart';
 import 'package:academy/features/academy/presentation/widgets/gender_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

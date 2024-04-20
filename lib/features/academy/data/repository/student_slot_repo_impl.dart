@@ -111,4 +111,18 @@ class StudentSlotRepoImpl implements StudentSlotRepo {
       return DataError(e.message);
     }
   }
+
+  @override
+  Future<Resource<List<StudentTimes>>> getStudentsSlotTimes(
+      String enrollId, String instructorId) async {
+    try {
+      var resp = await _studentSlotDataSource.getStudentsSlotTimes(
+          enrollId, instructorId);
+      return DataSuccess(resp.toMapList
+          .map((event) => StudentTimesModel.fromMap(event))
+          .toList());
+    } on ServerException catch (e) {
+      return DataError(e.message);
+    }
+  }
 }

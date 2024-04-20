@@ -81,6 +81,8 @@ class AppStrings {
       "Select at least one preferred time";
 
   static const String country = "Country";
+  static const String preferredDay = "Preferred day";
+  static const String preferredTime = "Preferred Time";
   static const String cantEmpty = "Please enter ";
   static const String city = "City";
   static const String state = "State";
@@ -122,6 +124,9 @@ class AppStrings {
   static const String addNewStudent = "Add new student";
   static const String dashboard = "Dashboard";
   static const String courses = "Courses";
+  static const String subCourses = "SubCourses";
+  static const String interested = "Interested";
+  static const String knowMore = "Know More";
   static const String courseDetails = "Course details";
   static const String notifications = "Notifications";
   static const String notificationDetails = "Notifications details";
@@ -136,6 +141,17 @@ class AppStrings {
   static const String settings = "Settings";
   static const String disclaimer = "Disclaimer";
   static const String payments = "Payments";
+  static const String courseName = "Course name";
+  static const String subCourseName = "Sub course name";
+  static const String status = "Status";
+  static const String courseEnrolledDate = "Course enrolled date";
+  static const String studentName = "Student name";
+  static const String time = "Time";
+  static const String date = "Date";
+  static const String week = "Week";
+  static const String parentName = "Parent name";
+  static const String parentEmail = "Parent email";
+  static const String notes = "Notes";
 
   static const String terms = "Terms & Conditions";
   static const String privacyPolicy = "Privacy Policy";
@@ -168,4 +184,6 @@ class AppStrings {
   static const String deleteConfirmMsg = "Are you sure do want to delete permanently";
 
   static const String confirmationRequired = "Confirmation required";
+  static const String description = "Description";
+  static const String feedback = "Feedback";
 }

@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -24,6 +26,7 @@ class RootCubit extends Cubit<RootState> {
   }
 
   void checkUser() async {
+    log("_uuuu: ${_uuid}");
     if (_uuid == null) {
       emit(RootToLanding(route: RoutePaths.landing.path));
       return;

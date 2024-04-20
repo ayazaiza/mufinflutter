@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/app_strings.dart';
-import '../../../../presentation/navigation/user_session_bloc/user_session_bloc.dart';
+import '../../../navigation/bloc/user_session_bloc.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({super.key});
@@ -49,7 +49,7 @@ class _RootPageState extends State<RootPage> {
                 queryParameters: {"uuid": state.uuid}).toString());
             return;
           }
-          if (state is RootToHome) {
+          if (state is RootToLanding) {
             context.go(RoutePaths.landing.path);
             return;
           }
