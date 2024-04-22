@@ -128,7 +128,16 @@ class ViewStudent extends HookWidget {
                                           CustomContainerBox<EnrollCourse>(
                                               title: AppStrings
                                                   .regularCourseEnrolls,
-                                              viewAll: () {},
+                                              viewAll: () {
+                                                context.push(Uri(
+                                                    path:
+                                                        RoutePaths.enrolls.path,
+                                                    queryParameters: {
+                                                      "uuid": state.uuid,
+                                                      "studentId":
+                                                          state.studentId
+                                                    }).toString());
+                                              },
                                               item: state.enrollCourses,
                                               itemWidget: (index) {
                                                 return GestureDetector(
@@ -246,7 +255,16 @@ class ViewStudent extends HookWidget {
                                       ),
                                       Expanded(
                                           child: TextIconButton(
-                                              onTap: () {},
+                                              onTap: () {
+                                                context.push(Uri(
+                                                    path: RoutePaths
+                                                        .enrollCourse.path,
+                                                    queryParameters: {
+                                                      "studentId":
+                                                          state.studentId,
+                                                      "uuid": state.uuid
+                                                    }).toString());
+                                              },
                                               iconData: Icons.school_rounded,
                                               text: AppStrings.enroll)),
                                     ],

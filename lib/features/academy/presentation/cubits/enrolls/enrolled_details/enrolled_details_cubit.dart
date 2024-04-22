@@ -6,9 +6,9 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tuple/tuple.dart';
 
-import '../../../domain/entities/slot/student_times.dart';
-import '../../../domain/usescases/enrolls/get_enroll_course.dart';
-import '../../../domain/usescases/slot_attandance/get_students_slot_times.dart';
+import '../../../../domain/entities/slot/student_times.dart';
+import '../../../../domain/usescases/enrolls/get_enroll_course.dart';
+import '../../../../domain/usescases/slot_attandance/get_students_slot_times.dart';
 
 part 'enrolled_details_state.dart';
 

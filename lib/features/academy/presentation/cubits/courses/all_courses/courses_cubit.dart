@@ -23,6 +23,8 @@ class CoursesCubit extends Cubit<CoursesState> {
           isLoading: false, error: resp.error ?? AppStrings.dataNotFound));
       return;
     }
-    emit(state.copyWith(isLoading: false, courses: resp.data!));
+    if(!isClosed){
+      emit(state.copyWith(isLoading: false, courses: resp.data!));
+    }
   }
 }

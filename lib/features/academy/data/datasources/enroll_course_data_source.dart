@@ -121,7 +121,7 @@ class EnrollCourseDataSourceImpl implements EnrollCourseDataSource {
         .where("studentDocumentId", isEqualTo: studentId)
         .where("courseId", isEqualTo: courseId)
         .where("subCourseId", isEqualTo: subCourseId)
-        .where("status", isEqualTo: "Completed")
+        .where("status", isNotEqualTo: "Completed")
         .get());
   }
 

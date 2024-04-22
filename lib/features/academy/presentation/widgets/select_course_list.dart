@@ -2,31 +2,38 @@ import 'package:academy/core/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class CustomDropDownList extends HookWidget {
-  final String? initialValue;
-  final void Function(String) onChange;
-  final List<String> countryList;
+import '../../domain/entities/courses/course.dart';
+
+class SelectCourseList extends HookWidget {
+  final Course? initialValue;
+  final void Function(Course) onChange;
+  final List<Course> coursesList;
   final String? errorMsg;
   final String label;
+  final bool enabled;
 
-  const CustomDropDownList(
+  const SelectCourseList(
       {this.initialValue,
       required this.onChange,
-      required this.countryList,
+      required this.coursesList,
       this.errorMsg,
       required this.label,
+      required this.enabled,
       super.key});
 
   @override
   Widget build(BuildContext context) {
-    final selectedCountry = useState<String?>(initialValue);
+    final selectedCourse = useState<Course?>(null);
+    useEffect(() {
+      selectedCourse.value = initialValue;
+      return () {};
+    }, [initialValue]);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
-          style: context.textTheme.titleLarge!
-              .copyWith(fontWeight: FontWeight.bold),
+          style: context.title!.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(
           height: 8,
@@ -48,20 +55,20 @@ class CustomDropDownList extends HookWidget {
                   fontWeight: FontWeight.w500,
                   letterSpacing: 1.5),
               hint: Text(label),
-              value: selectedCountry.value,
+              value: selectedCourse.value,
               underline: Container(),
               isExpanded: true,
-              items: countryList.map((e) {
-                return DropdownMenuItem<String>(
+              items: coursesList.map((e) {
+                return DropdownMenuItem<Course>(
                   onTap: () {},
                   value: e,
-                  child: Text(e),
+                  child: Text(e.name),
                 );
               }).toList(),
-              onChanged: (value) {
-                selectedCountry.value = value;
-                onChange(selectedCountry.value!);
-              }),
+              onChanged: enabled ? (value) {
+                selectedCourse.value = value as Course?;
+                onChange(selectedCourse.value!);
+              } : null),
         ),
         Visibility(
             visible: errorMsg != null,

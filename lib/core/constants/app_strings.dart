@@ -9,6 +9,10 @@ class AppStrings {
   static const String appRoot = "Root";
   static const String completeUrProfile = "Complete your profile";
   static const String updateProfile = "Update your profile";
+  static const String enrollNewCourse = "Enroll New Course";
+  static const String studentsNotFound = "Students are not found!. Please add new student";
+  static const String coursesNotFound = "Courses are not found! Please wait for few days or contact to admin";
+  static const String subCoursesNotFound = "SubCourses are not found! Please wait for few days or contact to admin";
 
   static const String save = "Save";
   static const String logout = "Logout";
@@ -58,6 +62,9 @@ class AppStrings {
   static const String emailReceive = "Would like to receive email alerts";
   static const String phoneReceive = "Would like to receive phone alerts";
   static const String selectPrefDays = "Select Preferred days";
+  static const String selectStudent = "Select Student";
+  static const String selectCourse = "Select Course";
+  static const String selectSubCourse = "Select SubCourse";
   static const List<String> prefDaysList = [
     "Sunday",
     "Monday",
@@ -86,6 +93,7 @@ class AppStrings {
   static const String cantEmpty = "Please enter ";
   static const String city = "City";
   static const String state = "State";
+  static const String comments = "Comments";
   static const String whereDid = "Where did you find us?";
   static const String whereDidExample = "Ex:- Advertisements, Referral, Online";
 
@@ -115,6 +123,7 @@ class AppStrings {
   static const String profile = "Profile";
   static const String students = "Students";
   static const String progress = "Progress";
+  static const String scheduledClasses = "Current Scheduled classes";
   static const String regularCourses = "Regular Courses";
   static const String regularCourseEnrolls = "Regular course enrollments";
   static const String attendance = "Attendance";
@@ -176,12 +185,12 @@ class AppStrings {
   static const String successfullyDeleted = "Successfully deleted";
   static const String failureToAdd = "Failure to add";
 
-
   static const String recentActivities = "Recent Activities";
   static const String confirm = "Confirm";
   static const String cancel = "Cancel";
 
-  static const String deleteConfirmMsg = "Are you sure do want to delete permanently";
+  static const String deleteConfirmMsg =
+      "Are you sure do want to delete permanently";
 
   static const String confirmationRequired = "Confirmation required";
   static const String description = "Description";

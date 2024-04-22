@@ -1,9 +1,18 @@
+import 'package:academy/core/extensions/extensions.dart';
+import 'package:academy/features/academy/domain/entities/slot/student_times.dart';
+import 'package:academy/features/academy/presentation/cubits/dashboard/dashboard_cubit.dart';
 import 'package:academy/features/academy/presentation/widgets/recent_activities_card.dart';
 import 'package:academy/features/academy/presentation/widgets/student_dashboard_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/constants/app_strings.dart';
+import '../widgets/custom_container_box.dart';
+import '../widgets/list_item_widget.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
+
   @override
   State<DashboardPage> createState() => _DashboardPageState();
 }
@@ -11,14 +20,47 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
-    return  const SingleChildScrollView(
+    return SingleChildScrollView(
       child: Column(
         children: [
-          RecentActivitiesCard(),
-          SizedBox(
+          const RecentActivitiesCard(),
+          const SizedBox(
             height: 6,
           ),
-          StudentDashboardCard()
+          const StudentDashboardCard(),
+          BlocBuilder<DashboardCubit, DashboardState>(
+            builder: (context, state) {
+              return CustomContainerBox<StudentTimes>(
+                  viewAll: () {
+
+                  },
+                  title: AppStrings.scheduledClasses,
+                  item: state.studentTimes,
+                  itemWidget: (index) {
+                    return GestureDetector(
+                      onTap: () {
+                        // context.push(Uri(
+                        //     path: RoutePaths.studentProgress.path,
+                        //     queryParameters: {
+                        //       "enrollId": state.progress[index].enrollDocId,
+                        //       "studentId": state.progress[index].studentDocumentId
+                        //     }).toString());
+                      },
+                      child: ListItemWidget(
+                          title: state.studentTimes[index].studentName,
+                          subtitle:
+                              "Course: ${state.studentTimes[index].courseName}",
+                          third:
+                              "Every ${state.studentTimes[index].dayName} at ${state.studentTimes[index].time} (IST)",
+                          icon: Icon(
+                            Icons.book_rounded,
+                            color: context.colorScheme.onPrimary,
+                          )),
+                    );
+                  },
+                  itemCount: state.studentTimes.take(3).length);
+            },
+          ),
         ],
       ),
     );

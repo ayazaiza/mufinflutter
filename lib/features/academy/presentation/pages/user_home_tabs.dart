@@ -18,7 +18,8 @@ import 'dashboard_page.dart';
 
 class UserHomeTabs extends HookWidget {
   final String uuid;
-   const UserHomeTabs({super.key, required this.uuid});
+
+  const UserHomeTabs({super.key, required this.uuid});
 
   @override
   Widget build(BuildContext context) {
@@ -53,15 +54,14 @@ class UserHomeTabs extends HookWidget {
                   scaffoldKey.currentState?.closeDrawer();
                   context.push(Uri(
                       path: RoutePaths.profile.path,
-                      queryParameters: {"uuid": uuid})
-                      .toString());
+                      queryParameters: {"uuid": uuid}).toString());
                 }),
-            NavDrawerCustomItem(
+           /* NavDrawerCustomItem(
                 text: AppStrings.settings,
                 icon: AppLocalAssets.settingsIcon,
                 onTap: () {
                   scaffoldKey.currentState?.closeDrawer();
-                }),
+                }),*/
             NavDrawerCustomItem(
                 text: AppStrings.students,
                 icon: AppLocalAssets.students,
@@ -69,14 +69,16 @@ class UserHomeTabs extends HookWidget {
                   scaffoldKey.currentState?.closeDrawer();
                   context.push(Uri(
                       path: RoutePaths.students.path,
-                      queryParameters: {"uuid": uuid})
-                      .toString());
+                      queryParameters: {"uuid": uuid}).toString());
                 }),
             NavDrawerCustomItem(
                 text: AppStrings.enrolls,
                 icon: AppLocalAssets.courseIconActive,
                 onTap: () {
                   scaffoldKey.currentState?.closeDrawer();
+                  context.push(Uri(
+                      path: RoutePaths.enrolls.path,
+                      queryParameters: {"uuid": uuid}).toString());
                 }),
             NavDrawerCustomItem(
                 text: AppStrings.eventEnrolls,
@@ -97,7 +99,6 @@ class UserHomeTabs extends HookWidget {
                   scaffoldKey.currentState?.closeDrawer();
                   context.read<UserSessionBloc>().add(UserDoLoggedOutEvent());
                 }),
-
           ],
         ),
       ),
@@ -136,7 +137,13 @@ class UserHomeTabs extends HookWidget {
             onPageChanged: (index) {
               context.read<BottomNavCubit>().selectPage(index);
             },
-            children: const [HomePage(), DashboardPage(), CoursesPage()],
+            children: [
+              const HomePage(),
+              const DashboardPage(),
+              CoursesPage(
+                uuid: uuid,
+              )
+            ],
           );
         },
       ),

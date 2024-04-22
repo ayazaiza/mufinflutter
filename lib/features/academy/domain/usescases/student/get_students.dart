@@ -10,7 +10,7 @@ class GetStudents implements UseCase<Resource<List<Student>>, String> {
   GetStudents({required StudentRepo studentRepo}) : _studentRepo = studentRepo;
 
   @override
-  Future<Resource<List<Student>>> call(String params) async{
-    return await _studentRepo.getStudents(params);
+  Future<Resource<List<Student>>> call(String uuid) async{
+    return await _studentRepo.getStudents(uuid);
   }
 }

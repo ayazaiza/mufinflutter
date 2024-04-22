@@ -19,10 +19,11 @@ class _AllStudentsState extends State<AllStudents> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(AppStrings.students),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.person_add))],
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.person_add))
+        ],
       ),
-      body: BlocConsumer<AllStudentsBloc, AllStudentsState>(
-        listener: (context, state) {},
+      body: BlocBuilder<AllStudentsBloc, AllStudentsState>(
         builder: (context, state) {
           return state.students.isNotEmpty
               ? Container(

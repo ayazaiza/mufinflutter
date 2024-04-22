@@ -2,24 +2,30 @@ import 'package:academy/core/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class CustomDropDownList extends HookWidget {
-  final String? initialValue;
-  final void Function(String) onChange;
-  final List<String> countryList;
+import '../../domain/entities/courses/sub_course.dart';
+
+class SelectSubCourseList extends HookWidget {
+  final SubCourse? initialValue;
+  final void Function(SubCourse) onChange;
+  final List<SubCourse> subCoursesList;
   final String? errorMsg;
   final String label;
 
-  const CustomDropDownList(
+  const SelectSubCourseList(
       {this.initialValue,
       required this.onChange,
-      required this.countryList,
+      required this.subCoursesList,
       this.errorMsg,
       required this.label,
       super.key});
 
   @override
   Widget build(BuildContext context) {
-    final selectedCountry = useState<String?>(initialValue);
+    final selectedSubCourse = useState<SubCourse?>(initialValue);
+    useEffect(() {
+      selectedSubCourse.value = initialValue;
+      return () {};
+    }, [initialValue]);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -41,26 +47,26 @@ class CustomDropDownList extends HookWidget {
                       : context.colorScheme.error,
                   width: 1.5),
               borderRadius: BorderRadius.circular(8)),
-          child: DropdownButton(
+          child: DropdownButton<SubCourse>(
               enableFeedback: false,
               style: context.textTheme.labelLarge!.copyWith(
                   color: context.colorScheme.onBackground,
                   fontWeight: FontWeight.w500,
                   letterSpacing: 1.5),
               hint: Text(label),
-              value: selectedCountry.value,
+              value: selectedSubCourse.value,
               underline: Container(),
               isExpanded: true,
-              items: countryList.map((e) {
-                return DropdownMenuItem<String>(
+              items: subCoursesList.map((e) {
+                return DropdownMenuItem(
                   onTap: () {},
                   value: e,
-                  child: Text(e),
+                  child: Text(e.name),
                 );
               }).toList(),
               onChanged: (value) {
-                selectedCountry.value = value;
-                onChange(selectedCountry.value!);
+                selectedSubCourse.value = value;
+                onChange(selectedSubCourse.value!);
               }),
         ),
         Visibility(
@@ -85,13 +91,3 @@ class CustomDropDownList extends HookWidget {
     );
   }
 }
-
-// Expanded(
-//   child: Text(
-//     "Select country",
-//     style: context.textTheme.labelLarge!.copyWith(
-//         color: Colors.grey.shade500,
-//         fontWeight: FontWeight.w500,
-//         letterSpacing: 1.5),
-//   ),
-// ),

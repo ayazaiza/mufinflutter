@@ -5,14 +5,20 @@ import 'package:academy/features/academy/domain/usescases/courses/get_course.dar
 import 'package:academy/features/academy/domain/usescases/courses/get_grade_courses.dart';
 import 'package:academy/features/academy/domain/usescases/courses/get_lesson_courses.dart';
 import 'package:academy/features/academy/domain/usescases/courses/get_sub_courses.dart';
+import 'package:academy/features/academy/domain/usescases/enrolls/enroll_new_course.dart';
+import 'package:academy/features/academy/domain/usescases/enrolls/get_enrolls_stud_id.dart';
 import 'package:academy/features/academy/domain/usescases/enrolls/get_enrolls_stud_uuid.dart';
+import 'package:academy/features/academy/domain/usescases/enrolls/get_enrolls_user_id.dart';
+import 'package:academy/features/academy/domain/usescases/enrolls/has_enrolled.dart';
 import 'package:academy/features/academy/domain/usescases/slot_attandance/get_all_attendance.dart';
 import 'package:academy/features/academy/domain/usescases/slot_attandance/get_attendance.dart';
 import 'package:academy/features/academy/domain/usescases/slot_attandance/get_student_slots_stud_id.dart';
+import 'package:academy/features/academy/domain/usescases/slot_attandance/get_student_slots_user_id_status.dart';
 import 'package:academy/features/academy/domain/usescases/slot_attandance/get_students_slot_times.dart';
 import 'package:academy/features/academy/domain/usescases/song/get_songs_student_id.dart';
 import 'package:academy/features/academy/domain/usescases/student/add_student.dart';
 import 'package:academy/features/academy/domain/usescases/student/get_student.dart';
+import 'package:academy/features/academy/domain/usescases/student/get_students.dart';
 import 'package:academy/features/academy/domain/usescases/student/get_students_stream.dart';
 import 'package:academy/features/academy/domain/usescases/student/update_student.dart';
 import 'package:academy/features/academy/domain/usescases/topics/get_grade_topics.dart';
@@ -21,6 +27,7 @@ import 'package:academy/features/academy/domain/usescases/topics/get_topics_by_e
 import 'package:academy/features/academy/domain/usescases/user/get_activities_stream.dart';
 import 'package:academy/features/academy/domain/usescases/user/insert_user.dart';
 import 'package:academy/features/academy/domain/usescases/user/update_user.dart';
+import 'package:academy/features/academy/presentation/blocs/enroll_course/enroll_course_bloc.dart';
 import 'package:academy/features/academy/presentation/blocs/student/add_student/add_student_bloc.dart';
 import 'package:academy/features/academy/presentation/blocs/student/all_students/all_students_bloc.dart';
 import 'package:academy/features/academy/presentation/cubits/attendance/all_attendance/attendances_cubit.dart';
@@ -28,7 +35,8 @@ import 'package:academy/features/academy/presentation/cubits/bottom_nav/bottom_n
 import 'package:academy/features/academy/presentation/cubits/courses/all_courses/courses_cubit.dart';
 import 'package:academy/features/academy/presentation/cubits/courses/course_details/course_details_cubit.dart';
 import 'package:academy/features/academy/presentation/cubits/dashboard/dashboard_cubit.dart';
-import 'package:academy/features/academy/presentation/cubits/enrolled_details/enrolled_details_cubit.dart';
+import 'package:academy/features/academy/presentation/cubits/enrolls/all_enrolls/all_enrolls_cubit.dart';
+import 'package:academy/features/academy/presentation/cubits/enrolls/enrolled_details/enrolled_details_cubit.dart';
 import 'package:academy/features/academy/presentation/cubits/stundent/student_details/student_details_cubit.dart';
 import 'package:academy/features/academy/presentation/cubits/stundent/student_progress/student_progress_cubit.dart';
 import 'package:academy/features/academy/presentation/cubits/view_profile/view_profile_cubit.dart';
@@ -38,6 +46,8 @@ import 'package:academy/features/academy/presentation/pages/attendance_details_p
 import 'package:academy/features/academy/presentation/pages/attendances_page.dart';
 import 'package:academy/features/academy/presentation/pages/course_details_page.dart';
 import 'package:academy/features/academy/presentation/pages/enrolled_details_page.dart';
+import 'package:academy/features/academy/presentation/pages/enrolls_page.dart';
+import 'package:academy/features/academy/presentation/pages/new_course_enroll_page.dart';
 import 'package:academy/features/academy/presentation/pages/student_progress.dart';
 import 'package:academy/features/academy/presentation/pages/user_home_tabs.dart';
 import 'package:academy/features/academy/presentation/pages/view_profile.dart';
@@ -61,6 +71,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/utils/router_const.dart';
+import '../academy/domain/usescases/courses/get_courses.dart';
 import '../academy/domain/usescases/enrolls/get_enroll_course.dart';
 import '../academy/domain/usescases/student/get_student_stream.dart';
 import '../academy/domain/usescases/user/user_exist.dart';
@@ -108,6 +119,7 @@ class RouterModule {
                   create: (context) => DashboardCubit(
                       getStudentsStream: _getIt<GetStudentsStream>(),
                       getActivitiesStream: _getIt<GetActivitiesStream>(),
+                      getStudentSlotsUserIdStatus: _getIt<GetStudentSlotsUserIdStatus>(),
                       uuid: uuid)
                     ..loadData()),
               BlocProvider(
@@ -190,6 +202,46 @@ class RouterModule {
                     enrollId: enrollId)
                   ..fetchData(),
                 child: const StudentProgressPage(),
+              );
+            }),
+
+        GoRoute(
+            path: RoutePaths.enrolls.path,
+            name: RoutePaths.enrolls.routeName(),
+            builder: (context, state) {
+              final String uuid =
+                  state.uri.queryParameters['uuid'].toString();
+              final String? studentId = state.uri.queryParameters['studentId'];
+              return BlocProvider(
+                create: (context) => AllEnrollsCubit(
+                    getEnrollsUserId: _getIt<GetEnrollsUserId>(),
+                    getEnrollsStudId: _getIt<GetEnrollsStudId>(),
+                    studentId: studentId,
+                    userId: uuid)
+                  ..fetchData(),
+                child: const EnrollsPage(),
+              );
+            }),
+        GoRoute(
+            path: RoutePaths.enrollCourse.path,
+            name: RoutePaths.enrollCourse.routeName(),
+            builder: (context, state) {
+              final String? studentId = state.uri.queryParameters['studentId'];
+              final String? courseId = state.uri.queryParameters['courseId'];
+              final String userId =
+                  state.uri.queryParameters['uuid'].toString();
+              return BlocProvider(
+                create: (context) => EnrollCourseBloc(
+                    userId: userId,
+                    studentId: studentId,
+                    courseId: courseId,
+                    getSubCourses: _getIt<GetSubCourses>(),
+                    getCourses: _getIt<GetCourses>(),
+                    hasEnrolled: _getIt<HasEnrolled>(),
+                    enrollNewCourse: _getIt<EnrollNewCourse>(),
+                    getStudents: _getIt<GetStudents>())
+                  ..add(const EnrollCourseEvent.fetchData()),
+                child: const NewCourseEnrollPage(),
               );
             }),
         GoRoute(

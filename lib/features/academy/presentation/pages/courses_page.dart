@@ -8,7 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class CoursesPage extends StatefulWidget {
-  const CoursesPage({super.key});
+  final String uuid;
+
+  const CoursesPage({super.key, required this.uuid});
 
   @override
   State<CoursesPage> createState() => _CoursesPageState();
@@ -125,7 +127,15 @@ class _CoursesPageState extends State<CoursesPage> {
                                       ),
                                       Expanded(
                                         child: OutlinedButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              context.push(Uri(
+                                                  path: RoutePaths
+                                                      .enrollCourse.path,
+                                                  queryParameters: {
+                                                    "courseId": course.courseId,
+                                                    "uuid": widget.uuid
+                                                  }).toString());
+                                            },
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,

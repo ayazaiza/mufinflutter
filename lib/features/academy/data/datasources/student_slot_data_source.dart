@@ -15,6 +15,9 @@ abstract interface class StudentSlotDataSource {
 
   Future<QuerySnapshot<Object?>> getStudentSlotsByParentId(String userId);
 
+  Future<QuerySnapshot<Object?>> getStudentSlotsByParentIdWithStatus(
+      String userId, String status);
+
   Future<QuerySnapshot<Object?>> getStudentSlotsByStudentId(String studentId);
 
   Future<DocumentSnapshot<Object?>> getStudentSlotTime(String studentSlotDocId);
@@ -98,6 +101,16 @@ class StudentSlotDataSourceImpl implements StudentSlotDataSource {
     return await _tryCatchList(() async => await _studentSlotTimeRef
         .where("enrollId", isEqualTo: enrollId)
         .where("instructorId", isEqualTo: instructorId)
+        .orderBy("lastUpdated", descending: true)
+        .get());
+  }
+
+  @override
+  Future<QuerySnapshot<Object?>> getStudentSlotsByParentIdWithStatus(
+      String userId, String status) async {
+    return await _tryCatchList(() async => await _studentSlotTimeRef
+        .where("userId", isEqualTo: userId)
+        .where("status", isEqualTo: status)
         .orderBy("lastUpdated", descending: true)
         .get());
   }

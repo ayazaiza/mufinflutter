@@ -78,18 +78,19 @@ import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../core/constants/constants.dart';
-import '../features/academy/data/datasources/shared_prefs_data_source.dart';
-import '../features/academy/data/datasources/song_data_source.dart';
-import '../features/academy/domain/repository/courses_repo.dart';
-import '../features/academy/domain/repository/enroll_course_repo.dart';
-import '../features/academy/domain/repository/shared_prefs_repo.dart';
-import '../features/academy/domain/repository/student_slot_repo.dart';
-import '../features/academy/domain/usescases/courses/get_certication_courses.dart';
-import '../features/academy/domain/usescases/courses/get_grade_courses.dart';
-import '../features/academy/domain/usescases/courses/get_lesson_courses.dart';
-import '../features/academy/domain/usescases/courses/get_sub_courses.dart';
+import 'package:academy/core/constants/constants.dart';
+import 'package:academy/features/academy/data/datasources/shared_prefs_data_source.dart';
+import 'package:academy/features/academy/data/datasources/song_data_source.dart';
+import 'package:academy/features/academy/domain/repository/courses_repo.dart';
+import 'package:academy/features/academy/domain/repository/enroll_course_repo.dart';
+import 'package:academy/features/academy/domain/repository/shared_prefs_repo.dart';
+import 'package:academy/features/academy/domain/repository/student_slot_repo.dart';
+import 'package:academy/features/academy/domain/usescases/courses/get_certication_courses.dart';
+import 'package:academy/features/academy/domain/usescases/courses/get_grade_courses.dart';
+import 'package:academy/features/academy/domain/usescases/courses/get_lesson_courses.dart';
+import 'package:academy/features/academy/domain/usescases/courses/get_sub_courses.dart';
 import '../features/academy/domain/usescases/slot_attandance/get_attendance.dart';
+import '../features/academy/domain/usescases/slot_attandance/get_student_slots_user_id_status.dart';
 import '../features/academy/domain/usescases/slot_attandance/get_students_slot_times.dart';
 import '../features/academy/domain/usescases/topics/get_grade_topics.dart';
 import '../features/academy/domain/usescases/topics/get_topics.dart';
@@ -302,6 +303,8 @@ Future<void> initDependencies() async {
         GetStudentSlotsStudId(studentSlotRepo: locator<StudentSlotRepo>()))
     ..registerFactory<GetStudentsSlotTimes>(
         () => GetStudentsSlotTimes(studentSlotRepo: locator<StudentSlotRepo>()))
+    ..registerFactory<GetStudentSlotsUserIdStatus>(
+        () => GetStudentSlotsUserIdStatus(studentSlotRepo: locator<StudentSlotRepo>()))
 
     /* Enrolls */
     ..registerLazySingleton<EnrollCourseDataSource>(() =>

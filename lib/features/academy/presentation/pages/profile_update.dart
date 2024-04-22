@@ -79,9 +79,9 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
             context.go(route);
             return;
           }
-          if (state.successMsg != null || state.errorMsg != null) {
-            event.add(const ProfileUpdateEvent.reset());
-          }
+          // if (state.successMsg != null || state.errorMsg != null) {
+          //   event.add(const ProfileUpdateEvent.reset());
+          // }
         },
         builder: (context, state) {
           return state.screenLoading
