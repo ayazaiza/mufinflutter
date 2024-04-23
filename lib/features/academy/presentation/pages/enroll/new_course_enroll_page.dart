@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../../../core/common/widgets/action_bar_loader.dart';
-import '../../../../core/constants/app_strings.dart';
-import '../../../../core/utils/custom_outlined_text_form_field.dart';
-import '../../../../core/utils/custom_widgets.dart';
-import '../widgets/select_course_list.dart';
-import '../widgets/select_sub_course_list.dart';
+import '../../../../../core/common/widgets/action_bar_loader.dart';
+import '../../../../../core/constants/app_strings.dart';
+import '../../../../../core/utils/custom_outlined_text_form_field.dart';
+import '../../../../../core/utils/custom_widgets.dart';
+import '../../widgets/select_course_list.dart';
+import '../../widgets/select_sub_course_list.dart';
 
 class NewCourseEnrollPage extends StatefulWidget {
   const NewCourseEnrollPage({super.key});

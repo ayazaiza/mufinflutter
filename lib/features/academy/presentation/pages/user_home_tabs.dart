@@ -1,7 +1,7 @@
 import 'package:academy/core/extensions/extension_mapper.dart';
 import 'package:academy/core/extensions/extensions.dart';
 import 'package:academy/features/academy/presentation/cubits/bottom_nav/bottom_nav_cubit.dart';
-import 'package:academy/features/academy/presentation/pages/courses_page.dart';
+import 'package:academy/features/academy/presentation/pages/course/courses_page.dart';
 import 'package:academy/features/academy/presentation/pages/home_page.dart';
 import 'package:academy/features/academy/presentation/widgets/nav_drawer_custom_item.dart';
 import 'package:academy/features/academy/presentation/widgets/nav_drawer_header.dart';
@@ -56,7 +56,7 @@ class UserHomeTabs extends HookWidget {
                       path: RoutePaths.profile.path,
                       queryParameters: {"uuid": uuid}).toString());
                 }),
-           /* NavDrawerCustomItem(
+            /* NavDrawerCustomItem(
                 text: AppStrings.settings,
                 icon: AppLocalAssets.settingsIcon,
                 onTap: () {
@@ -139,7 +139,9 @@ class UserHomeTabs extends HookWidget {
             },
             children: [
               const HomePage(),
-              const DashboardPage(),
+              DashboardPage(
+                uuid: uuid,
+              ),
               CoursesPage(
                 uuid: uuid,
               )

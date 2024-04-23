@@ -16,7 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/utils/router_const.dart';
+import '../../../../../core/utils/router_const.dart';
 
 class ViewStudent extends HookWidget {
   const ViewStudent({super.key});

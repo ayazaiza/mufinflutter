@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/constants/app_strings.dart';
-import '../../../../core/utils/router_const.dart';
-import '../widgets/list_item_widget.dart';
+import '../../../../../core/constants/app_strings.dart';
+import '../../../../../core/utils/router_const.dart';
+import '../../widgets/list_item_widget.dart';
 
 class EnrollsPage extends StatelessWidget {
   const EnrollsPage({super.key});

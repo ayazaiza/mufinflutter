@@ -51,7 +51,7 @@ class ListItemWidget extends StatelessWidget {
                 subtitle,
                 // state.enrollCourses[index].parentName,
                 style: context.textTheme.titleMedium!.copyWith(
-                  // color: context.colorScheme.secondary,
+                  color: context.colorScheme.secondary,
                 ),
                 maxLines: 1,
               ),
@@ -62,7 +62,9 @@ class ListItemWidget extends StatelessWidget {
                 Text(
                   third!,
                   // state.enrollCourses[index].parentName,
-                  style: context.textTheme.titleMedium!,
+                  style: context.textTheme.titleMedium!.copyWith(
+                    color: context.colorScheme.tertiary
+                  ),
                   maxLines: 1,
                 ),
 

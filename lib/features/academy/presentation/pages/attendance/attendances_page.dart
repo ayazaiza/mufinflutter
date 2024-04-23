@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/constants/app_strings.dart';
-import '../widgets/list_item_widget.dart';
+import '../../../../../core/constants/app_strings.dart';
+import '../../widgets/list_item_widget.dart';
 
 class AttendancesPage extends StatelessWidget {
   const AttendancesPage({super.key});

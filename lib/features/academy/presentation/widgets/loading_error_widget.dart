@@ -21,7 +21,7 @@ class LoadingErrorWidget<Type> extends StatelessWidget {
         ? const Center(
             child: CircularProgressIndicator(),
           )
-        : error != null && type == null
+        : error != null
             ? ErrorScreen(error: error)
             : child;
   }

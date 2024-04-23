@@ -124,6 +124,8 @@ class AppStrings {
   static const String students = "Students";
   static const String progress = "Progress";
   static const String scheduledClasses = "Current Scheduled classes";
+  static const String classDetails = "Class details";
+  static const String classes = "Classes";
   static const String regularCourses = "Regular Courses";
   static const String regularCourseEnrolls = "Regular course enrollments";
   static const String attendance = "Attendance";

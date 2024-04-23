@@ -5,13 +5,17 @@ import 'package:academy/features/academy/presentation/widgets/recent_activities_
 import 'package:academy/features/academy/presentation/widgets/student_dashboard_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/app_strings.dart';
+import '../../../../core/utils/router_const.dart';
 import '../widgets/custom_container_box.dart';
 import '../widgets/list_item_widget.dart';
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+  final String uuid;
+
+  const DashboardPage({super.key, required this.uuid});
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();
@@ -32,19 +36,24 @@ class _DashboardPageState extends State<DashboardPage> {
             builder: (context, state) {
               return CustomContainerBox<StudentTimes>(
                   viewAll: () {
-
+                    context.push(Uri(
+                        path: RoutePaths.studentAllCls.path,
+                        queryParameters: {
+                          "userId": widget.uuid,
+                        }).toString());
                   },
                   title: AppStrings.scheduledClasses,
                   item: state.studentTimes,
                   itemWidget: (index) {
                     return GestureDetector(
                       onTap: () {
-                        // context.push(Uri(
-                        //     path: RoutePaths.studentProgress.path,
-                        //     queryParameters: {
-                        //       "enrollId": state.progress[index].enrollDocId,
-                        //       "studentId": state.progress[index].studentDocumentId
-                        //     }).toString());
+                        context.push(Uri(
+                            path: RoutePaths.studentClsDetails.path,
+                            queryParameters: {
+                              "enrollId": state.studentTimes[index].enrollId,
+                              "studentId": state.studentTimes[index].studentId,
+                              "studentTimeDocId": state.studentTimes[index].studentTimeDocId,
+                            }).toString());
                       },
                       child: ListItemWidget(
                           title: state.studentTimes[index].studentName,

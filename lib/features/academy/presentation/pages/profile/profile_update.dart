@@ -12,8 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/utils/custom_widgets.dart';
-import '../../../navigation/bloc/user_session_bloc.dart';
+import '../../../../../core/utils/custom_widgets.dart';
+import '../../../../navigation/bloc/user_session_bloc.dart';
 
 class ProfileUpdate extends StatefulWidget {
   final String? title;
