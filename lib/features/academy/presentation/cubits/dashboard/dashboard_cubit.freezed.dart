@@ -21,6 +21,9 @@ mixin _$DashboardState {
       throw _privateConstructorUsedError;
   List<Student> get students => throw _privateConstructorUsedError;
   List<StudentTimes> get studentTimes => throw _privateConstructorUsedError;
+  List<EnrollCourse> get enrolls => throw _privateConstructorUsedError;
+  List<EventEnroll> get eventEnrolls => throw _privateConstructorUsedError;
+  List<Song> get songs => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   String? get errorMsg => throw _privateConstructorUsedError;
 
@@ -40,6 +43,9 @@ abstract class $DashboardStateCopyWith<$Res> {
       List<RecentActivities> recentActivities,
       List<Student> students,
       List<StudentTimes> studentTimes,
+      List<EnrollCourse> enrolls,
+      List<EventEnroll> eventEnrolls,
+      List<Song> songs,
       bool isLoading,
       String? errorMsg});
 }
@@ -61,6 +67,9 @@ class _$DashboardStateCopyWithImpl<$Res, $Val extends DashboardState>
     Object? recentActivities = null,
     Object? students = null,
     Object? studentTimes = null,
+    Object? enrolls = null,
+    Object? eventEnrolls = null,
+    Object? songs = null,
     Object? isLoading = null,
     Object? errorMsg = freezed,
   }) {
@@ -81,6 +90,18 @@ class _$DashboardStateCopyWithImpl<$Res, $Val extends DashboardState>
           ? _value.studentTimes
           : studentTimes // ignore: cast_nullable_to_non_nullable
               as List<StudentTimes>,
+      enrolls: null == enrolls
+          ? _value.enrolls
+          : enrolls // ignore: cast_nullable_to_non_nullable
+              as List<EnrollCourse>,
+      eventEnrolls: null == eventEnrolls
+          ? _value.eventEnrolls
+          : eventEnrolls // ignore: cast_nullable_to_non_nullable
+              as List<EventEnroll>,
+      songs: null == songs
+          ? _value.songs
+          : songs // ignore: cast_nullable_to_non_nullable
+              as List<Song>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -106,6 +127,9 @@ abstract class _$$InitialImplCopyWith<$Res>
       List<RecentActivities> recentActivities,
       List<Student> students,
       List<StudentTimes> studentTimes,
+      List<EnrollCourse> enrolls,
+      List<EventEnroll> eventEnrolls,
+      List<Song> songs,
       bool isLoading,
       String? errorMsg});
 }
@@ -125,6 +149,9 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? recentActivities = null,
     Object? students = null,
     Object? studentTimes = null,
+    Object? enrolls = null,
+    Object? eventEnrolls = null,
+    Object? songs = null,
     Object? isLoading = null,
     Object? errorMsg = freezed,
   }) {
@@ -145,6 +172,18 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value._studentTimes
           : studentTimes // ignore: cast_nullable_to_non_nullable
               as List<StudentTimes>,
+      enrolls: null == enrolls
+          ? _value._enrolls
+          : enrolls // ignore: cast_nullable_to_non_nullable
+              as List<EnrollCourse>,
+      eventEnrolls: null == eventEnrolls
+          ? _value._eventEnrolls
+          : eventEnrolls // ignore: cast_nullable_to_non_nullable
+              as List<EventEnroll>,
+      songs: null == songs
+          ? _value._songs
+          : songs // ignore: cast_nullable_to_non_nullable
+              as List<Song>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -166,11 +205,17 @@ class _$InitialImpl implements _Initial {
           const <RecentActivities>[],
       final List<Student> students = const <Student>[],
       final List<StudentTimes> studentTimes = const <StudentTimes>[],
+      final List<EnrollCourse> enrolls = const <EnrollCourse>[],
+      final List<EventEnroll> eventEnrolls = const <EventEnroll>[],
+      final List<Song> songs = const <Song>[],
       this.isLoading = true,
       this.errorMsg})
       : _recentActivities = recentActivities,
         _students = students,
-        _studentTimes = studentTimes;
+        _studentTimes = studentTimes,
+        _enrolls = enrolls,
+        _eventEnrolls = eventEnrolls,
+        _songs = songs;
 
   @override
   final String? uuid;
@@ -202,6 +247,33 @@ class _$InitialImpl implements _Initial {
     return EqualUnmodifiableListView(_studentTimes);
   }
 
+  final List<EnrollCourse> _enrolls;
+  @override
+  @JsonKey()
+  List<EnrollCourse> get enrolls {
+    if (_enrolls is EqualUnmodifiableListView) return _enrolls;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_enrolls);
+  }
+
+  final List<EventEnroll> _eventEnrolls;
+  @override
+  @JsonKey()
+  List<EventEnroll> get eventEnrolls {
+    if (_eventEnrolls is EqualUnmodifiableListView) return _eventEnrolls;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_eventEnrolls);
+  }
+
+  final List<Song> _songs;
+  @override
+  @JsonKey()
+  List<Song> get songs {
+    if (_songs is EqualUnmodifiableListView) return _songs;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_songs);
+  }
+
   @override
   @JsonKey()
   final bool isLoading;
@@ -210,7 +282,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'DashboardState(uuid: $uuid, recentActivities: $recentActivities, students: $students, studentTimes: $studentTimes, isLoading: $isLoading, errorMsg: $errorMsg)';
+    return 'DashboardState(uuid: $uuid, recentActivities: $recentActivities, students: $students, studentTimes: $studentTimes, enrolls: $enrolls, eventEnrolls: $eventEnrolls, songs: $songs, isLoading: $isLoading, errorMsg: $errorMsg)';
   }
 
   @override
@@ -224,6 +296,10 @@ class _$InitialImpl implements _Initial {
             const DeepCollectionEquality().equals(other._students, _students) &&
             const DeepCollectionEquality()
                 .equals(other._studentTimes, _studentTimes) &&
+            const DeepCollectionEquality().equals(other._enrolls, _enrolls) &&
+            const DeepCollectionEquality()
+                .equals(other._eventEnrolls, _eventEnrolls) &&
+            const DeepCollectionEquality().equals(other._songs, _songs) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.errorMsg, errorMsg) ||
@@ -237,6 +313,9 @@ class _$InitialImpl implements _Initial {
       const DeepCollectionEquality().hash(_recentActivities),
       const DeepCollectionEquality().hash(_students),
       const DeepCollectionEquality().hash(_studentTimes),
+      const DeepCollectionEquality().hash(_enrolls),
+      const DeepCollectionEquality().hash(_eventEnrolls),
+      const DeepCollectionEquality().hash(_songs),
       isLoading,
       errorMsg);
 
@@ -253,6 +332,9 @@ abstract class _Initial implements DashboardState {
       final List<RecentActivities> recentActivities,
       final List<Student> students,
       final List<StudentTimes> studentTimes,
+      final List<EnrollCourse> enrolls,
+      final List<EventEnroll> eventEnrolls,
+      final List<Song> songs,
       final bool isLoading,
       final String? errorMsg}) = _$InitialImpl;
 
@@ -264,6 +346,12 @@ abstract class _Initial implements DashboardState {
   List<Student> get students;
   @override
   List<StudentTimes> get studentTimes;
+  @override
+  List<EnrollCourse> get enrolls;
+  @override
+  List<EventEnroll> get eventEnrolls;
+  @override
+  List<Song> get songs;
   @override
   bool get isLoading;
   @override

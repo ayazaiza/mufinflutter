@@ -9,7 +9,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: EventsCarousel(),
+      body: Padding(
+        padding: EdgeInsets.symmetric(vertical: 8.0),
+        child: EventsCarousel(),
+      ),
     );
   }
 }

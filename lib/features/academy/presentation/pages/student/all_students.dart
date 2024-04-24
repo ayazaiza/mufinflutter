@@ -18,9 +18,12 @@ class _AllStudentsState extends State<AllStudents> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         title: const Text(AppStrings.students),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.person_add))
+          IconButton(onPressed: () {
+
+          }, icon: const Icon(Icons.person_add))
         ],
       ),
       body: BlocBuilder<AllStudentsBloc, AllStudentsState>(

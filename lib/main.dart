@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:academy/core/extensions/extensions.dart';
 import 'package:academy/core/theme/color_schemes.dart';
 import 'package:academy/core/constants/app_strings.dart';
 import 'package:academy/features/academy/presentation/blocs/student/delete_student/delete_student_bloc.dart';
@@ -50,6 +51,22 @@ class MyApp extends StatelessWidget {
       routerConfig: routerModule.goRouter,
       theme: ThemeData(
         fontFamily: "NotoSans",
+        // appBarTheme: AppBarTheme(
+        //   titleTextStyle: context.textTheme.titleLarge!
+        //       .copyWith(color: context.colorScheme.onPrimary,
+        //       fontWeight: FontWeight.bold),
+        //   iconTheme:
+        //   context.iconTheme!.copyWith(color: context.colorScheme.onPrimary),
+        //   backgroundColor: context.colorScheme.primary,
+        // ),
+        // appBarTheme: Theme.of(context).appBarTheme!.copyWith(
+        //   titleTextStyle: context.textTheme.titleLarge!
+        //       .copyWith(color: context.colorScheme.onPrimary,
+        //       fontWeight: FontWeight.bold),
+        //   iconTheme:
+        //   context.iconTheme!.copyWith(color: context.colorScheme.onPrimary),
+        //   backgroundColor: context.colorScheme.primary,
+        // ),
         // colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFDDE1FF)),
         colorScheme: lightColorScheme,
         useMaterial3: true,

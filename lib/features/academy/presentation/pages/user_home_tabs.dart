@@ -27,12 +27,20 @@ class UserHomeTabs extends HookWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
+        // titleTextStyle: context.textTheme.titleLarge!
+        //     .copyWith(color: context.colorScheme.onPrimary,
+        // fontWeight: FontWeight.bold),
+        // iconTheme:
+        //     context.iconTheme!.copyWith(color: context.colorScheme.onPrimary),
+        // backgroundColor: context.colorScheme.primary,
         title: const Text(AppStrings.appName),
         leading: IconButton(
             onPressed: () {
               scaffoldKey.currentState!.openDrawer();
             },
-            icon: const Icon(Icons.menu_rounded)),
+            icon: const Icon(
+              Icons.menu_rounded,
+            )),
         actions: [
           IconButton(
               onPressed: () {
@@ -85,12 +93,20 @@ class UserHomeTabs extends HookWidget {
                 icon: AppLocalAssets.eventsIcon,
                 onTap: () {
                   scaffoldKey.currentState?.closeDrawer();
+                  context.push(
+                      Uri(path: RoutePaths.eventEnrolls.path, queryParameters: {
+                    "userId": uuid,
+                  }).toString());
                 }),
             NavDrawerCustomItem(
                 text: AppStrings.songs,
                 icon: AppLocalAssets.songIcon,
                 onTap: () {
                   scaffoldKey.currentState?.closeDrawer();
+                  context.push(
+                      Uri(path: RoutePaths.allSongs.path, queryParameters: {
+                    "userId": uuid,
+                  }).toString());
                 }),
             NavDrawerCustomItem(
                 text: AppStrings.logout,

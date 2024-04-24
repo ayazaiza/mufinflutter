@@ -7,6 +7,9 @@ class DashboardState with _$DashboardState {
     @Default(<RecentActivities>[]) List<RecentActivities> recentActivities,
     @Default(<Student>[]) List<Student> students,
     @Default(<StudentTimes>[]) List<StudentTimes> studentTimes,
+    @Default(<EnrollCourse>[]) List<EnrollCourse> enrolls,
+    @Default(<EventEnroll>[]) List<EventEnroll> eventEnrolls,
+    @Default(<Song>[]) List<Song> songs,
     @Default(true) bool isLoading,
     String? errorMsg,
   }) = _Initial;

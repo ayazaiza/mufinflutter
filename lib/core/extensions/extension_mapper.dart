@@ -7,7 +7,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/academy/domain/entities/utils/carousel_item.dart';
-import '../error/app_exceptions.dart';
 
 extension MufinUserExt on MufinUser {
   Map<String, dynamic> get toHashMap => {
@@ -157,7 +156,7 @@ extension Strings on String {
     // } else if (contains("accepted")) {
     //   return context.colorScheme.secondaryContainer;
     // } else {
-    return context.colorScheme.background.withOpacity(0.7);
+    return context.colorScheme.surfaceVariant.withOpacity(0.5);
     // }
   }
 

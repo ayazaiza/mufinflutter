@@ -19,7 +19,7 @@ class RecentActivitiesCard extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                 margin: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                    color: context.colorScheme.surfaceVariant.withOpacity(0.8),
+                    // color: context.colorScheme.surfaceVariant.withOpacity(0.8),
                     borderRadius: BorderRadius.circular(12)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

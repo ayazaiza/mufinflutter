@@ -8,6 +8,7 @@ enum RoutePaths {
   settings(path: '/settings'),
   profile(path: '/profile'),
   allSongs(path: '/all_songs'),
+  songDetails(path: '/song_details'),
   students(path: '/students'),
   addStudent(path: '/add_student'),
   studentDetails(path: '/student_details'),
@@ -113,6 +114,8 @@ enum RoutePaths {
         return AppStrings.scheduledClasses;
       case RoutePaths.studentClsDetails:
         return AppStrings.classDetails;
+      case RoutePaths.songDetails:
+        return AppStrings.songDetails;
     }
   }
 }

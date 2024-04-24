@@ -13,6 +13,8 @@ extension MediaQueryExt on BuildContext {
 
   TextTheme get textTheme => themeData.textTheme;
 
+  IconThemeData? get iconTheme => themeData.appBarTheme.iconTheme;
+
   TextStyle? get title => themeData.textTheme.titleLarge;
 
   TextStyle? get subTitle => themeData.textTheme.titleMedium;

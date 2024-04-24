@@ -10,6 +10,8 @@ import 'package:academy/features/academy/domain/usescases/enrolls/get_enrolls_st
 import 'package:academy/features/academy/domain/usescases/enrolls/get_enrolls_stud_uuid.dart';
 import 'package:academy/features/academy/domain/usescases/enrolls/get_enrolls_user_id.dart';
 import 'package:academy/features/academy/domain/usescases/enrolls/has_enrolled.dart';
+import 'package:academy/features/academy/domain/usescases/event_enrolls/get_event_enroll.dart';
+import 'package:academy/features/academy/domain/usescases/event_enrolls/get_event_enrolls.dart';
 import 'package:academy/features/academy/domain/usescases/slot_attandance/get_all_attendance.dart';
 import 'package:academy/features/academy/domain/usescases/slot_attandance/get_attendance.dart';
 import 'package:academy/features/academy/domain/usescases/slot_attandance/get_student_slot_time.dart';
@@ -17,7 +19,9 @@ import 'package:academy/features/academy/domain/usescases/slot_attandance/get_st
 import 'package:academy/features/academy/domain/usescases/slot_attandance/get_student_slots_stud_id.dart';
 import 'package:academy/features/academy/domain/usescases/slot_attandance/get_student_slots_user_id_status.dart';
 import 'package:academy/features/academy/domain/usescases/slot_attandance/get_students_slot_times.dart';
+import 'package:academy/features/academy/domain/usescases/song/get_song.dart';
 import 'package:academy/features/academy/domain/usescases/song/get_songs_student_id.dart';
+import 'package:academy/features/academy/domain/usescases/song/get_songs_user_id.dart';
 import 'package:academy/features/academy/domain/usescases/student/add_student.dart';
 import 'package:academy/features/academy/domain/usescases/student/get_student.dart';
 import 'package:academy/features/academy/domain/usescases/student/get_students.dart';
@@ -39,10 +43,15 @@ import 'package:academy/features/academy/presentation/cubits/courses/course_deta
 import 'package:academy/features/academy/presentation/cubits/dashboard/dashboard_cubit.dart';
 import 'package:academy/features/academy/presentation/cubits/enrolls/all_enrolls/all_enrolls_cubit.dart';
 import 'package:academy/features/academy/presentation/cubits/enrolls/enrolled_details/enrolled_details_cubit.dart';
+import 'package:academy/features/academy/presentation/cubits/event_enrolls/all_event_enrolls/all_event_enrolls_cubit.dart';
+import 'package:academy/features/academy/presentation/cubits/event_enrolls/event_enroll_details/event_enroll_details_cubit.dart';
+import 'package:academy/features/academy/presentation/cubits/song/all_songs/all_songs_cubit.dart';
+import 'package:academy/features/academy/presentation/cubits/song/song_details/song_details_cubit.dart';
 import 'package:academy/features/academy/presentation/cubits/stundent/student_cls/student_cls_cubit.dart';
 import 'package:academy/features/academy/presentation/cubits/stundent/student_details/student_details_cubit.dart';
 import 'package:academy/features/academy/presentation/cubits/stundent/student_progress/student_progress_cubit.dart';
 import 'package:academy/features/academy/presentation/cubits/view_profile/view_profile_cubit.dart';
+import 'package:academy/features/academy/presentation/pages/songs/songs_page.dart';
 import 'package:academy/features/academy/presentation/pages/student/add_student_page.dart';
 import 'package:academy/features/academy/presentation/pages/student/all_students.dart';
 import 'package:academy/features/academy/presentation/pages/attendance/attendance_details_page.dart';
@@ -84,6 +93,9 @@ import '../academy/presentation/blocs/profile_update/profile_update_bloc.dart';
 import '../academy/presentation/cubits/attendance/attendance_details/attendance_cubit.dart';
 import '../academy/presentation/cubits/event_details/event_details_cubit.dart';
 import '../academy/presentation/cubits/stundent/student_cls_details/student_cls_details_cubit.dart';
+import '../academy/presentation/pages/event_enrolls/event_enrolled_details_page.dart';
+import '../academy/presentation/pages/event_enrolls/event_enrolls_page.dart';
+import '../academy/presentation/pages/songs/song_details_page.dart';
 import '../auth/presentation/pages/forgot_pwd_screen.dart';
 
 class RouterModule {
@@ -123,8 +135,11 @@ class RouterModule {
               BlocProvider(create: (context) => BottomNavCubit()),
               BlocProvider(
                   create: (context) => DashboardCubit(
+                      getSongsUserId: _getIt<GetSongsUserId>(),
                       getStudentsStream: _getIt<GetStudentsStream>(),
                       getActivitiesStream: _getIt<GetActivitiesStream>(),
+                      getEnrollsUserId: _getIt<GetEnrollsUserId>(),
+                      getEventEnrolls: _getIt<GetEventEnrolls>(),
                       getStudentSlotsUserIdStatus:
                           _getIt<GetStudentSlotsUserIdStatus>(),
                       uuid: uuid)
@@ -152,10 +167,10 @@ class RouterModule {
           path: RoutePaths.studentClsDetails.path,
           name: RoutePaths.studentClsDetails.routeName(),
           builder: (context, state) {
-            final String enrollId =
-                state.uri.queryParameters['enrollId'].toString();
-            final String studentId =
-                state.uri.queryParameters['studentId'].toString();
+            // final String enrollId =
+            //     state.uri.queryParameters['enrollId'].toString();
+            // final String studentId =
+            //     state.uri.queryParameters['studentId'].toString();
             final String studentTimeDocId =
                 state.uri.queryParameters['studentTimeDocId'].toString();
             return BlocProvider(
@@ -164,6 +179,38 @@ class RouterModule {
                 getStudentSlotTime: _getIt<GetStudentSlotTime>(),
               )..fetchData(),
               child: const StudentClassDetailsPage(),
+            );
+          },
+        ),
+        GoRoute(
+          path: RoutePaths.eventEnrolls.path,
+          name: RoutePaths.eventEnrolls.routeName(),
+          builder: (context, state) {
+            final String uuid = state.uri.queryParameters['userId'].toString();
+            return BlocProvider(
+              create: (context) => AllEventEnrollsCubit(
+                userId: uuid,
+                getEventEnrolls: _getIt<GetEventEnrolls>(),
+              )..fetchData(),
+              child: const EventEnrollsPage(),
+            );
+          },
+        ),
+        GoRoute(
+          path: RoutePaths.eventEnrollDetails.path,
+          name: RoutePaths.eventEnrollDetails.routeName(),
+          builder: (context, state) {
+            // final String enrollId =
+            //     state.uri.queryParameters['enrollId'].toString();
+            // final String studentId =
+            //     state.uri.queryParameters['studentId'].toString();
+            final String id = state.uri.queryParameters['id'].toString();
+            return BlocProvider(
+              create: (context) => EventEnrollDetailsCubit(
+                id: id,
+                getEventEnroll: _getIt<GetEventEnroll>(),
+              )..fetchData(),
+              child: const EventEnrolledDetailsPage(),
             );
           },
         ),
@@ -347,6 +394,38 @@ class RouterModule {
                 child: const CourseDetails(),
               );
             }),
+        GoRoute(
+            path: RoutePaths.allSongs.path,
+            name: RoutePaths.allSongs.routeName(),
+            builder: (context, state) {
+              final String userId =
+                  state.uri.queryParameters['userId'].toString();
+              return BlocProvider(
+                create: (context) => AllSongsCubit(
+                    getSongsUserId: _getIt<GetSongsUserId>(), uuid: userId)
+                  ..fetchData(),
+                child: const SongsPage(),
+              );
+            }),
+        GoRoute(
+          path: RoutePaths.songDetails.path,
+          name: RoutePaths.songDetails.routeName(),
+          builder: (context, state) {
+            // final String enrollId =
+            //     state.uri.queryParameters['enrollId'].toString();
+            // final String studentId =
+            //     state.uri.queryParameters['studentId'].toString();
+            final String songId =
+                state.uri.queryParameters['songId'].toString();
+            return BlocProvider(
+              create: (context) => SongDetailsCubit(
+                songId: songId,
+                getSong: _getIt<GetSong>(),
+              )..fetchData(),
+              child: const SongDetailsPage(),
+            );
+          },
+        ),
         GoRoute(
             path: RoutePaths.profile.path,
             name: RoutePaths.profile.routeName(),

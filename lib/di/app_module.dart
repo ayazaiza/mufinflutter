@@ -7,11 +7,13 @@ import 'package:academy/features/academy/data/datasources/student_slot_data_sour
 import 'package:academy/features/academy/data/repository/completed_topic_repo_impl.dart';
 import 'package:academy/features/academy/data/repository/course_repo_impl.dart';
 import 'package:academy/features/academy/data/repository/enroll_course_repo_impl.dart';
+import 'package:academy/features/academy/data/repository/event_enrolls_repo_impl.dart';
 import 'package:academy/features/academy/data/repository/notification_repo_impl.dart';
 import 'package:academy/features/academy/data/repository/song_repo_impl.dart';
 import 'package:academy/features/academy/data/repository/student_repo_impl.dart';
 import 'package:academy/features/academy/data/repository/student_slot_repo_impl.dart';
 import 'package:academy/features/academy/domain/repository/completed_topic_repo.dart';
+import 'package:academy/features/academy/domain/repository/event_enrolls_repo.dart';
 import 'package:academy/features/academy/domain/repository/notification_repo.dart';
 import 'package:academy/features/academy/domain/repository/song_repo.dart';
 import 'package:academy/features/academy/domain/repository/student_repo.dart';
@@ -29,6 +31,10 @@ import 'package:academy/features/academy/domain/usescases/enrolls/get_enrolls_st
 import 'package:academy/features/academy/domain/usescases/enrolls/get_enrolls_user_id.dart';
 import 'package:academy/features/academy/domain/usescases/enrolls/has_enrolled.dart';
 import 'package:academy/features/academy/domain/usescases/enrolls/update_enroll_course.dart';
+import 'package:academy/features/academy/domain/usescases/event_enrolls/add_event_enrolls.dart';
+import 'package:academy/features/academy/domain/usescases/event_enrolls/get_event_enroll_stu_id.dart';
+import 'package:academy/features/academy/domain/usescases/event_enrolls/get_event_enrolls.dart';
+import 'package:academy/features/academy/domain/usescases/event_enrolls/get_event_enrolls_has_dup.dart';
 import 'package:academy/features/academy/domain/usescases/notification/get_notification.dart';
 import 'package:academy/features/academy/domain/usescases/notification/get_notifications.dart';
 import 'package:academy/features/academy/domain/usescases/notification/update_notification.dart';
@@ -89,6 +95,8 @@ import 'package:academy/features/academy/domain/usescases/courses/get_certicatio
 import 'package:academy/features/academy/domain/usescases/courses/get_grade_courses.dart';
 import 'package:academy/features/academy/domain/usescases/courses/get_lesson_courses.dart';
 import 'package:academy/features/academy/domain/usescases/courses/get_sub_courses.dart';
+import '../features/academy/data/datasources/event_enrolls_data_source.dart';
+import '../features/academy/domain/usescases/event_enrolls/get_event_enroll.dart';
 import '../features/academy/domain/usescases/slot_attandance/get_attendance.dart';
 import '../features/academy/domain/usescases/slot_attandance/get_student_slots_user_id_status.dart';
 import '../features/academy/domain/usescases/slot_attandance/get_students_slot_times.dart';
@@ -303,8 +311,9 @@ Future<void> initDependencies() async {
         GetStudentSlotsStudId(studentSlotRepo: locator<StudentSlotRepo>()))
     ..registerFactory<GetStudentsSlotTimes>(
         () => GetStudentsSlotTimes(studentSlotRepo: locator<StudentSlotRepo>()))
-    ..registerFactory<GetStudentSlotsUserIdStatus>(
-        () => GetStudentSlotsUserIdStatus(studentSlotRepo: locator<StudentSlotRepo>()))
+    ..registerFactory<GetStudentSlotsUserIdStatus>(() =>
+        GetStudentSlotsUserIdStatus(
+            studentSlotRepo: locator<StudentSlotRepo>()))
 
     /* Enrolls */
     ..registerLazySingleton<EnrollCourseDataSource>(() =>
@@ -343,6 +352,25 @@ Future<void> initDependencies() async {
         () => GetSongsStudentId(songRepo: locator<SongRepo>()))
     ..registerFactory<GetSongsUserId>(
         () => GetSongsUserId(songRepo: locator<SongRepo>()))
+
+    /* Event Enrolls */
+    ..registerLazySingleton<EventEnrollsDataSource>(() =>
+        EventEnrollsDataSourceImpl(
+            reference: locator<FirebaseFirestore>()
+                .collection(AppConstants.eventEnroll)))
+    ..registerLazySingleton<EventEnrollsRepo>(() => EventEnrollsRepoImpl(
+        eventEnrollsDataSource: locator<EventEnrollsDataSource>()))
+    ..registerFactory<GetEventEnroll>(
+        () => GetEventEnroll(eventEnrollsRepo: locator<EventEnrollsRepo>()))
+    ..registerFactory<GetEventEnrolls>(
+        () => GetEventEnrolls(eventEnrollsRepo: locator<EventEnrollsRepo>()))
+    ..registerFactory<GetEventEnrollsStuId>(() =>
+        GetEventEnrollsStuId(eventEnrollsRepo: locator<EventEnrollsRepo>()))
+    ..registerFactory<GetEventEnrollsHasDup>(() =>
+        GetEventEnrollsHasDup(eventEnrollsRepo: locator<EventEnrollsRepo>()))
+    ..registerFactory<AddEventEnrolls>(() => AddEventEnrolls(
+        eventEnrollsRepo: locator<EventEnrollsRepo>(),
+        addActivity: locator<AddActivity>()))
 
     /* Notification */
     ..registerLazySingleton<NotificationDataSource>(() =>

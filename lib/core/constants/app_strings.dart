@@ -133,6 +133,9 @@ class AppStrings {
   static const String studentDetails = "Student details";
   static const String addStudent = "Add student";
   static const String addNewStudent = "Add new student";
+  static const String nextSteps = "Next steps";
+  static const String stepOne = "Step:1 Add New Student in your account. click New student link down there";
+  static const String stepTwo = "Step:2 Enroll new course to new student.";
   static const String dashboard = "Dashboard";
   static const String courses = "Courses";
   static const String subCourses = "SubCourses";
@@ -156,6 +159,8 @@ class AppStrings {
   static const String subCourseName = "Sub course name";
   static const String status = "Status";
   static const String courseEnrolledDate = "Course enrolled date";
+  static const String enrolledDate = "Enrolled date";
+  static const String lastUpdated = "LastUpdate";
   static const String studentName = "Student name";
   static const String time = "Time";
   static const String date = "Date";
@@ -196,5 +201,12 @@ class AppStrings {
 
   static const String confirmationRequired = "Confirmation required";
   static const String description = "Description";
+  static const String shortDescription = "Short description";
   static const String feedback = "Feedback";
+  static const String enrollments = "Enrollments";
+  static const String songTitle = "Song title";
+  static const String songUrl = "Song Url";
+  static const String songAlbum = "Song Album";
+  static const String songArtist = "Song Artist";
+  static const String songGenre = "Song Genre";
 }
