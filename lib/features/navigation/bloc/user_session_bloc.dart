@@ -25,7 +25,7 @@ class UserSessionBloc extends Bloc<UserSessionEvent, UserSessionState> {
         super(UserSessionSplashState()) {
     on<UserSessionInit>(_initCheck);
     on<UserSessionOnBoardEvent>((event, emit) async {
-      // await Future.delayed(const Duration(seconds: 2));
+      // await Future.delayed(const Duration(seconds: 10));
       emit(UserSessionOnBoardState());
     });
     on<UserSessionOnBoardSkipEvent>((event, emit) {

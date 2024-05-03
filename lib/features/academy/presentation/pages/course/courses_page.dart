@@ -2,6 +2,7 @@ import 'package:academy/core/constants/app_strings.dart';
 import 'package:academy/core/extensions/extensions.dart';
 import 'package:academy/core/utils/router_const.dart';
 import 'package:academy/features/academy/presentation/cubits/courses/all_courses/courses_cubit.dart';
+import 'package:academy/features/academy/presentation/widgets/button_with_icon.dart';
 import 'package:academy/features/academy/presentation/widgets/error_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,8 +47,8 @@ class _CoursesPageState extends State<CoursesPage> {
                                     children: [
                                       Container(
                                         clipBehavior: Clip.antiAlias,
-                                        height: 130,
-                                        width: 160,
+                                        height: 100,
+                                        width: 130,
                                         decoration: BoxDecoration(
                                             color: context
                                                 .colorScheme.primaryContainer
@@ -72,22 +73,26 @@ class _CoursesPageState extends State<CoursesPage> {
                                       const SizedBox(
                                         width: 10,
                                       ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            course.name,
-                                            style: context.textTheme.bodyLarge!
-                                                .copyWith(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                          ),
-                                          Text(
-                                            course.about,
-                                            style: context.textTheme.bodyLarge,
-                                          ),
-                                        ],
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              course.name,
+                                              style: context
+                                                  .textTheme.bodyLarge!
+                                                  .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                            ),
+                                            Text(
+                                              course.about,
+                                              style:
+                                                  context.textTheme.bodyLarge,
+                                            ),
+                                          ],
+                                        ),
                                       )
                                     ],
                                   ),
@@ -98,56 +103,36 @@ class _CoursesPageState extends State<CoursesPage> {
                                   child: Row(
                                     children: [
                                       Expanded(
-                                        child: OutlinedButton(
-                                            onPressed: () {
-                                              context.push(Uri(
-                                                  path: RoutePaths
-                                                      .courseDetails.path,
-                                                  queryParameters: {
-                                                    "courseId": course.courseId
-                                                  }).toString());
-                                            },
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                const Icon(Icons.info),
-                                                const SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Text(AppStrings.knowMore
-                                                    .toUpperCase()),
-                                              ],
-                                            )),
+                                        child: ButtonWithIconWidget(
+                                          onPressed: () {
+                                            context.push(Uri(
+                                                path: RoutePaths
+                                                    .courseDetails.path,
+                                                queryParameters: {
+                                                  "courseId": course.courseId
+                                                }).toString());
+                                          },
+                                          name:
+                                              AppStrings.knowMore.toUpperCase(),
+                                        ),
                                       ),
                                       const SizedBox(
                                         width: 10,
                                       ),
                                       Expanded(
-                                        child: OutlinedButton(
-                                            onPressed: () {
-                                              context.push(Uri(
-                                                  path: RoutePaths
-                                                      .enrollCourse.path,
-                                                  queryParameters: {
-                                                    "courseId": course.courseId,
-                                                    "uuid": widget.uuid
-                                                  }).toString());
-                                            },
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                const Icon(Icons.school),
-                                                const SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Text(AppStrings.interested
-                                                    .toUpperCase()),
-                                              ],
-                                            )),
+                                        child: ButtonWithIconWidget(
+                                          onPressed: () {
+                                            context.push(Uri(
+                                                path: RoutePaths
+                                                    .enrollCourse.path,
+                                                queryParameters: {
+                                                  "courseId": course.courseId,
+                                                  "uuid": widget.uuid
+                                                }).toString());
+                                          },
+                                          name: AppStrings.interested
+                                              .toUpperCase(),
+                                        ),
                                       )
                                     ],
                                   ),

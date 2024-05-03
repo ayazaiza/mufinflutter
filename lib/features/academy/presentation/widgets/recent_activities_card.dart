@@ -1,6 +1,7 @@
 import 'package:academy/core/extensions/extension_mapper.dart';
 import 'package:academy/core/extensions/extensions.dart';
 import 'package:academy/features/academy/presentation/cubits/dashboard/dashboard_cubit.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -61,13 +62,15 @@ class RecentActivitiesCard extends StatelessWidget {
                                     size: 20,
                                     color: context.colorScheme.secondary),
                                 const SizedBox(
-                                  width: 10,
+                                  width: 6,
                                 ),
-                                Text(
-                                  activity,
-                                  style: context.textTheme.bodyLarge,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
+                                Expanded(
+                                  child: Text(
+                                    activity,
+                                    style: context.textTheme.bodySmall,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
                               ],
                             ),

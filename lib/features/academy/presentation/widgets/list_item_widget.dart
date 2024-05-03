@@ -1,4 +1,5 @@
 import 'package:academy/core/extensions/extensions.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ListItemWidget extends StatelessWidget {
@@ -33,43 +34,45 @@ class ListItemWidget extends StatelessWidget {
           const SizedBox(
             width: 12,
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                // "${state.enrollCourses[index].courseName} (${state.enrollCourses[index].subCourseName})",
-                style: context.textTheme.titleMedium!.copyWith(
-                    // color: context.colorScheme.primary,
-                    fontWeight: FontWeight.bold),
-                maxLines: 2,
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              Text(
-                subtitle,
-                // state.enrollCourses[index].parentName,
-                style: context.textTheme.titleMedium!.copyWith(
-                  color: context.colorScheme.secondary,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  // "${state.enrollCourses[index].courseName} (${state.enrollCourses[index].subCourseName})",
+                  style: context.textTheme.bodyMedium!.copyWith(
+                      // color: context.colorScheme.primary,
+                      fontWeight: FontWeight.bold),
+                  maxLines: 2,
                 ),
-                maxLines: 1,
-              ),
-              if (third != null) ...[
                 const SizedBox(
                   height: 6,
                 ),
                 Text(
-                  third!,
+                  subtitle,
                   // state.enrollCourses[index].parentName,
                   style: context.textTheme.titleMedium!.copyWith(
-                    color: context.colorScheme.tertiary
+                    color: context.colorScheme.secondary,
                   ),
                   maxLines: 1,
                 ),
-
-              ]
-            ],
+                if (third != null) ...[
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Text(
+                    third!,
+                    // state.enrollCourses[index].parentName,
+                    style: context.textTheme.titleMedium!.copyWith(
+                      color: context.colorScheme.tertiary
+                    ),
+                    maxLines: 1,
+                  ),
+            
+                ]
+              ],
+            ),
           )
         ],
       ),

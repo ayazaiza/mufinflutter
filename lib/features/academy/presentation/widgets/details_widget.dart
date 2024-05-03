@@ -15,17 +15,17 @@ class DetailsWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-              flex: 1,
+              flex: 2,
               child: Text(
                 title,
                 style: context.textTheme.bodySmall!,
                 textAlign: TextAlign.start,
               )),
           Expanded(
-              flex: 3,
+              flex: 4,
               child: Text(
                 detail,
-                style: context.textTheme.bodyLarge!
+                style: context.textTheme.bodyMedium!
                     .copyWith(
                     fontWeight: FontWeight.bold
                 ),

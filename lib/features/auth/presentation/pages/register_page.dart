@@ -26,32 +26,32 @@ class RegisterPage extends HookWidget {
           centerTitle: true,
           title: kDebugMode
               ? InkWell(
-            onTap: () {
-              var email = "test_riyaz168@gmail.com";
-              // var email = "test_riyaz${Random().nextInt(1000)}@gmail.com";
-              var name = "Test riyaz";
-              var pwd = "12345678";
-              emailController.text = email;
-              pwdController.text = pwd;
-              cnfPwdController.text = pwd;
-              context.read<AuthBloc>().add(
-                  AuthEvent.testCred(email: email, pwd: pwd, name: name));
-            },
-            child: Text(
-              AppStrings.register,
-              style: context.textTheme.titleLarge!.copyWith(
-                  color: context.colorScheme.primary,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 1.5),
-            ),
-          )
+                  onTap: () {
+                    var email = "test_riyaz168@gmail.com";
+                    // var email = "test_riyaz${Random().nextInt(1000)}@gmail.com";
+                    var name = "Test riyaz";
+                    var pwd = "12345678";
+                    emailController.text = email;
+                    pwdController.text = pwd;
+                    cnfPwdController.text = pwd;
+                    context.read<AuthBloc>().add(
+                        AuthEvent.testCred(email: email, pwd: pwd, name: name));
+                  },
+                  child: Text(
+                    AppStrings.register,
+                    style: context.textTheme.titleLarge!.copyWith(
+                        color: context.colorScheme.primary,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 1.5),
+                  ),
+                )
               : Text(
-            AppStrings.register,
-            style: context.textTheme.titleLarge!.copyWith(
-                color: context.colorScheme.primary,
-                fontWeight: FontWeight.w900,
-                letterSpacing: 1.5),
-          ),
+                  AppStrings.register,
+                  style: context.textTheme.titleLarge!.copyWith(
+                      color: context.colorScheme.primary,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 1.5),
+                ),
           actions: [
             BlocBuilder<AuthBloc, AuthState>(
               builder: (context, state) {
@@ -81,9 +81,10 @@ class RegisterPage extends HookWidget {
                   toastLength: Toast.LENGTH_SHORT,
                   timeInSecForIosWeb: 1,
                   backgroundColor: context.colorScheme.primary);
-              var route = Uri(
-                  path: state.route!,
-                  queryParameters: {"uuid": state.uuid!,"email": state.respEmail!}).toString();
+              var route = Uri(path: state.route!, queryParameters: {
+                "uuid": state.uuid!,
+                "email": state.respEmail!
+              }).toString();
               context.go(route);
             }
             /*if (state.successMsg != null) {
@@ -164,12 +165,10 @@ class RegisterPage extends HookWidget {
                                 .add(AuthEvent.acceptTerms(accepted: value!));
                           },
                           onPrivacyTap: () {
-                            context
-                                .push(RoutePaths.privacyPolicy.path);
+                            context.push(RoutePaths.privacyPolicy.path);
                           },
                           onTermsTap: () {
-                            context
-                                .push(RoutePaths.terms.path);
+                            context.push(RoutePaths.terms.path);
                           },
                           color: context.colorScheme.primary,
                           style: context.textTheme.bodySmall),
@@ -179,11 +178,11 @@ class RegisterPage extends HookWidget {
                           context: context,
                           onPressed: !state.isLoading
                               ? () async {
-                            context.read<AuthBloc>().add(AuthEvent.submit(
-                                email: emailController.text.trim(),
-                                pwd: pwdController.text.trim(),
-                                cnfPwd: cnfPwdController.text.trim()));
-                          }
+                                  context.read<AuthBloc>().add(AuthEvent.submit(
+                                      email: emailController.text.trim(),
+                                      pwd: pwdController.text.trim(),
+                                      cnfPwd: cnfPwdController.text.trim()));
+                                }
                               : null),
                       CustomWidgets.spacerHeight(defaultHeight: 20),
                       CustomWidgets.customOptions(
@@ -203,8 +202,7 @@ class RegisterPage extends HookWidget {
                       CustomWidgets.footerWidget(
                           deviceWidth: context.width,
                           onTap: () {
-                            context
-                                .push(RoutePaths.login.path);
+                            context.push(RoutePaths.login.path);
                           },
                           style: context.textTheme.bodySmall,
                           textOne: AppStrings.haveAnAccount,
@@ -240,8 +238,7 @@ class RegisterPage extends HookWidget {
                             CustomWidgets.spacerWidth(defaultWidth: 6),
                             InkWell(
                               onTap: () {
-                                context.push(
-                                    RoutePaths.terms.path);
+                                context.push(RoutePaths.terms.path);
                               },
                               child: Text(
                                 AppStrings.terms,
@@ -263,7 +260,6 @@ class RegisterPage extends HookWidget {
         ));
   }
 }
-
 
 /*if (state.isLoading == LoadingState.show) {
               showDialog(

@@ -22,6 +22,7 @@ class LoginPage extends HookWidget {
     final pwdController = useTextEditingController();
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: kDebugMode
             ? InkWell(
           onTap: () {
@@ -34,7 +35,7 @@ class LoginPage extends HookWidget {
                 .add(AuthEvent.testLogin(email: email, pwd: pwd));
           },
           child: Text(
-            AppStrings.login,
+            AppStrings.appName,
             style: context.textTheme.titleLarge!.copyWith(
               // color: context.colorScheme.primary,
                 fontWeight: FontWeight.bold,
@@ -90,7 +91,7 @@ class LoginPage extends HookWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         AppStrings.login,
-                        style: context.textTheme.displaySmall!.copyWith(
+                        style: context.textTheme.titleLarge!.copyWith(
                             color: context.colorScheme.primary,
                             fontWeight: FontWeight.w800),
                       ),
