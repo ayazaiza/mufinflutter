@@ -53,6 +53,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<ResetError>((event, emit) {
       emit(state.copyWith(errorMsg: null, isLoading: false));
     });
+    on<AcceptTerms>((event, emit) {
+      emit(state.copyWith(acceptedTerms: event.accepted));
+    });
     // on<CheckUserExists>(_fetchUser);
     on<SignInNdUpWithGoogle>(_signInAdUpWithGoogle);
   }

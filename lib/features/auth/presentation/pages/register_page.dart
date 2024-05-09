@@ -8,10 +8,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/constants/app_strings.dart';
-import '../../../../core/utils/app_local_assets.dart';
-import '../../../../core/utils/custom_widgets.dart';
-import '../../../../core/utils/router_const.dart';
+import 'package:academy/core/constants/app_strings.dart';
+import 'package:academy/core/utils/app_local_assets.dart';
+import 'package:academy/core/utils/custom_widgets.dart';
+import 'package:academy/core/utils/router_const.dart';
 
 class RegisterPage extends HookWidget {
   const RegisterPage({super.key});
@@ -21,6 +21,12 @@ class RegisterPage extends HookWidget {
     final emailController = useTextEditingController();
     final pwdController = useTextEditingController();
     final cnfPwdController = useTextEditingController();
+
+    useEffect(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) => showAlert(context));
+      return () {};
+    }, []);
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -165,10 +171,12 @@ class RegisterPage extends HookWidget {
                                 .add(AuthEvent.acceptTerms(accepted: value!));
                           },
                           onPrivacyTap: () {
-                            context.push(RoutePaths.privacyPolicy.path);
+                            showAlert(context);
+                            // context.push(RoutePaths.privacyPolicy.path);
                           },
                           onTermsTap: () {
-                            context.push(RoutePaths.terms.path);
+                            showAlert(context);
+                            // context.push(RoutePaths.terms.path);
                           },
                           color: context.colorScheme.primary,
                           style: context.textTheme.bodySmall),
@@ -238,7 +246,8 @@ class RegisterPage extends HookWidget {
                             CustomWidgets.spacerWidth(defaultWidth: 6),
                             InkWell(
                               onTap: () {
-                                context.push(RoutePaths.terms.path);
+                                showAlert(context);
+                                // context.push(RoutePaths.terms.path);
                               },
                               child: Text(
                                 AppStrings.terms,
@@ -258,6 +267,75 @@ class RegisterPage extends HookWidget {
             );
           },
         ));
+  }
+
+  void showAlert(BuildContext context) {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (con) {
+          return AlertDialog(
+            content: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Text(
+                          AppStrings.terms,
+                          style: context.textTheme.titleMedium!
+                              .copyWith(fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        Text(
+                          AppStrings.termNdConditionsText,
+                          textAlign: TextAlign.justify,
+                          style: context.textTheme.bodyMedium,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    FilledButton(
+                        onPressed: () {
+                          BlocProvider.of<AuthBloc>(context).add(
+                              const AuthEvent.acceptTerms(accepted: false));
+                          Navigator.of(context).pop();
+                          context.pop();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              context.colorScheme.error, // Background color
+                        ),
+                        child: Text(
+                          "Maybe Later",
+                          style: context.textTheme.labelSmall!
+                              .copyWith(color: context.colorScheme.onPrimary),
+                        )),
+                    FilledButton(
+                        onPressed: () {
+                          BlocProvider.of<AuthBloc>(context)
+                              .add(const AuthEvent.acceptTerms(accepted: true));
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("I Agree",
+                            style: context.textTheme.labelSmall!.copyWith(
+                                color: context.colorScheme.onPrimary))),
+                  ],
+                )
+              ],
+            ),
+          );
+        });
   }
 }
 

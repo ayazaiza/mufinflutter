@@ -10,9 +10,12 @@ class AppStrings {
   static const String completeUrProfile = "Complete your profile";
   static const String updateProfile = "Update your profile";
   static const String enrollNewCourse = "Enroll New Course";
-  static const String studentsNotFound = "Students are not found!. Please add new student";
-  static const String coursesNotFound = "Courses are not found! Please wait for few days or contact to admin";
-  static const String subCoursesNotFound = "SubCourses are not found! Please wait for few days or contact to admin";
+  static const String studentsNotFound =
+      "Students are not found!. Please add new student";
+  static const String coursesNotFound =
+      "Courses are not found! Please wait for few days or contact to admin";
+  static const String subCoursesNotFound =
+      "SubCourses are not found! Please wait for few days or contact to admin";
 
   static const String save = "Save";
   static const String logout = "Logout";
@@ -134,7 +137,8 @@ class AppStrings {
   static const String addStudent = "Add student";
   static const String addNewStudent = "Add new student";
   static const String nextSteps = "Next steps";
-  static const String stepOne = "Step:1 Add New Student in your account. click New student link down there";
+  static const String stepOne =
+      "Step:1 Add New Student in your account. click New student link down there";
   static const String stepTwo = "Step:2 Enroll new course to new student.";
   static const String dashboard = "Dashboard";
   static const String courses = "Courses";
@@ -209,4 +213,6 @@ class AppStrings {
   static const String songAlbum = "Song Album";
   static const String songArtist = "Song Artist";
   static const String songGenre = "Song Genre";
+  static const String termNdConditionsText =
+      "Terms & Conditions for MufinAcademy Acceptance of Terms: By enrolling in the music academy, you acknowledge that you have read, understood, and agree to be bound by these terms and conditions.\n\nEnrollment and Payment: You agree to pay the tuition fees and any other fees associated with your enrollment in the music academy. You also understand that fees are non-refundable and non-transferable.\n\nStudent Conduct: You agree to follow the rules and regulations of the music academy, which may include dress codes, attendance policies, and other requirements.\n\nIntellectual Property: All content, including text, images, and music, provided by the music academy is protected by copyright laws. You agree not to reproduce, distribute, or display any content without the express written permission of the music academy.\n\nLiability and Indemnification: You agree that the music academy is not liable for any damages or losses incurred as a result of your enrollment in the music academy. You also agree to indemnify the music academy against any claims or lawsuits arising from your conduct or actions while enrolled in the music academy.\n\nStudent injuries: The music academy may not be held responsible for any injuries that occur during classes or lessons. Students may need to sign a waiver acknowledging the risks involved with musical instruction.\n\nTermination: The music academy reserves the right to terminate your enrollment in the music academy at any time for any reason. You also have the right to terminate your enrollment, but fees may not be refunded.\n\nModifications: The music academy reserves the right to modify these terms and conditions at any time. Any modifications will be effective immediately upon posting on the music academy's website. It is your responsibility to review the terms and conditions regularly for any changes.\n";
 }

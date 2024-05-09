@@ -1,16 +1,19 @@
 import 'package:academy/core/extensions/extensions.dart';
 import 'package:academy/features/academy/domain/entities/event_enrolls/mufin_events.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/utils/router_const.dart';
-
+import '../cubits/bottom_nav/bottom_nav_cubit.dart';
 
 class MufinEventCard extends StatelessWidget {
+  final String? userId;
 
   final MufinEvents item;
-  const MufinEventCard({required this.item, super.key});
+
+  const MufinEventCard({required this.item, this.userId, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +94,13 @@ class MufinEventCard extends StatelessWidget {
               ),
               Expanded(
                 child: FilledButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (userId == null) {
+                      context.push(RoutePaths.login.path);
+                    } else {
+                      context.read<BottomNavCubit>().onTap(2);
+                    }
+                  },
                   child: Text(item.btnText.toUpperCase()),
                 ),
               )

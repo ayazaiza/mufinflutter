@@ -154,7 +154,9 @@ class UserHomeTabs extends HookWidget {
               context.read<BottomNavCubit>().selectPage(index);
             },
             children: [
-              const HomePage(),
+              HomePage(
+                userId: uuid,
+              ),
               DashboardPage(
                 uuid: uuid,
               ),

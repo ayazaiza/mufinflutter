@@ -7,7 +7,9 @@ import '../../../features/academy/presentation/widgets/carousel_card_widget.dart
 import '../../../features/academy/presentation/widgets/mufin_event_card.dart';
 
 class EventsCarousel extends StatefulWidget {
-  const EventsCarousel({super.key});
+  final String? userId;
+
+  const EventsCarousel({super.key, this.userId});
 
   @override
   State<EventsCarousel> createState() => _EventsCarouselState();
@@ -38,7 +40,10 @@ class _EventsCarouselState extends State<EventsCarousel> {
                       )),
                   ...state.events.map((e) {
                     var item = e;
-                    return MufinEventCard(item: item);
+                    return MufinEventCard(
+                      item: item,
+                      userId: widget.userId,
+                    );
                   }).toList()
                 ],
               );
