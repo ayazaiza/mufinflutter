@@ -13,7 +13,6 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/utils/app_local_assets.dart';
 import '../../../../core/utils/router_const.dart';
-import '../../../navigation/bloc/user_session_bloc.dart';
 import 'dashboard_page.dart';
 
 class UserHomeTabs extends HookWidget {
@@ -109,11 +108,12 @@ class UserHomeTabs extends HookWidget {
                   }).toString());
                 }),
             NavDrawerCustomItem(
-                text: AppStrings.logout,
-                icon: AppLocalAssets.logoutIcon,
+                text: AppStrings.settings,
+                icon: AppLocalAssets.settingsIcon,
                 onTap: () {
                   scaffoldKey.currentState?.closeDrawer();
-                  context.read<UserSessionBloc>().add(UserDoLoggedOutEvent());
+                  context.push(RoutePaths.settings.path);
+                  // context.read<UserSessionBloc>().add(UserDoLoggedOutEvent());
                 }),
           ],
         ),

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:academy/features/auth/domain/entities/user_model.dart';
 import 'package:bloc/bloc.dart';
@@ -32,7 +31,7 @@ class UserSessionBloc extends Bloc<UserSessionEvent, UserSessionState> {
       _getStarted();
     });
     on<UserLoggedOutEvent>((event, emit) async {
-      // await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 2));
       emit(UserSessionLandingState());
     });
     on<UserDoLoggedOutEvent>((event, emit) async {
@@ -41,6 +40,10 @@ class UserSessionBloc extends Bloc<UserSessionEvent, UserSessionState> {
     on<UserLoggedInEvent>((event, emit) async {
       // await Future.delayed(const Duration(seconds: 2));
       emit(UserLoggedInState(userModel: event.userModel));
+    });
+
+    on<UserDelete>((event, emit) {
+      _delete();
     });
   }
 
@@ -77,9 +80,12 @@ class UserSessionBloc extends Bloc<UserSessionEvent, UserSessionState> {
     _switchToLogout();
   }
 
+  void _delete() async {
+    await _firebaseUserAuth.deleteUser();
+  }
+
   @override
   Future<void> close() {
-    log("UserSessionBloc closed");
     _streamSubscription?.cancel();
     return super.close();
   }

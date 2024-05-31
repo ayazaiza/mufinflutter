@@ -1,4 +1,4 @@
-{
+ {
   "project_info": {
     "project_number": "547020247713",
     "project_id": "mufin-academy",
@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "547020247713-2hlghiqmqfegignqd1dc96f4uduj0e8n.apps.googleusercontent.com",
+          "client_id": "547020247713-at2q03ncs604imnt5dh47o56oi4ofe5t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.mufin.academy",
-            "certificate_hash": "4f8d92992d3c705ab57ea694eda7f5d95fec8172"
+            "certificate_hash": "b054c09c68ac9f928a5d4c9714854979103214af"
           }
         },
         {

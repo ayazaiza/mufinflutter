@@ -15,6 +15,7 @@ class AppLocalAssets {
   static String settingsIcon = "assets/icons/settings.png";
   static String songIcon = "assets/icons/song.png";
   static String logoutIcon = "assets/icons/logout.png";
+  static String deleteAccountIcon = "assets/icons/delete_account.png";
   static String loginIcon = "assets/icons/login.png";
   static String students = "assets/icons/students.png";
   static String appIcon = "assets/logo/mufin_icon.png";

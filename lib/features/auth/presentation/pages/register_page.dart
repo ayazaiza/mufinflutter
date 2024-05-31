@@ -186,6 +186,8 @@ class RegisterPage extends HookWidget {
                           context: context,
                           onPressed: !state.isLoading
                               ? () async {
+                                  FocusScope.of(context)
+                                      .requestFocus(FocusNode());
                                   context.read<AuthBloc>().add(AuthEvent.submit(
                                       email: emailController.text.trim(),
                                       pwd: pwdController.text.trim(),

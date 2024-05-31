@@ -51,6 +51,7 @@ import 'package:academy/features/academy/presentation/cubits/stundent/student_cl
 import 'package:academy/features/academy/presentation/cubits/stundent/student_details/student_details_cubit.dart';
 import 'package:academy/features/academy/presentation/cubits/stundent/student_progress/student_progress_cubit.dart';
 import 'package:academy/features/academy/presentation/cubits/view_profile/view_profile_cubit.dart';
+import 'package:academy/features/academy/presentation/pages/settings/settings.dart';
 import 'package:academy/features/academy/presentation/pages/songs/songs_page.dart';
 import 'package:academy/features/academy/presentation/pages/student/add_student_page.dart';
 import 'package:academy/features/academy/presentation/pages/student/all_students.dart';
@@ -444,6 +445,12 @@ class RouterModule {
             name: RoutePaths.splash.routeName(),
             builder: (context, state) {
               return const SplashPage();
+            }),
+        GoRoute(
+            path: RoutePaths.settings.path,
+            name: RoutePaths.settings.routeName(),
+            builder: (context, state) {
+              return const SettingsPage();
             }),
         GoRoute(
             path: RoutePaths.login.path,

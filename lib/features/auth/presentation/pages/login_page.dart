@@ -27,7 +27,7 @@ class LoginPage extends HookWidget {
             ? InkWell(
           onTap: () {
             var email = "riyaznaz143@gmail.com";
-            var pwd = "riyaz123";
+            var pwd = "12345678";
             emailController.text = email;
             pwdController.text = pwd;
             context
@@ -109,6 +109,7 @@ class LoginPage extends HookWidget {
                         controller: pwdController,
                         errorMsg: state.pwdError,
                         keyboardType: TextInputType.visiblePassword,
+                        textInputAction: TextInputAction.done,
                         prefixIcon: const Icon(Icons.key),
                         obscureText: state.pwdVisible,
                         suffixIcon: IconButton(
@@ -127,6 +128,7 @@ class LoginPage extends HookWidget {
                         context: context,
                         onPressed: !state.isLoading
                             ? () {
+                          FocusScope.of(context).requestFocus(FocusNode());
                           context.read<AuthBloc>().add(AuthEvent.login(
                             email: emailController.text,
                             password: pwdController.text,

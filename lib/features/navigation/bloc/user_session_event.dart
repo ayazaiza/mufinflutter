@@ -15,6 +15,8 @@ class UserSessionOnBoardSkipEvent extends UserSessionEvent {}
 
 class UserLoggedOutEvent extends UserSessionEvent {}
 class UserDoLoggedOutEvent extends UserSessionEvent {}
+class UserDelete extends UserSessionEvent {}
+
 
 class UserLoggedInEvent extends UserSessionEvent {
   final UserModel userModel;

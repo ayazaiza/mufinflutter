@@ -118,6 +118,8 @@ class AppStrings {
   static const String edit = "Edit";
   static const String view = "View";
   static const String deleteAccount = "Delete Account";
+  static const String deleteAccountDesc =
+      "Are you sure want to delete this account permanently. This action can't be undone once deleted the account";
   static const String somethingWentWrong = "Something went wrong";
   static const String successRegister = "Successfully registered";
   static const String successLogin = "Successfully logged in";
