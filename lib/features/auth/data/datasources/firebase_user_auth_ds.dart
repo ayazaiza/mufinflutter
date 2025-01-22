@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
 
@@ -10,8 +12,11 @@ import '../../../../core/constants/app_strings.dart';
 import '../../../../core/error/app_exceptions.dart';
 import '../../../../core/utils/custom_widgets.dart';
 
-
 abstract interface class FirebaseUserAuthDataSource {
+
+
+  Future<String?> signInWithPhone(String number);
+
   Stream<User?> userSession();
 
   Future<void> checkUserExist();
@@ -28,6 +33,8 @@ abstract interface class FirebaseUserAuthDataSource {
       {required UserAuthModel userAuthModel});
 
   Future<void> deleteUser();
+
+  Future<UserCredential> signInWithCredentials(AuthCredential credential);
 }
 
 class FirebaseUserAuthDataSourceImpl implements FirebaseUserAuthDataSource {
@@ -44,7 +51,7 @@ class FirebaseUserAuthDataSourceImpl implements FirebaseUserAuthDataSource {
 
   @override
   Future<void> checkUserExist() async {
-    return await _firebaseAuth.currentUser?.reload();
+    await _firebaseAuth.currentUser?.reload();
   }
 
   @override
@@ -62,7 +69,7 @@ class FirebaseUserAuthDataSourceImpl implements FirebaseUserAuthDataSource {
       return;
     }
     CustomWidgets.ignoreTryCatch(() async {
-      var uid = _firebaseAuth.currentUser!.uid;
+      // var uid = _firebaseAuth.currentUser!.uid;
       // await _firebaseFireStore.collection(collectionsRef).doc(uid).delete();
       await _firebaseAuth.currentUser?.delete();
       await _googleSignIn.signOut();
@@ -106,7 +113,8 @@ class FirebaseUserAuthDataSourceImpl implements FirebaseUserAuthDataSource {
     final credential = GoogleAuthProvider.credential(
         accessToken: gAuth.accessToken, idToken: gAuth.idToken);
     loading();
-    try {
+    return await signInWithCredentials(credential);
+    /*try {
       var resp = await _firebaseAuth.signInWithCredential(credential);
       if (resp.user == null) {
         throw const ServerException(message: AppStrings.userNotFound);
@@ -116,7 +124,7 @@ class FirebaseUserAuthDataSourceImpl implements FirebaseUserAuthDataSource {
       throw ServerException(message: e.message);
     } on FirebaseAuthException catch (e, _) {
       throw ServerException(message: e.message.toString());
-    }
+    }*/
   }
 
   @override
@@ -136,6 +144,39 @@ class FirebaseUserAuthDataSourceImpl implements FirebaseUserAuthDataSource {
     }
   }
 
+  @override
+  Future<String?> signInWithPhone(String number) async {
+    var comp = Completer<String?>();
+    await _firebaseAuth.verifyPhoneNumber(
+        phoneNumber: number,
+        verificationCompleted: (PhoneAuthCredential credential) {},
+        verificationFailed: (FirebaseAuthException e) {
+          comp.completeError(ServerException(message: e.message.toString()));
+        },
+        codeSent: (verificationId, forceResendingToken) {
+          comp.complete(verificationId);
+        },
+        codeAutoRetrievalTimeout: (verificationId) {
+          log(verificationId);
+        });
+    return comp.future;
+  }
+
+  @override
+  Future<UserCredential> signInWithCredentials(
+      AuthCredential credential) async {
+    try {
+      var resp = await _firebaseAuth.signInWithCredential(credential);
+      if (resp.user == null) {
+        throw const ServerException(message: AppStrings.userNotFound);
+      }
+      return resp;
+    } on SocketException catch (e, _) {
+      throw ServerException(message: e.message);
+    } on FirebaseAuthException catch (e, _) {
+      throw ServerException(message: e.message.toString());
+    }
+  }
 }
 
 /*  Future<UserModel?> _insertUser(

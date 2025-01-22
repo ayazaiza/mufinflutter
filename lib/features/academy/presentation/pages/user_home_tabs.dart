@@ -122,7 +122,7 @@ class UserHomeTabs extends HookWidget {
         builder: (context, state) {
           return NavigationBar(
             selectedIndex: state.index,
-            indicatorColor: context.colorScheme.surfaceVariant,
+            indicatorColor: context.colorScheme.surfaceContainerHighest,
             destinations: [
               NavigationDestination(
                   icon: AppLocalAssets.homeIconInActive.toBottomIcon,

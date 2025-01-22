@@ -1,7 +1,6 @@
 import 'package:academy/core/extensions/extension_mapper.dart';
 import 'package:academy/core/extensions/extensions.dart';
 import 'package:academy/features/academy/presentation/cubits/dashboard/dashboard_cubit.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

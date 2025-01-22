@@ -19,7 +19,7 @@ class ProfileUpdateState with _$ProfileUpdateState {
       String? preferredTimesError,
       @Default("") String address,
       String? addressError,
-      @Default(["Canada", "India", "UK", "USA"]) List<String> countriesList,
+      @Default(AppStrings.countries) List<String> countriesList,
       String? country,
       String? countryError,
       @Default("") String stateText,

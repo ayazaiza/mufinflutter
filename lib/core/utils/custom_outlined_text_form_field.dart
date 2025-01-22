@@ -101,7 +101,7 @@ class CustomOutlinedTextFormField extends StatelessWidget {
                       width: 2),
                 ),
                 labelText: exampleHint ?? hintText,
-                fillColor: enabled ? context.colorScheme.background : null,
+                fillColor: enabled ? context.colorScheme.surface : null,
                 // fillColor: Colors.grey.shade200,
                 alignLabelWithHint: true)
           // Colors.grey.shade100 fillColor: ThemeData().appBarTheme.backgroundColor),

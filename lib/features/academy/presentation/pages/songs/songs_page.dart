@@ -1,7 +1,5 @@
 import 'package:academy/core/extensions/extension_mapper.dart';
 import 'package:academy/core/extensions/extensions.dart';
-import 'package:academy/features/academy/presentation/cubits/enrolls/all_enrolls/all_enrolls_cubit.dart';
-import 'package:academy/features/academy/presentation/cubits/event_enrolls/all_event_enrolls/all_event_enrolls_cubit.dart';
 import 'package:academy/features/academy/presentation/cubits/song/all_songs/all_songs_cubit.dart';
 import 'package:academy/features/academy/presentation/widgets/error_screen.dart';
 import 'package:flutter/material.dart';

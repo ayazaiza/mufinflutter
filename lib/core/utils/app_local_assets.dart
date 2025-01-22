@@ -2,6 +2,7 @@ import 'dart:ui';
 
 class AppLocalAssets {
   static String business = "assets/images/undraw_business.png";
+  static String muffinLoginImg = "assets/images/mufin_login.png";
   static String googleIcon = "assets/images/google.png";
   static String homeIconActive = "assets/icons/home_filled.png";
   static String homeIconInActive = "assets/icons/home_outlined.png";
@@ -20,7 +21,13 @@ class AppLocalAssets {
   static String students = "assets/icons/students.png";
   static String appIcon = "assets/logo/mufin_icon.png";
   static String appLogo = "assets/logo/logo.jpeg";
-  static Color seed  = const Color(0xFF172667);
+  static Color seed = const Color(0xFF172667);
+
+  // flags
+  static String flagIndia = "assets/flags/flag_india.png";
+  static String flagCanada = "assets/flags/flag_canada.png";
+  static String flagUsa = "assets/flags/flag_usa.png";
+  static String flagUk = "assets/flags/flag_uk.png";
   static String dummyShortText =
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut nisi arcu. Integer non hendrerit lorem. Sed nisl ante, eleifend eget semper a, cursus vitae diam.";
 

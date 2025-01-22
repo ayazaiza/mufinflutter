@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:academy/core/extensions/extensions.dart';
 import 'package:academy/core/theme/color_schemes.dart';
 import 'package:academy/core/constants/app_strings.dart';
 import 'package:academy/features/academy/presentation/blocs/student/delete_student/delete_student_bloc.dart';

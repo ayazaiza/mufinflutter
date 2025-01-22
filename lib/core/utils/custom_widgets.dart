@@ -7,6 +7,9 @@ import '../constants/app_strings.dart';
 class CustomWidgets {
   static EdgeInsets screenPadding =
       const EdgeInsets.symmetric(vertical: 16, horizontal: 24);
+  static BorderRadius textFieldBorderRadius = const BorderRadius.all(
+    Radius.circular(2),
+  );
 
   static spacerHeight({double defaultHeight = 12}) {
     return SizedBox(
@@ -61,6 +64,65 @@ class CustomWidgets {
       void Function(String?)? onSaved,
       String? Function(String?)? validator,
       required String hintText,
+      double borderRadius = 2,
+      bool autocorrect = false,
+      TextInputAction textInputAction = TextInputAction.next,
+      TextInputType keyboardType = TextInputType.text,
+      bool obscureText = false,
+      Widget? prefixIcon,
+      AutovalidateMode autoValidateMode = AutovalidateMode.onUserInteraction,
+      Widget? suffixIcon,
+      required BuildContext context,
+      int maxLines = 1}) {
+    var defaultOutlinedBorder = OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+        borderSide: BorderSide(color: context.colorScheme.inversePrimary));
+    return TextFormField(
+        maxLines: maxLines,
+        controller: controller,
+        onChanged: onChanged,
+        onSaved: onSaved,
+        validator: validator,
+        keyboardType: keyboardType,
+        autocorrect: autocorrect,
+        textInputAction: textInputAction,
+        obscureText: obscureText,
+        autovalidateMode: autoValidateMode,
+        decoration: InputDecoration(
+            /*labelStyle: context.textTheme.labelLarge!.copyWith(
+                color: Colors.grey.shade500,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 1.5),
+            errorStyle: context.textTheme.labelMedium!.copyWith(
+              color: context.colorScheme.error,
+              fontWeight: FontWeight.bold,
+            ),*/
+            // floatingLabelBehavior: FloatingLabelBehavior.never,
+            prefixIcon: prefixIcon,
+            suffixIcon: suffixIcon,
+            border: defaultOutlinedBorder,
+            enabledBorder: defaultOutlinedBorder,
+            disabledBorder: defaultOutlinedBorder.copyWith(
+                borderSide: BorderSide(
+              color: context.themeData.disabledColor,
+            )),
+            errorBorder: defaultOutlinedBorder.copyWith(
+                borderSide: BorderSide(
+              color: context.colorScheme.error,
+            )),
+            focusedBorder: defaultOutlinedBorder,
+            labelText: hintText,
+            alignLabelWithHint: false)
+        // Colors.grey.shade100 fillColor: ThemeData().appBarTheme.backgroundColor),
+        );
+  }
+
+  static Widget customFilledTextFormField(
+      {TextEditingController? controller,
+      void Function(String)? onChanged,
+      void Function(String?)? onSaved,
+      String? Function(String?)? validator,
+      required String hintText,
       double borderRadius = 16,
       bool autocorrect = false,
       TextInputAction textInputAction = TextInputAction.next,
@@ -88,9 +150,9 @@ class CustomWidgets {
                 fontWeight: FontWeight.w500,
                 letterSpacing: 1.5),
             errorStyle: context.textTheme.labelMedium!.copyWith(
-                  color: context.colorScheme.error,
-                  fontWeight: FontWeight.bold,
-                ),
+              color: context.colorScheme.error,
+              fontWeight: FontWeight.bold,
+            ),
             floatingLabelBehavior: FloatingLabelBehavior.never,
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
@@ -213,7 +275,7 @@ class CustomWidgets {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Expanded(
-          child: customOutlinedTextFormField(
+          child: customFilledTextFormField(
               autocorrect: false,
               keyboardType: TextInputType.name,
               textInputAction: TextInputAction.next,
@@ -222,7 +284,7 @@ class CustomWidgets {
         ),
         spacerWidth(),
         Expanded(
-          child: customOutlinedTextFormField(
+          child: customFilledTextFormField(
               autocorrect: false,
               keyboardType: TextInputType.name,
               textInputAction: TextInputAction.next,
@@ -317,6 +379,7 @@ class CustomWidgets {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),
+        backgroundColor: color,
         padding: padding,
         elevation: onPressed != null ? elevation : 0);
 
@@ -388,7 +451,7 @@ class CustomWidgets {
                     child: Text(
                       label.toUpperCase(),
                       style: context.textTheme.bodyLarge!.copyWith(
-                          color: context.colorScheme.onBackground,
+                          color: context.colorScheme.onSurface,
                           fontWeight: FontWeight.w500),
                       textAlign: TextAlign.center,
                     ))

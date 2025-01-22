@@ -68,6 +68,7 @@ import 'package:academy/features/academy/presentation/pages/user_home_tabs.dart'
 import 'package:academy/features/academy/presentation/pages/profile/view_profile.dart';
 import 'package:academy/features/academy/presentation/pages/student/view_student.dart';
 import 'package:academy/features/auth/presentation/cubit/root_cubit.dart';
+import 'package:academy/features/auth/presentation/pages/new_login_ui.dart';
 import 'package:academy/features/auth/presentation/pages/root_page.dart';
 import 'package:academy/features/academy/domain/repository/mufin_events_repo.dart';
 import 'package:academy/features/auth/presentation/bloc/auth_bloc.dart';
@@ -458,7 +459,7 @@ class RouterModule {
             builder: (context, state) {
               return BlocProvider(
                 create: (context) => _getIt<AuthBloc>(),
-                child: const LoginPage(),
+                child: const NewLoginUi(),
               );
             }),
         GoRoute(

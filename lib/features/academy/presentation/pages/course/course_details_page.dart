@@ -56,7 +56,7 @@ class CourseDetails extends StatelessWidget {
                               return Container(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ListTile(
-                                  tileColor: context.colorScheme.surfaceVariant,
+                                  tileColor: context.colorScheme.surfaceContainerHighest,
                                   title: Text(state.subCourses[index].name),
                                   subtitle: Text(state.subCourses[index].about),
                                 ),

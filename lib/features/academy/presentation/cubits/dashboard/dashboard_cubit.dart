@@ -6,7 +6,6 @@ import 'package:academy/features/academy/domain/entities/student/student.dart';
 import 'package:academy/features/academy/domain/entities/user/recent_activities.dart';
 import 'package:academy/features/academy/domain/entities/utils/song.dart';
 import 'package:academy/features/academy/domain/usescases/slot_attandance/get_student_slots_user_id_status.dart';
-import 'package:academy/features/academy/domain/usescases/song/get_song.dart';
 import 'package:academy/features/academy/domain/usescases/student/get_students_stream.dart';
 import 'package:academy/features/academy/domain/usescases/user/get_activities_stream.dart';
 import 'package:bloc/bloc.dart';
@@ -19,9 +18,8 @@ import '../../../domain/usescases/enrolls/get_enrolls_user_id.dart';
 import '../../../domain/usescases/event_enrolls/get_event_enrolls.dart';
 import '../../../domain/usescases/song/get_songs_user_id.dart';
 
-part 'dashboard_state.dart';
-
 part 'dashboard_cubit.freezed.dart';
+part 'dashboard_state.dart';
 
 class DashboardCubit extends Cubit<DashboardState> {
   final GetStudentsStream _getStudentsStream;

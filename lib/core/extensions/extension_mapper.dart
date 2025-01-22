@@ -156,7 +156,7 @@ extension Strings on String {
     // } else if (contains("accepted")) {
     //   return context.colorScheme.secondaryContainer;
     // } else {
-    return context.colorScheme.surfaceVariant.withOpacity(0.5);
+    return context.colorScheme.surfaceContainerHighest.withOpacity(0.5);
     // }
   }
 

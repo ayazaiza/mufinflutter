@@ -3,8 +3,6 @@ import 'package:academy/core/models/gender_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../domain/entities/utils/yes_no.dart';
-
 class GenderSelectWidget extends HookWidget {
   final String label;
   final String? error;
@@ -13,7 +11,7 @@ class GenderSelectWidget extends HookWidget {
 
   const GenderSelectWidget(
       {required this.label,
-        required this.error,
+      required this.error,
       required this.initialValue,
       required this.onChanged,
       super.key});
@@ -73,13 +71,13 @@ class GenderSelectWidget extends HookWidget {
         ),
         error != null
             ? Text(
-          error!,
-          style: context.textTheme.bodySmall!.copyWith(
-              fontWeight: FontWeight.w500,
-              color: context.colorScheme.error),
-          textAlign: TextAlign.end,
-          maxLines: 2,
-        )
+                error!,
+                style: context.textTheme.bodySmall!.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: context.colorScheme.error),
+                textAlign: TextAlign.end,
+                maxLines: 2,
+              )
             : const SizedBox.shrink()
       ],
     );

@@ -47,7 +47,7 @@ class StudentCard extends HookWidget {
           padding: const EdgeInsets.all(8),
           margin: const EdgeInsets.symmetric(vertical: 6),
           decoration: BoxDecoration(
-              color: context.colorScheme.surfaceVariant.withOpacity(0.5),
+              color: context.colorScheme.surfaceContainerHighest.withOpacity(0.5),
               borderRadius: BorderRadius.circular(12)),
           child: Row(
             children: [

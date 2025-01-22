@@ -1,16 +1,11 @@
 import 'package:academy/core/constants/app_strings.dart';
-import 'package:academy/core/extensions/extensions.dart';
-import 'package:academy/features/academy/domain/entities/courses/enroll_course.dart';
 import 'package:academy/features/academy/domain/entities/event_enrolls/event_enroll.dart';
-import 'package:academy/features/academy/presentation/cubits/enrolls/enrolled_details/enrolled_details_cubit.dart';
 import 'package:academy/features/academy/presentation/cubits/event_enrolls/event_enroll_details/event_enroll_details_cubit.dart';
 import 'package:academy/features/academy/presentation/widgets/loading_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../../../../core/utils/router_const.dart';
 import '../../widgets/details_widget.dart';
 import '../../widgets/heading_title_widget.dart';
 
@@ -57,7 +52,6 @@ class EventEnrolledDetailsPage extends HookWidget {
                                       title: AppStrings.studentName,
                                       detail: state.eventEnroll!.studentName,
                                     ),
-
                                     DetailsWidget(
                                       title: AppStrings.enrolledDate,
                                       detail: state.eventEnroll!.timestamp

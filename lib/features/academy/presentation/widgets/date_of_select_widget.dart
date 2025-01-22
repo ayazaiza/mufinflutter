@@ -64,7 +64,7 @@ class DateOfBirthSelect extends HookWidget {
                 decoration: BoxDecoration(
                     border: Border.all(
                         color: hasError == null
-                            ? context.colorScheme.onBackground
+                            ? context.colorScheme.onSurface
                             : context.colorScheme.error,
                         width: 1.5),
                     borderRadius: BorderRadius.circular(8)),
@@ -74,7 +74,7 @@ class DateOfBirthSelect extends HookWidget {
                       child: Text(dob.value.isNotEmpty ? dob.value : label,
                           style: context.textTheme.labelLarge!.copyWith(
                               color: dob.value.isNotEmpty
-                                  ? context.colorScheme.onBackground
+                                  ? context.colorScheme.onSurface
                                   : Colors.grey,
                               fontWeight: FontWeight.w500,
                               letterSpacing: 1.5)),

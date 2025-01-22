@@ -2,38 +2,31 @@ import 'package:academy/core/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../domain/entities/courses/course.dart';
-
-class SelectCourseList extends HookWidget {
-  final Course? initialValue;
-  final void Function(Course) onChange;
-  final List<Course> coursesList;
+class PhoneCodeDropDown extends HookWidget {
+  final Map<String, String>? initialValue;
+  final void Function(Map<String, String>) onChange;
+  final List<Map<String, String>> countryList;
   final String? errorMsg;
   final String label;
-  final bool enabled;
 
-  const SelectCourseList(
+  const PhoneCodeDropDown(
       {this.initialValue,
       required this.onChange,
-      required this.coursesList,
+      required this.countryList,
       this.errorMsg,
       required this.label,
-      required this.enabled,
       super.key});
 
   @override
   Widget build(BuildContext context) {
-    final selectedCourse = useState<Course?>(null);
-    useEffect(() {
-      selectedCourse.value = initialValue;
-      return () {};
-    }, [initialValue]);
+    final selectedCountry = useState<Map<String, String>?>(initialValue);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
-          style: context.title!.copyWith(fontWeight: FontWeight.bold),
+          style: context.textTheme.titleLarge!
+              .copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(
           height: 8,
@@ -48,27 +41,27 @@ class SelectCourseList extends HookWidget {
                       : context.colorScheme.error,
                   width: 1.5),
               borderRadius: BorderRadius.circular(8)),
-          child: DropdownButton(
+          child: DropdownButton<Map<String, String>>(
               enableFeedback: false,
               style: context.textTheme.labelLarge!.copyWith(
                   color: context.colorScheme.onSurface,
                   fontWeight: FontWeight.w500,
                   letterSpacing: 1.5),
               hint: Text(label),
-              value: selectedCourse.value,
+              value: selectedCountry.value,
               underline: Container(),
               isExpanded: true,
-              items: coursesList.map((e) {
-                return DropdownMenuItem<Course>(
+              items: countryList.map((e) {
+                return DropdownMenuItem<Map<String, String>>(
                   onTap: () {},
                   value: e,
-                  child: Text(e.name),
+                  child: Text("${e["flag"]} ${e["phoneCode"]} ${e["country"]}"),
                 );
               }).toList(),
-              onChanged: enabled ? (value) {
-                selectedCourse.value = value as Course?;
-                onChange(selectedCourse.value!);
-              } : null),
+              onChanged: (value) {
+                selectedCountry.value = value;
+                onChange(selectedCountry.value!);
+              }),
         ),
         Visibility(
             visible: errorMsg != null,

@@ -22,7 +22,7 @@ class ListItemWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 6),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          color: context.colorScheme.surfaceVariant.withOpacity(0.5)),
+          color: context.colorScheme.surfaceContainerHighest.withOpacity(0.5)),
       child: Row(
         children: [
           Container(

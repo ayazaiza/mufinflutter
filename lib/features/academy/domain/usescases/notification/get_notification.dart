@@ -1,7 +1,7 @@
 import 'package:academy/features/academy/domain/entities/utils/notification.dart';
 import 'package:academy/features/academy/domain/repository/notification_repo.dart';
 
-import '../../../../../core/usecase/usecaseStream.dart';
+import '../../../../../core/usecase/use_case_stream.dart';
 import '../../../../../core/utils/resource.dart';
 
 class GetNotificationStream

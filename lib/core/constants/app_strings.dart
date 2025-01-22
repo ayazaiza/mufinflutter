@@ -17,6 +17,9 @@ class AppStrings {
   static const String subCoursesNotFound =
       "SubCourses are not found! Please wait for few days or contact to admin";
 
+  static const String standardCall =
+      "Standard call, messaging or data rates may apply";
+
   static const String save = "Save";
   static const String logout = "Logout";
   static const String signUp = "Sign Up";
@@ -77,6 +80,13 @@ class AppStrings {
     "Friday",
     "Saturday",
     "Any day"
+  ];
+  static const List<String> countries = ["Canada", "India", "UK", "USA"];
+  static const List<Map<String, String>> countriesWithFlag = [
+    {"country": "India", "flag": "🇮🇳", "phoneCode": "+91"},
+    {"country": "Canada", "flag": "🇨🇦", "phoneCode": "+1"},
+    {"country": "UK", "flag": "🇬🇧", "phoneCode": "+44"},
+    {"country": "USA", "flag": "🇺🇸", "phoneCode": "+1"}
   ];
   static const String selectPrefDaysError = "Select at least one preferred day";
   static const List<String> prefTimingsList = [

@@ -53,7 +53,7 @@ class MufinEventDetailCard extends StatelessWidget {
                       // softWrap: false,
                       maxLines: 2,
                       style: context.textTheme.titleLarge?.copyWith(
-                          color: context.colorScheme.onBackground,
+                          color: context.colorScheme.onSurface,
                           fontWeight: FontWeight.w900,
                           overflow: TextOverflow.ellipsis),
                       textAlign: TextAlign.start,

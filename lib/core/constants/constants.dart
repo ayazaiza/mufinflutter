@@ -1,4 +1,6 @@
 class AppConstants {
+  static const String devEmail = "riyaznaz143@gmail.com";
+  static const String devPwd = "12345678";
   static const String onBoard = "on_boarded";
   static const String theme = "current_theme";
 
@@ -27,8 +29,6 @@ class AppConstants {
   static const String lessonTopic = "lessonTopic";
   static const String paymentBill = "paymentBills";
   static const String userInvoice = "userInvoices";
-
-
 
   static const String noteType = "noteType";
   static const String notes = "notes";

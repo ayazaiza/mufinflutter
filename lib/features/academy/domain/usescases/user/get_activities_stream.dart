@@ -1,7 +1,7 @@
 import 'package:academy/core/utils/resource.dart';
 import 'package:academy/features/academy/domain/entities/user/recent_activities.dart';
 
-import '../../../../../core/usecase/usecaseStream.dart';
+import '../../../../../core/usecase/use_case_stream.dart';
 import '../../repository/mufin_user_repo.dart';
 
 class GetActivitiesStream

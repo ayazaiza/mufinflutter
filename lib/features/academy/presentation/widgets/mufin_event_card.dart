@@ -24,7 +24,7 @@ class MufinEventCard extends StatelessWidget {
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
-          color: context.colorScheme.surfaceVariant),
+          color: context.colorScheme.surfaceContainerHighest),
       child: Column(
         children: [
           SizedBox(
@@ -56,7 +56,7 @@ class MufinEventCard extends StatelessWidget {
               // softWrap: false,
               maxLines: 2,
               style: context.textTheme.titleLarge?.copyWith(
-                  color: context.colorScheme.onBackground,
+                  color: context.colorScheme.onSurface,
                   fontWeight: FontWeight.w900,
                   overflow: TextOverflow.ellipsis),
               textAlign: TextAlign.start,

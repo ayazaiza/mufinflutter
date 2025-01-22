@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:academy/core/extensions/extensions.dart';
 import 'package:academy/core/common/widgets/action_bar_loader.dart';
 import 'package:academy/features/auth/presentation/bloc/auth_bloc.dart';
@@ -194,20 +196,22 @@ class RegisterPage extends HookWidget {
                                       cnfPwd: cnfPwdController.text.trim()));
                                 }
                               : null),
-                      CustomWidgets.spacerHeight(defaultHeight: 20),
-                      CustomWidgets.customOptions(
-                          context: context,
-                          optionText: AppStrings.orWord.toUpperCase()),
-                      CustomWidgets.spacerHeight(defaultHeight: 20),
-                      CustomWidgets.customButtonWithIcon(
-                          context: context,
-                          assetImage: AppLocalAssets.googleIcon,
-                          label: AppStrings.signUpWithGoogle,
-                          onTap: () {
-                            context
-                                .read<AuthBloc>()
-                                .add(const AuthEvent.signInNdUpWithGoogle());
-                          }),
+                      if (Platform.isAndroid) ...[
+                        CustomWidgets.spacerHeight(defaultHeight: 20),
+                        CustomWidgets.customOptions(
+                            context: context,
+                            optionText: AppStrings.orWord.toUpperCase()),
+                        CustomWidgets.spacerHeight(defaultHeight: 20),
+                        CustomWidgets.customButtonWithIcon(
+                            context: context,
+                            assetImage: AppLocalAssets.googleIcon,
+                            label: AppStrings.signUpWithGoogle,
+                            onTap: () {
+                              context
+                                  .read<AuthBloc>()
+                                  .add(const AuthEvent.signInNdUpWithGoogle());
+                            }),
+                      ],
                       CustomWidgets.spacerHeight(defaultHeight: 30),
                       CustomWidgets.footerWidget(
                           deviceWidth: context.width,

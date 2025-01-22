@@ -45,14 +45,14 @@ class SelectStudentList extends HookWidget {
           decoration: BoxDecoration(
               border: Border.all(
                   color: errorMsg == null
-                      ? context.colorScheme.onBackground
+                      ? context.colorScheme.onSurface
                       : context.colorScheme.error,
                   width: 1.5),
               borderRadius: BorderRadius.circular(8)),
           child: DropdownButton(
               enableFeedback: false,
               style: context.textTheme.labelLarge!.copyWith(
-                  color: context.colorScheme.onBackground,
+                  color: context.colorScheme.onSurface,
                   fontWeight: FontWeight.w500,
                   letterSpacing: 1.5),
               hint: Text(label),

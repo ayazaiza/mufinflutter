@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
@@ -26,7 +25,7 @@ class RootCubit extends Cubit<RootState> {
   }
 
   void checkUser() async {
-    log("_uuuu: ${_uuid}");
+    log("user_uuid: $_uuid");
     if (_uuid == null) {
       emit(RootToLanding(route: RoutePaths.landing.path));
       return;
@@ -35,15 +34,11 @@ class RootCubit extends Cubit<RootState> {
     // await Future.delayed(const Duration(seconds: 2));
     if (resp.data == null) {
       emit(RootToProfileUpdate(
-          route: RoutePaths.profileUpdate.path,
-          uuid: _uuid,
-          email: _email));
+          route: RoutePaths.profileUpdate.path, uuid: _uuid, email: _email));
       return;
     }
 
     emit(RootToHome(
-        route: RoutePaths.home.path,
-        uuid: _uuid,
-        email: resp.data!.email));
+        route: RoutePaths.home.path, uuid: _uuid, email: resp.data!.email));
   }
 }

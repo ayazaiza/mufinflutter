@@ -122,7 +122,7 @@ class EnrolledDetailsPage extends HookWidget {
                           ),
                           Container(
                             decoration: BoxDecoration(
-                                color: context.colorScheme.surfaceVariant
+                                color: context.colorScheme.surfaceContainerHighest
                                     .withOpacity(0.4),
                                 borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(25),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:academy/core/extensions/extensions.dart';
 import 'package:academy/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter/foundation.dart';
@@ -7,27 +9,39 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/common/widgets/action_bar_loader.dart';
 import '../../../../core/constants/app_strings.dart';
+import '../../../../core/constants/constants.dart';
 import '../../../../core/utils/app_local_assets.dart';
 import '../../../../core/utils/custom_widgets.dart';
 import '../../../../core/utils/router_const.dart';
-import '../../../../core/common/widgets/action_bar_loader.dart';
 
 class LoginPage extends HookWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    /* useEffect(() {
+      // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+      //     overlays: [SystemUiOverlay.bottom]);
+     */ /* SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+          statusBarColor: Colors.red));*/ /*
+      return () {
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+            overlays: SystemUiOverlay.values);
+      };
+    }, []);*/
+
     final emailController = useTextEditingController();
     final pwdController = useTextEditingController();
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
         centerTitle: true,
         title: kDebugMode
             ? InkWell(
           onTap: () {
-            var email = "riyaznaz143@gmail.com";
-            var pwd = "12345678";
+            var email = AppConstants.devEmail;
+            var pwd = AppConstants.devPwd;
             emailController.text = email;
             pwdController.text = pwd;
             context
@@ -128,33 +142,35 @@ class LoginPage extends HookWidget {
                         context: context,
                         onPressed: !state.isLoading
                             ? () {
-                          FocusScope.of(context).requestFocus(FocusNode());
-                          context.read<AuthBloc>().add(AuthEvent.login(
-                            email: emailController.text,
-                            password: pwdController.text,
-                          ));
-                        }
+                                FocusScope.of(context)
+                                    .requestFocus(FocusNode());
+                                context.read<AuthBloc>().add(AuthEvent.login(
+                                      email: emailController.text,
+                                      password: pwdController.text,
+                                    ));
+                              }
                             : null),
                     CustomWidgets.spacerHeight(defaultHeight: 36),
-                    CustomWidgets.customOptions(
-                        context: context,
-                        optionText: AppStrings.orWord.toUpperCase()),
-                    CustomWidgets.spacerHeight(defaultHeight: 30),
-                    CustomWidgets.customButtonWithIcon(
-                        context: context,
-                        assetImage: AppLocalAssets.googleIcon,
-                        label: AppStrings.signInWithGoogle,
-                        onTap: () {
-                          context
-                              .read<AuthBloc>()
-                              .add(const AuthEvent.signInNdUpWithGoogle());
-                        }),
+                    if (Platform.isAndroid) ...[
+                      CustomWidgets.customOptions(
+                          context: context,
+                          optionText: AppStrings.orWord.toUpperCase()),
+                      CustomWidgets.spacerHeight(defaultHeight: 30),
+                      CustomWidgets.customButtonWithIcon(
+                          context: context,
+                          assetImage: AppLocalAssets.googleIcon,
+                          label: AppStrings.signInWithGoogle,
+                          onTap: () {
+                            context
+                                .read<AuthBloc>()
+                                .add(const AuthEvent.signInNdUpWithGoogle());
+                          }),
+                    ],
                     CustomWidgets.spacerHeight(defaultHeight: 30),
                     CustomWidgets.footerWidget(
                         deviceWidth: context.width,
                         onTap: () {
-                          context
-                              .push(RoutePaths.register.path);
+                          context.push(RoutePaths.register.path);
                         },
                         style: context.textTheme.bodySmall,
                         textOne: AppStrings.doesNotHaveAnAccount,
@@ -164,8 +180,7 @@ class LoginPage extends HookWidget {
                     CustomWidgets.spacerHeight(defaultHeight: 30),
                     InkWell(
                       onTap: () {
-                        context
-                            .push(RoutePaths.forgotPassword.path);
+                        context.push(RoutePaths.forgotPassword.path);
                       },
                       child: Text(
                         AppStrings.forgotPwd,
@@ -185,7 +200,6 @@ class LoginPage extends HookWidget {
     );
   }
 }
-
 
 /* return Scaffold(
       appBar: AppBar(

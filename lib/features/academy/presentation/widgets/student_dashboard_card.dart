@@ -22,7 +22,7 @@ class StudentDashboardCard extends HookWidget {
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                 margin: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                    color: context.colorScheme.surfaceVariant.withOpacity(0.5),
+                    color: context.colorScheme.surfaceContainerHighest.withOpacity(0.5),
                     borderRadius: BorderRadius.circular(12)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,7 +134,7 @@ class StudentDashboardCard extends HookWidget {
       padding: const EdgeInsets.all(12.0),
       margin: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-          color: context.colorScheme.surfaceVariant.withOpacity(0.5),
+          color: context.colorScheme.surfaceContainerHighest.withOpacity(0.5),
           borderRadius: BorderRadius.circular(5)),
       child: Text(title,
           style: context.textTheme.bodyMedium!

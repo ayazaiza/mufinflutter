@@ -18,7 +18,7 @@ class StudentClassDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppStrings.classDetails),
+        title: const Text(AppStrings.classDetails),
       ),
       body: BlocBuilder<StudentClsDetailsCubit, StudentClsDetailsState>(
         builder: (context, state) {
@@ -70,7 +70,7 @@ class StudentClassDetailsPage extends StatelessWidget {
                           ),
                           Container(
                             decoration: BoxDecoration(
-                                color: context.colorScheme.surfaceVariant
+                                color: context.colorScheme.surfaceContainerHighest
                                     .withOpacity(0.4),
                                 borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(25),
